@@ -19,7 +19,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         this.setTitle("Swimming Manager");
-        Image img=Toolkit.getDefaultToolkit().getImage("Swimming_Manager_Logo_modelo_2.png");
+        Image img=Toolkit.getDefaultToolkit().getImage("images/Swimming_Manager_Logo_modelo_2.png");
         this.setIconImage(img);
         this.setVisible(true);
     }
