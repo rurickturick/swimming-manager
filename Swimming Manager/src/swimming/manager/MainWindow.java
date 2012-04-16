@@ -4,6 +4,8 @@
  */
 
 package swimming.manager;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 /**
  *
@@ -17,7 +19,8 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         this.setTitle("Swimming Manager");
-        this.setIconImage(null);
+        Image img=Toolkit.getDefaultToolkit().getImage("Swimming_Manager_Logo_modelo_2.png");
+        this.setIconImage(img);
         this.setVisible(true);
     }
 
