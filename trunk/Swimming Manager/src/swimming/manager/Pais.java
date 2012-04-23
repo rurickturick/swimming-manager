@@ -1,38 +1,14 @@
 package swimming.manager;
 
-/**
- * 
- */
-
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author usuario_local
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class Pais {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	
 	private String pais;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	
 	private String ciudad;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public Pais() {
-		// begin-user-code
-		// TODO Ap�ndice de constructor generado autom�ticamente
-		// end-user-code
+		this.pais = "España";
+                this.ciudad = "Madrid";
 	}
 
 	/** 
@@ -43,22 +19,8 @@ public class Pais {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public Pais(String pais, String ciudad) {
-		// begin-user-code
-		// TODO Ap�ndice de constructor generado autom�ticamente
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Pais getPais() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		this.pais = pais;
+                this.ciudad = ciudad;
 	}
 
 	/** 
@@ -70,9 +32,8 @@ public class Pais {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void setPais(String pais, String ciudad) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		// end-user-code
+		this.pais = pais;
+                this.ciudad = ciudad;
 	}
 
 	/** 
@@ -82,9 +43,25 @@ public class Pais {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public String toString() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
+		String s="";
+                s="Ciudad"+ this.ciudad + ", País" + this.pais;
+		return s;
 		// end-user-code
 	}
+        
+        public String getPais (){
+            return this.pais;
+        }
+        
+        public void setPais(String pais){
+            this.pais=pais;
+        }
+        
+        public String getCiudad (){
+            return this.ciudad;
+        }
+        
+        public void setCiudad(String ciudad){
+            this.ciudad=ciudad;
+        }
 }
