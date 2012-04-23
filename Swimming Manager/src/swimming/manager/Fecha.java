@@ -14,7 +14,14 @@ public class Fecha {
 	private int dia;
 	private int mes;
 	private int anyo;
-	public Fecha(int x, int y, int z){
+	
+        public Fecha(){
+            dia=1;
+            mes=1;
+            anyo = 1990;
+        }
+        
+        public Fecha(int x, int y, int z){
 		dia = x;
 		mes = y;
 		anyo = z;
