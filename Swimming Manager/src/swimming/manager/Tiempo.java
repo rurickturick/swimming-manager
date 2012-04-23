@@ -16,31 +16,31 @@ public class Tiempo {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Integer horas;
+	private int horas;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Integer minutos;
+	private int minutos;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Integer segundos;
+	private int segundos;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Integer decimas;
+	private int decimas;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Integer centesimas;
+	private int centesimas;
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -64,8 +64,8 @@ public class Tiempo {
 	 * @param intcentesimas
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Tiempo(Object inthoras, Object _int, Object minutos,
-			Object intsegudos, Object intdecimas, Object intcentesimas) {
+	public Tiempo(int inthoras, int _int, int minutos,
+			int intsegudos, int intdecimas, int intcentesimas) {
 		// begin-user-code
 		// TODO Ap�ndice de constructor generado autom�ticamente
 		// end-user-code
@@ -77,7 +77,7 @@ public class Tiempo {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Integer getTiempo() {
+	public Tiempo getTiempo() {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 		return null;
@@ -95,8 +95,8 @@ public class Tiempo {
 	 * @param intcentesimas
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setTiempo(Object inthoras, Object _int, Object minutos,
-			Object intsegudos, Object intdecimas, Object intcentesimas) {
+	public void setTiempo(int inthoras, int _int, int minutos,
+			int intsegudos, int intdecimas, int intcentesimas) {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 
