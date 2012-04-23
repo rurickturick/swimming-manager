@@ -64,7 +64,7 @@ public class Tiempo {
 	 * @param intcentesimas
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Tiempo(int inthoras, int _int, int minutos,
+	public Tiempo(int inthoras, int minutos,
 			int intsegudos, int intdecimas, int intcentesimas) {
 		// begin-user-code
 		// TODO Ap�ndice de constructor generado autom�ticamente
@@ -77,12 +77,6 @@ public class Tiempo {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Tiempo getTiempo() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
-	}
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -95,7 +89,7 @@ public class Tiempo {
 	 * @param intcentesimas
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setTiempo(int inthoras, int _int, int minutos,
+	public void setTiempo(int inthoras, int minutos,
 			int intsegudos, int intdecimas, int intcentesimas) {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
