@@ -11,95 +11,53 @@ package swimming.manager;
  * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class Fecha {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private int[] dia = new int[31];
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private int[] mes = new int[12];
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private int[] anyo = new int[2050];
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Nadador nadador;
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Fecha() {
-		// begin-user-code
-		// TODO Ap�ndice de constructor generado autom�ticamente
-		// end-user-code
+	private int dia;
+	private int mes;
+	private int anyo;
+	public Fecha(int x, int y, int z){
+		dia = x;
+		mes = y;
+		anyo = z;
 	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param dia
-	 * @param mes
-	 * @param a�o
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Fecha(int dia, int mes, int anyo) {
-		// begin-user-code
-		// TODO Ap�ndice de constructor generado autom�ticamente
-		// end-user-code
+	public int getDia(){
+		return dia;
 	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Fecha getFecha() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+	public void setDia(int x){
+		dia = x;
 	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param dia
-	 * @param mes
-	 * @param a�o
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Void setFecha(int dia, int mes, int anyo) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+	public String toString(){
+		return "La fecha es "+dia+"/"+mes+"/"+anyo;
 	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public String toString() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+	
+	public void sumarDias(int x){
+		int [] meses = new int[12];
+		meses[0]=31;
+		meses[1]=28;
+		meses[2]=31;
+		meses[3]=30;
+		meses[4]=31;
+		meses[5]=30;
+		meses[6]=31;
+		meses[7]=31;
+		meses[8]=30;
+		meses[9]=31;
+		meses[10]=30;
+		meses[11]=31;
+		
+		for(int i=0;i<x;i++){
+			if( dia<meses[mes-1] || ((mes==2)&&esBisiesto())&&(dia<29) ) dia++;
+			else{
+				dia = 1;
+				if(mes==12){
+					mes=1;
+					anyo++;
+				}
+				else mes++;
+			}
+		}
+	}
+	
+	public boolean esBisiesto(){
+		return ((anyo%4==0)&&(!(anyo%100==0) || (anyo%400==0)));
 	}
 }
