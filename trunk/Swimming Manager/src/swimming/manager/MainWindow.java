@@ -7,6 +7,14 @@ package swimming.manager;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import javax.swing.JFileChooser;
+import javax.swing.JMenu;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author Juanlu
@@ -22,6 +30,7 @@ public class MainWindow extends javax.swing.JFrame {
         Image img=Toolkit.getDefaultToolkit().getImage("images/Swimming_Manager_Logo_modelo_2.png");
         this.setIconImage(img);
         this.setVisible(true);
+        initListener();
     }
 
     /**
@@ -262,4 +271,48 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
+    private void initListener(){
+        jMenuItem2.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                  JFileChooser selecFich=new JFileChooser();
+                  int i=selecFich.showOpenDialog(MainWindow .this);
+                  try {
+                      if(i==1) throw new IOException("No se ha seleccionado ningún archivo");
+                      else{
+                           String fich=selecFich.getSelectedFile().getName();
+                                    Scanner f= new Scanner(new File(fich));
+                                    fich = fich.substring(0, fich.length()-4); 
+                                    JMenu archivo=new JMenu(fich);
+                                    
+                            }
+                    } catch (IOException e1) {
+                            JOptionPane.showMessageDialog(null,"No se ha seleccionado archivo");
+                    }	  
+                    
+                    
+            }
+        });
+        jMenuItem4.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                  FileNameExtensionFilter filter = new FileNameExtensionFilter("Documentos de texto (*.txt)", ".txt");
+				JFileChooser selecFich=new JFileChooser();
+				selecFich.addChoosableFileFilter(filter);
+				int i=selecFich.showSaveDialog(MainWindow.this);
+				try{
+					if(i==1) throw new IOException("No se ha guardado ningún archivo");
+					else{
+						String fich=selecFich.getSelectedFile().getName();
+						fich+=".txt";
+						
+					}					
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(null,"No se ha seleccionado archivo");
+				}
+                    
+            }
+        });
+                
+                
+    }
+
 }
