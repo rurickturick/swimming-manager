@@ -59,4 +59,44 @@ public class Tiempo {
             this.decimas=intdecimas;
             this.centesimas=intcentesimas;
 	}
+        
+        public int getHoras(){
+            return this.horas;
+        }
+        
+        public void setHoras(int horas){
+            this.horas = horas;
+        }
+        
+        public int getMinutos(){
+            return this.minutos;
+        }
+        
+        public void setMinutos(int minutos){
+            this.minutos = minutos;
+        }
+        
+        public int getSegundos(){
+            return this.segundos;
+        }
+        
+        public void setSegundos(int segundos){
+            this.segundos = segundos;
+        }
+        
+        public int getDecimas(){
+            return this.decimas;
+        }
+        
+        public void setDecimas(int decimas){
+            this.decimas = decimas;
+        }
+        
+        public int getCentesimas(){
+            return this.centesimas;
+        }
+        
+        public void setCentesimas(int centesimas){
+            this.centesimas = centesimas;
+        }
 }
