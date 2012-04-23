@@ -60,4 +60,14 @@ public class Fecha {
 	public boolean esBisiesto(){
 		return ((anyo%4==0)&&(!(anyo%100==0) || (anyo%400==0)));
 	}
+        
+        public int getMes(){
+		return mes;
+	}
+        
+        public int getAnyo(){
+            return anyo;
+        }
+        
+        
 }

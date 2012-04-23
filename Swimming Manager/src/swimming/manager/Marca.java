@@ -11,98 +11,62 @@ package swimming.manager;
  * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class Marca {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	
 	private Fecha fecha;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	private Tiempo tiempo;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	private int distancia;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Estilo estilo;
+        private Estilo estilo;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Marca() {
-		// begin-user-code
-		// TODO Ap�ndice de constructor generado autom�ticamente
-		// end-user-code
-	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param fecha
-	 * @param tiempo
-	 * @param distancia
-	 * @param estilo
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Marca(Fecha fecha, double tiempo, int distancia, Estilo estilo) {
-		// begin-user-code
-		// TODO Ap�ndice de constructor generado autom�ticamente
-		// end-user-code
+	public Marca(Fecha fecha, Tiempo tiempo, int distancia, Estilo estilo) {
+            this.fecha = fecha;
+            this.tiempo = tiempo;
+            this.distancia=distancia;
+            this.estilo = estilo;
+		
 	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Marca getMarca() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+        
+        public void setFecha(Fecha fecha){
+            this.fecha = fecha;
+        }
+        
+        public Fecha getFecha() {
+            return fecha;
+        }
+        
+        public void setTiempo(Tiempo tiempo){
+            this.tiempo = tiempo;
+        }
+        
+        public Tiempo getTiempo() {
+            return tiempo;
+        }
+        
+        public void setDistancia(int distancia){
+            this.distancia = distancia;
+        }
+        
+        public int getDistancia() {
+            return distancia;
+        }
+        
+        public void setEstilo(Estilo estilo){
+            this.estilo = estilo;
+        }
+        
+        public Estilo getEstilo() {
+            return estilo;
+        }
+        
+        public String toString() {
+            String s1= this.fecha.toString();
+            String s2= this.tiempo.toString();
+            String s3= ""+this.distancia;
+            String s4= this.estilo.name();
+            
+            String resultado = s1 + " " + s2 + " " + s3 + " " + s4;
+            return resultado;
 	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param fecha
-	 * @param tiempo
-	 * @param distancia
-	 * @param estilo
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Void setMarca(Fecha fecha, double tiempo, int distancia,
-			Estilo estilo) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public String toString() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
-	}
+                
+         
 }
