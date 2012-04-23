@@ -6,7 +6,13 @@ public class Marca {
 	private int distancia;
         private Estilo estilo;
 
-
+        public Marca(){
+            this.fecha = new Fecha();
+            this.estilo = Estilo.Libre;
+            tiempo=new Tiempo();
+            distancia = 1000;
+        }
+        
 	public Marca(Fecha fecha, Tiempo tiempo, int distancia, Estilo estilo) {
             this.fecha = fecha;
             this.tiempo = tiempo;

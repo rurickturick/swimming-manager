@@ -11,34 +11,18 @@ package swimming.manager;
  * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class Titulo {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	
 	private String descripcion;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	
 	private Medalla medalla;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	
 	private Marca marca;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	public Titulo() {
-		// begin-user-code
-		// TODO Ap�ndice de constructor generado autom�ticamente
-		// end-user-code
+		this.descripcion = "";
+                this.medalla=null;
+                this.marca=new Marca();
 	}
 
 	/** 
@@ -49,23 +33,10 @@ public class Titulo {
 	 * @param marca
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Titulo(String descripcion, Medalla medalla, double marca) {
-		// begin-user-code
-		// TODO Ap�ndice de constructor generado autom�ticamente
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param _9
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getTitulo(Object _9) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Titulo(String descripcion, Medalla medalla, Marca marca) {
+		this.descripcion = descripcion;
+                this.medalla=medalla;
+                this.marca = marca;
 	}
 
 	/** 
@@ -76,11 +47,10 @@ public class Titulo {
 	 * @param marca
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setTitulo(String descripcion, Medalla medalla, double marca) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setTitulo(String descripcion, Medalla medalla, Marca marca) {
+		this.descripcion = descripcion;
+                this.medalla=medalla;
+                this.marca = marca;
 	}
 
 	/** 
@@ -90,9 +60,33 @@ public class Titulo {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public String toString() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
+		String s="";
+                s = descripcion + medalla.name() + marca.toString();
+		return s;
 		// end-user-code
 	}
+        
+        public String getDescripcion(){
+            return this.descripcion;
+        }
+        
+        public void setDescripcion(String desc){
+            descripcion=desc;
+        }
+        
+        public Medalla getMedalla(){
+            return this.medalla;
+        }
+        
+        public void setMedalla(Medalla medalla){
+            this.medalla=medalla;
+        }
+        
+        public Marca getMarca(){
+            return this.marca;
+        }
+        
+        public void setDescripcion(Marca marca){
+            this.marca = marca;
+        }
 }
