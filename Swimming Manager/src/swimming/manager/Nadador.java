@@ -1,24 +1,19 @@
 package swimming.manager;
 
-import java.util.Set;
+import java.util.*;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author usuario_local
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class Nadador {
+    
 	private String nombre;
 	private Fecha fechaNacimiento;
-	private Estilo[] estilos = new Estilo[20];
+	private ArrayList<Estilo> estilos = new ArrayList<Estilo>();
 	private Pais pais;
-	private Titulo[] palmares = new Titulo[50];
-	private Marca[] marcas = new Marca[10];
+	private ArrayList<Titulo> palmares = new ArrayList<Titulo>();
+	private ArrayList <Marca> marcas = new ArrayList<Marca>();
 	
        
-	public Nadador(String nombre, Fecha fechaNacimiento, Estilo[] estilos,
-			Pais pais, Titulo[] palmares, Marca[] marcas) {
+	public Nadador(String nombre, Fecha fechaNacimiento, ArrayList<Estilo> estilos,
+			Pais pais, ArrayList<Titulo> palmares, ArrayList<Marca> marcas) {
             
             this.nombre = nombre;
             this.fechaNacimiento=fechaNacimiento;
@@ -37,16 +32,16 @@ public class Nadador {
             String s5= this.pais.toString();
             String s6="";
             String s7="";
-            for(int i=0; i<this.estilos.length; i++) {
-                s4= s4+ estilos[i].name();
+            for(int i=0; i<estilos.size(); i++) {
+                s4= s4+ estilos.get(i).name();
             }
             
-            for(int i=0; i<this.marcas.length; i++){
-                s6= s6+ marcas[i].toString();
+            for(int i=0; i<marcas.size(); i++){
+                s6= s6+ marcas.get(i).toString();
             }
             
-            for(int i=0; i<this.palmares.length; i++){
-                s7=s7 + palmares[i].toString();
+            for(int i=0; i<palmares.size(); i++){
+                s7=s7 + palmares.get(i).toString();
             }
             
             String resultado = s1 + "\n" + s2 + "\n" + s3 + "\n" +
@@ -55,4 +50,54 @@ public class Nadador {
             return resultado;            
 	
 	}
+        
+        public void setNombre(String nombre){
+            this.nombre = nombre;
+        }
+        
+        public String getNombre(){
+            return nombre;
+        }
+        
+        public void setFecha(Fecha fecha){
+            this.fechaNacimiento = fecha;
+        }
+        
+        public Fecha getFecha(){
+            return fechaNacimiento;
+        }
+        
+        public void setEstilo(ArrayList<Estilo> estilo){
+            this.estilos = estilo;
+        }
+        
+        public ArrayList<Estilo> getEstilos(){
+            return estilos;
+        }
+        
+        public void setPalmares (ArrayList<Titulo> titulos){
+            this.palmares = titulos;
+        }
+        
+        public ArrayList<Titulo> getPalmares() {
+            return palmares;
+        }
+        
+        public void setPais(Pais pais){
+            this.pais = pais;
+        }
+        
+        public Pais getPais() {
+            return pais;
+        }
+        
+        public void setMarcas(ArrayList<Marca> marcas){
+            this.marcas = marcas;
+        }
+        
+        public ArrayList<Marca> getMarcas(){
+            return marcas;
+        }
+        
+        
 }
