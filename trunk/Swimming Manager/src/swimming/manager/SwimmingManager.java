@@ -141,8 +141,5 @@ public class SwimmingManager {
 		// end-user-code
 	}
         
-            public static void main(String[] args) {
-        // TODO code application logic here
-        MainWindow window = new MainWindow();
-    }
+            
 }

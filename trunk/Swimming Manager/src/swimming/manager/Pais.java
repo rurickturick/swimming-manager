@@ -69,10 +69,9 @@ public class Pais {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Void setPais(String pais, String ciudad) {
+	public void setPais(String pais, String ciudad) {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
 		// end-user-code
 	}
 
