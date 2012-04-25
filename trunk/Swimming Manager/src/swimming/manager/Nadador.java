@@ -1,6 +1,6 @@
 package swimming.manager;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class Nadador {
     
@@ -11,7 +11,15 @@ public class Nadador {
 	private ArrayList<Titulo> palmares = new ArrayList<Titulo>();
 	private ArrayList <Marca> marcas = new ArrayList<Marca>();
 	
-       
+        public Nadador(){
+            this.nombre="";
+            this.fechaNacimiento=new Fecha();
+            this.estilos=new ArrayList<Estilo>();
+            this.pais=new Pais();
+            this.palmares=new ArrayList<Titulo>();
+            this.marcas=new ArrayList<Marca>();
+        }
+        
 	public Nadador(String nombre, Fecha fechaNacimiento, ArrayList<Estilo> estilos,
 			Pais pais, ArrayList<Titulo> palmares, ArrayList<Marca> marcas) {
             

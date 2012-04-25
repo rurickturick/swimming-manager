@@ -3,11 +3,8 @@ package swimming.manager;
 /**
  * 
  */
-import swimming.manager.Nadador;
-import swimming.manager.Estilo;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 
 /** 
  * <!-- begin-UML-doc -->
