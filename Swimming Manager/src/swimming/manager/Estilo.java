@@ -1,7 +1,6 @@
 package swimming.manager;
 
-public enum Estilo {
-	
+public enum Estilo{
 	Libre,
 	Espalda,
 	Mariposa,
