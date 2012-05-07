@@ -109,4 +109,22 @@ public class Nadador {
         }
         
         
+        public int getPosicionMarca(Marca m){
+            boolean encontrado = false;
+            //Devuelve -1 en caso de no encontrar la marca en el arraylist
+            int position = -1; 
+            int i = 0;
+            
+            while(i<marcas.size() && !encontrado){
+                if(marcas.get(i) == m){
+                    position = i;
+                    encontrado = true;
+                }
+                i++;
+            }
+            return position;
+            
+        }
+        
+        
 }
