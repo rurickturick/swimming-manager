@@ -89,7 +89,7 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-        private Nadador buscarNadadorPorNombre(String nombre){
+        public Nadador buscarNadadorPorNombre(String nombre){
             Iterator<Nadador> it=this.nadadores.iterator();
             while(it.hasNext()){
                 Nadador n=it.next();
@@ -100,7 +100,7 @@ public class SwimmingManager {
             return null;
         }
         
-        private ArrayList<Nadador> buscarNadadoresPorEstilo(String e){
+        public ArrayList<Nadador> buscarNadadoresPorEstilo(String e){
             Estilo estilo= parseEstilos(e);
             ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
             Iterator<Nadador> it=this.nadadores.iterator();
@@ -112,7 +112,7 @@ public class SwimmingManager {
             }
             return auxNadadores;
         }
-        private ArrayList<Nadador> buscarNadadoresPorNombre(String nombre){
+        public ArrayList<Nadador> buscarNadadoresPorNombre(String nombre){
             ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
             Iterator<Nadador> it=this.nadadores.iterator();
             while(it.hasNext()){
@@ -124,7 +124,7 @@ public class SwimmingManager {
             return auxNadadores;
         }
         
-        private ArrayList<Nadador> buscarNadadoresPorMarca(int distancia,String e){
+        public ArrayList<Nadador> buscarNadadoresPorMarca(int distancia,String e){
             Estilo estilo=parseEstilos(e);
             ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
             Iterator<Nadador> it=this.nadadores.iterator();
@@ -141,7 +141,7 @@ public class SwimmingManager {
             return auxNadadores;
         }
         
-        private ArrayList<Nadador> buscarNadadoresPorPais(String pais){
+        public ArrayList<Nadador> buscarNadadoresPorPais(String pais){
             ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
             Iterator<Nadador> it=this.nadadores.iterator();
             while(it.hasNext()){
@@ -153,7 +153,7 @@ public class SwimmingManager {
             return auxNadadores;
         }
         
-        private ArrayList<Nadador> buscarNadadoresPorEdad(int edad){
+        public ArrayList<Nadador> buscarNadadoresPorEdad(int edad){
             ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
             Iterator<Nadador> it=this.nadadores.iterator();
             Date now= new Date();
@@ -215,17 +215,7 @@ public class SwimmingManager {
             
             
 		
-	}
-
-	
-	public ArrayList<Nadador> buscarNadadores() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-                
-                
-                return null;
-		// end-user-code
-	}
+        }
 
 	
 	public void compararMarcas() {
