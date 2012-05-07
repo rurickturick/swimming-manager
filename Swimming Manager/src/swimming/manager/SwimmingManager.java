@@ -1,26 +1,14 @@
 package swimming.manager;
 
-/**
- * 
- */
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Date;
+//import java.util.Date;
+//import java.util.ArrayList;
+//import java.util.Iterator;
 import java.util.*;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author usuario_local
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class SwimmingManager {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	
 	private ArrayList<Nadador> nadadores;
+        public static final String LINE_SEPARATOR = System.getProperty("line.separator");
         
         /** Metodo que se usa para generar un array list de estilos a partir de un String **/
         
@@ -210,12 +198,51 @@ public class SwimmingManager {
        }
 
 
-	public void verInformacionNadador(Nadador n) {
+	public String verInformacionNadador(Nadador n) {
+            String LabelNombre = "Nombre: ";
+            String LabelFN = "Fecha de nacimiento: ";
+            String LabelPais = "País: ";
+            String LabelEstilos = "Estilos: ";
+            String LabelMarcas = "Marcas: ";
+            String LabelPalmares = "Títulos: ";
             
+            String s1 = n.getNombre();
+            String s2 = n.getFecha().toString();
+            String s3 = n.getPais().toString();
+            String s4 = "";
+            String s6 = "";
+            String s7 = "";
+            String resultado = "";
+            for(int i = 0; i < n.getEstilos().size(); i++) 
+                s4 = s4 + n.getEstilos().get(i).name() + LINE_SEPARATOR;
             
+            for(int i = 0; i < n.getMarcas().size(); i++)
+                s6 = s6 + n.getMarcas().get(i).toString()+ LINE_SEPARATOR;            
             
-		
+            for(int i = 0; i < n.getPalmares().size(); i++)
+                s7 = s7 + n.getPalmares().get(i).toString()+ LINE_SEPARATOR;
+          
+            resultado = LabelNombre + s1 + LINE_SEPARATOR + 
+                    LabelFN + s2 + LINE_SEPARATOR + LabelPais + s3 + LINE_SEPARATOR +
+                    LabelEstilos + s4 + LINE_SEPARATOR + LabelMarcas + s6 + LINE_SEPARATOR + 
+                    LabelPalmares + s7 + LINE_SEPARATOR;
+            
+            return resultado;
+            
         }
+
+	
+	public ArrayList<Nadador> buscarNadadores() {
+		// begin-user-code
+		// TODO Ap�ndice de m�todo generado autom�ticamente
+                
+                
+                return null;
+		// end-user-code
+	
+
+        }
+
 
 	
 	public void compararMarcas() {
