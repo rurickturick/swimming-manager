@@ -5,6 +5,7 @@ package swimming.manager;
  */
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.*;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -96,8 +97,7 @@ public class SwimmingManager {
         //          3 si el formato de la fecha no es correcto
 	public int anadirMarcaNadador(String nombre, String marca, String fecha,
                                       int distancia, Estilo estilo){
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+	
             Nadador nadador=buscarNadador(nombre);
             if (nadador==null) return 1;
             String[] auxMarca = marca.split(" ");
@@ -113,24 +113,28 @@ public class SwimmingManager {
             return 0;
 		// end-user-code
 	}
+        
+        
+	public void eliminarMarcaNadador(Marca m, Nadador n) throws Exception{
+         
+            if(n!=null || m!=null){
+                if(hayNadador(n)){
+                       ArrayList<Marca> marcasNadadores=n.getMarcas();
+                       int pos = n.getPosicionMarca(m);
+                       if(pos!=-1){
+                            marcasNadadores.remove(pos);
+                            n.setMarcas(marcasNadadores);
+                        }
+                        else throw new Exception("No existe esa marca");
+                  
+                 }
+                else throw new Exception("No está el nadador");
+            }
+            else throw new Exception("El nadador o la marca introducidos no son válidos");
+                  
+       }
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void eliminarMarcaNadador() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
 
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public void verInformacionNadador(Nadador n) {
             
             
@@ -138,11 +142,7 @@ public class SwimmingManager {
 		
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	
 	public void buscarNadadores() {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
@@ -150,11 +150,7 @@ public class SwimmingManager {
 		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	
 	public void compararMarcas() {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
@@ -197,6 +193,17 @@ public class SwimmingManager {
 
 		// end-user-code
 	}
+        
+        public boolean hayNadador(Nadador nadador) {
+            boolean encontrado = false;
+            int i=0;
+            
+            while(i<this.nadadores.size() && !encontrado){
+                encontrado = this.nadadores.get(i)== nadador;
+                i++;
+            }
+            return encontrado;
+        }
         
             
 }
