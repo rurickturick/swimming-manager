@@ -105,6 +105,9 @@ public class Nadador {
         
         public void addMarca(Marca marca){
             this.marcas.add(marca);
+            if (this.record==null) this.record=marca;
+            else 
+                if(!this.record.getTiempo().compara(marca.getTiempo()))this.record=marca;
         }
         public ArrayList<Marca> getMarcas(){
             return marcas;
