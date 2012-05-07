@@ -10,6 +10,7 @@ public class Nadador {
 	private Pais pais;
 	private ArrayList<Titulo> palmares = new ArrayList<Titulo>();
 	private ArrayList <Marca> marcas = new ArrayList<Marca>();
+        private Marca record;
 	
         public Nadador(){
             this.nombre = "";
@@ -18,6 +19,7 @@ public class Nadador {
             this.pais = new Pais();
             this.palmares = new ArrayList<Titulo>();
             this.marcas = new ArrayList<Marca>();
+            this.record = null;
         }
         
 	public Nadador(String nombre, Fecha fechaNacimiento, ArrayList<Estilo> estilos,
@@ -28,7 +30,8 @@ public class Nadador {
             this.estilos = estilos;
             this.pais = pais;
             this.palmares = palmares;
-            this.marcas = marcas;		
+            this.marcas = marcas;
+            this.record = null;
 	}
 	
 	public String toString() {
@@ -106,6 +109,9 @@ public class Nadador {
         }
         public ArrayList<Marca> getMarcas(){
             return marcas;
+        }
+        public Marca getRecord(){
+            return this.record;
         }
         
         
