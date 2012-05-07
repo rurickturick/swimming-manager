@@ -38,6 +38,7 @@ public class MainWindow extends JFrame {
      */
     private JTable tablaNadadores;
     private DefaultTableModel modeloTabla;
+    private SwimmingManager swimming;
     
     public MainWindow() {
         initComponents();
@@ -48,7 +49,7 @@ public class MainWindow extends JFrame {
         initListener();
         this.add(jPanel1,"North");
         jPanel1.add(panelTabla,"North");
-        
+        swimming = new SwimmingManager();
     }
 
     /**
@@ -373,8 +374,9 @@ public class MainWindow extends JFrame {
                 mainPanel.setLayout(new BorderLayout());                
                 
                 JPanel auxPanelCampos = new JPanel();
-                GridLayout contenedorCampos = new GridLayout(5,2,10,40);
+                GridLayout contenedorCampos = new GridLayout(6, 2, 10, 35);
                 auxPanelCampos.setLayout(contenedorCampos);
+                
                 mainPanel.add(auxPanelCampos, "Center");
                 JPanel auxPanelBotones = new JPanel();
                 auxPanelBotones.setEnabled(true);
@@ -390,20 +392,24 @@ public class MainWindow extends JFrame {
                 JLabel campoNombre = new JLabel();
                 campoNombre.setText("Nombre: ");
                 JLabel campoNacionalidad = new JLabel("Nacionalidad: ");
+                JLabel campoSexo = new JLabel("Sexo: ");
                 JLabel diaNac = new JLabel("Día de Nacimiento: ");
                 JLabel mesNac = new JLabel("Mes de Nacimiento: ");
                 JLabel annoNac = new JLabel("Año de Nacimiento: ");
                 
-                JTextField nombreTexto = new JTextField();
-                JTextField nacionTexto = new JTextField();
-                JTextField diaTexto = new JTextField();
-                JTextField mesTexto = new JTextField();
-                JTextField annoTexto = new JTextField();
-                                
+                final JTextField nombreTexto = new JTextField();
+                final JTextField nacionTexto = new JTextField();
+                final JTextField diaTexto = new JTextField();
+                final JTextField mesTexto = new JTextField();
+                final JTextField annoTexto = new JTextField();
+                final JTextField sexoTexto = new JTextField();
+                
                 auxPanelCampos.add(campoNombre);
                 auxPanelCampos.add(nombreTexto);
                 auxPanelCampos.add(campoNacionalidad);
                 auxPanelCampos.add(nacionTexto);
+                auxPanelCampos.add(campoSexo);
+                auxPanelCampos.add(sexoTexto);
                 auxPanelCampos.add(diaNac);
                 auxPanelCampos.add(diaTexto);
                 auxPanelCampos.add(mesNac);
@@ -423,7 +429,13 @@ public class MainWindow extends JFrame {
                 
                 botonAceptar.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
-                        
+                        try{
+                            String fecha = diaTexto.getText()+"-"+mesTexto.getText()+"-"+annoTexto.getText();
+                            swimming.darDeAltaNadador(nombreTexto.getText(), fecha, nacionTexto.getText());
+                        }
+                        catch(Exception ex){
+                            
+                        }
                     }
                     
                 });
