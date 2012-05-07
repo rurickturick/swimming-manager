@@ -4,6 +4,12 @@
  */
 
 package swimming.manager;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +17,13 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -349,6 +362,74 @@ public class MainWindow extends JFrame {
             }
         });
         
+        jMenuItem16.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                final JFrame mainVentana = new JFrame();
+                mainVentana.setVisible(true);
+                mainVentana.setSize(new Dimension(300, 400));
+                mainVentana.setAlwaysOnTop(true);
+                
+                JPanel mainPanel = new JPanel();
+                mainPanel.setLayout(new BorderLayout());                
+                
+                JPanel auxPanelCampos = new JPanel();
+                GridLayout contenedorCampos = new GridLayout(5,2,10,40);
+                auxPanelCampos.setLayout(contenedorCampos);
+                mainPanel.add(auxPanelCampos, "Center");
+                JPanel auxPanelBotones = new JPanel();
+                auxPanelBotones.setEnabled(true);
+                
+                JButton botonAceptar = new JButton();
+                botonAceptar.setText("Aceptar");
+                JButton botonCancelar = new JButton();
+                botonCancelar.setText("Cancelar");
+                auxPanelBotones.add(botonAceptar);
+                auxPanelBotones.add(botonCancelar);                
+                mainPanel.add(auxPanelBotones, "South");                              
+                
+                JLabel campoNombre = new JLabel();
+                campoNombre.setText("Nombre: ");
+                JLabel campoNacionalidad = new JLabel("Nacionalidad: ");
+                JLabel diaNac = new JLabel("Día de Nacimiento: ");
+                JLabel mesNac = new JLabel("Mes de Nacimiento: ");
+                JLabel annoNac = new JLabel("Año de Nacimiento: ");
+                
+                JTextField nombreTexto = new JTextField();
+                JTextField nacionTexto = new JTextField();
+                JTextField diaTexto = new JTextField();
+                JTextField mesTexto = new JTextField();
+                JTextField annoTexto = new JTextField();
+                                
+                auxPanelCampos.add(campoNombre);
+                auxPanelCampos.add(nombreTexto);
+                auxPanelCampos.add(campoNacionalidad);
+                auxPanelCampos.add(nacionTexto);
+                auxPanelCampos.add(diaNac);
+                auxPanelCampos.add(diaTexto);
+                auxPanelCampos.add(mesNac);
+                auxPanelCampos.add(mesTexto);
+                auxPanelCampos.add(annoNac);                
+                auxPanelCampos.add(annoTexto);
+                
+                
+                mainVentana.add(mainPanel);          
+                
+                botonCancelar.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e) {
+                        mainVentana.dispose();
+                    }                
+                });
+                
+                
+                botonAceptar.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e) {
+                        
+                    }
+                    
+                });
+            }
+        });
+        
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                  
@@ -362,9 +443,7 @@ public class MainWindow extends JFrame {
          
                  JOptionPane.showMessageDialog(null,"Se ha creado un documento en blanco.","",1,null);
             }
-        });
-                
-                
+        });                
     }
 
 }
