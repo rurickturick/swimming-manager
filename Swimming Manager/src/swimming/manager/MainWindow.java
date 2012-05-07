@@ -311,6 +311,12 @@ public class MainWindow extends javax.swing.JFrame {
                     
             }
         });
+        
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                 JOptionPane.showMessageDialog(null,"Se ha creado un documento en blanco.","",1,null);
+            }
+        });
                 
                 
     }
