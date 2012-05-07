@@ -12,46 +12,44 @@ public class Nadador {
 	private ArrayList <Marca> marcas = new ArrayList<Marca>();
 	
         public Nadador(){
-            this.nombre="";
-            this.fechaNacimiento=new Fecha();
-            this.estilos=new ArrayList<Estilo>();
-            this.pais=new Pais();
-            this.palmares=new ArrayList<Titulo>();
-            this.marcas=new ArrayList<Marca>();
+            this.nombre = "";
+            this.fechaNacimiento = new Fecha();
+            this.estilos = new ArrayList<Estilo>();
+            this.pais = new Pais();
+            this.palmares = new ArrayList<Titulo>();
+            this.marcas = new ArrayList<Marca>();
         }
         
 	public Nadador(String nombre, Fecha fechaNacimiento, ArrayList<Estilo> estilos,
 			Pais pais, ArrayList<Titulo> palmares, ArrayList<Marca> marcas) {
             
             this.nombre = nombre;
-            this.fechaNacimiento=fechaNacimiento;
+            this.fechaNacimiento = fechaNacimiento;
             this.estilos = estilos;
-            this.pais=pais;
-            this.palmares=palmares;
+            this.pais = pais;
+            this.palmares = palmares;
             this.marcas = marcas;		
 	}
 	
 	public String toString() {
             
             String s1 = this.nombre;
-            String s2= this.fechaNacimiento.toString();
-            String s3= this.pais.toString();
-            String s4= "";
-            String s5= this.pais.toString();
-            String s6="";
-            String s7="";
-            for(int i=0; i<estilos.size(); i++) {
-                s4= s4+ estilos.get(i).name();
-            }
+            String s2 = this.fechaNacimiento.toString();
+            String s3 = this.pais.toString();
+            String s4 = "";
+            String s5 = this.pais.toString();
+            String s6 = "";
+            String s7 = "";
+         
+            for(int i = 0; i < estilos.size(); i++) 
+                s4 = s4 + estilos.get(i).name();
             
-            for(int i=0; i<marcas.size(); i++){
-                s6= s6+ marcas.get(i).toString();
-            }
+            for(int i = 0; i < marcas.size(); i++)
+                s6 = s6 + marcas.get(i).toString();            
             
-            for(int i=0; i<palmares.size(); i++){
-                s7=s7 + palmares.get(i).toString();
-            }
-            
+            for(int i = 0; i < palmares.size(); i++)
+                s7 = s7 + palmares.get(i).toString();
+         
             String resultado = s1 + "\n" + s2 + "\n" + s3 + "\n" +
                                s4 + "\n" + s5 + "\n" + s6 + "\n" + s7;
             

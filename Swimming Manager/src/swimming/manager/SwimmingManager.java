@@ -18,7 +18,7 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private ArrayList<Nadador> Nadadores;
+	private ArrayList<Nadador> nadadores;
         
         /** Metodo que se usa para generar un array list de estilos a partir de un String **/
         
@@ -52,7 +52,7 @@ public class SwimmingManager {
             ArrayList<Titulo> palmares=new ArrayList<Titulo>();
             ArrayList<Marca> marca= new ArrayList<Marca>();
             Nadador nadador=new Nadador(Nombre, fecha, estilosParsed, p, palmares, marca);
-            this.Nadadores.add(nadador);
+            this.nadadores.add(nadador);
 	}
 
 	/** 
@@ -63,7 +63,7 @@ public class SwimmingManager {
 	public void darDeBajaNadador(String nombre) {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
-            Iterator<Nadador> it=this.Nadadores.iterator();
+            Iterator<Nadador> it=this.nadadores.iterator();
             while(it.hasNext()){
                 Nadador n=it.next();
                 if (n.getNombre().equalsIgnoreCase(nombre)){
@@ -74,16 +74,13 @@ public class SwimmingManager {
 		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void anadirMarcaNadador() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	
+	public void anadirMarcaNadador(Marca m, Nadador n) {
+            ArrayList<Marca> marcasNadador;
+            marcasNadador = n.getMarcas();
+            marcasNadador.add(m);
+            n.setMarcas(marcasNadador);
+		
 	}
 
 	/** 
@@ -103,11 +100,11 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void verInformacionNadador() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void verInformacionNadador(Nadador n) {
+            
+            
+            
+		
 	}
 
 	/** 
