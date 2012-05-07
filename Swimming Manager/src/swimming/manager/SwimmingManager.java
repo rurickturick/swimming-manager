@@ -230,20 +230,6 @@ public class SwimmingManager {
             return resultado;
             
         }
-
-	
-	public ArrayList<Nadador> buscarNadadores() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-                
-                
-                return null;
-		// end-user-code
-	
-
-        }
-
-
 	
 	public void compararMarcas() {
 		// begin-user-code
