@@ -101,6 +101,9 @@ public class Nadador {
             this.marcas = marcas;
         }
         
+        public void addMarca(Marca marca){
+            this.marcas.add(marca);
+        }
         public ArrayList<Marca> getMarcas(){
             return marcas;
         }

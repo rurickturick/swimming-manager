@@ -73,14 +73,45 @@ public class SwimmingManager {
             }
 		// end-user-code
 	}
-
-	
-	public void anadirMarcaNadador(Marca m, Nadador n) {
-            ArrayList<Marca> marcasNadador;
-            marcasNadador = n.getMarcas();
-            marcasNadador.add(m);
-            n.setMarcas(marcasNadador);
-		
+        
+	/** 
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+        private Nadador buscarNadador(String nombre){
+            Iterator<Nadador> it=this.nadadores.iterator();
+            while(it.hasNext()){
+                Nadador n=it.next();
+                if (n.getNombre().equalsIgnoreCase(nombre)){
+                    return n;
+                }
+            }
+            return null;
+        }
+        
+        // devuelve 0 si se ha añadido bien
+        //          1 si el nadador no existe
+        //          2 si el formato de la marca no es correcto
+        //          3 si el formato de la fecha no es correcto
+	public int anadirMarcaNadador(String nombre, String marca, String fecha,
+                                      int distancia, Estilo estilo){
+		// begin-user-code
+		// TODO Ap�ndice de m�todo generado autom�ticamente
+            Nadador nadador=buscarNadador(nombre);
+            if (nadador==null) return 1;
+            String[] auxMarca = marca.split(" ");
+            if (auxMarca.length!=5) return 2;
+            String[] auxfecha = fecha.split("-");
+            if (auxfecha.length!=3) return 3;
+            Marca m = new Marca(Integer.parseInt(auxfecha[0]),Integer.parseInt(auxfecha[1]),
+                                Integer.parseInt(auxfecha[2]),Integer.parseInt(auxMarca[0]),
+                                Integer.parseInt(auxMarca[1]),Integer.parseInt(auxMarca[2]),
+                                Integer.parseInt(auxMarca[3]),Integer.parseInt(auxMarca[4]),
+                                distancia, estilo);
+            nadador.addMarca(m);
+            return 0;
+		// end-user-code
 	}
 
 	/** 
