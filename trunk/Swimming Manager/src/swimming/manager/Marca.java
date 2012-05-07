@@ -13,9 +13,14 @@ public class Marca {
             distancia = 1000;
         }
         
-	public Marca(Fecha fecha, Tiempo tiempo, int distancia, Estilo estilo) {
-            this.fecha = fecha;
-            this.tiempo = tiempo;
+	public Marca(int dia,int mes, int anyo, int horas,
+                    int minutos,int segundos ,int decimas,
+                    int centesimas , int distancia, Estilo estilo) {
+       
+            Fecha f = new Fecha(dia, mes, anyo);
+            Tiempo t= new Tiempo(horas, minutos, segundos, decimas, centesimas);
+            this.fecha = f;
+            this.tiempo = t;
             this.distancia=distancia;
             this.estilo = estilo;
 		
