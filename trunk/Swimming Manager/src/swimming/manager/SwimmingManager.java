@@ -5,6 +5,7 @@ package swimming.manager;
  */
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Date;
 import java.util.*;
 
 /** 
@@ -32,6 +33,14 @@ public class SwimmingManager {
                 if(estilo[i].equalsIgnoreCase("mariposa")) aux.add(Estilo.Mariposa);
             }
             return aux;
+        }
+       private Estilo parseEstilos(String estilo){
+           Estilo e = null;
+                if(estilo.equalsIgnoreCase("braza")) e=Estilo.Braza;
+                if(estilo.equalsIgnoreCase("espalda")) e=Estilo.Espalda;
+                if(estilo.equalsIgnoreCase("libre")) e=Estilo.Libre;
+                if(estilo.equalsIgnoreCase("mariposa")) e=Estilo.Mariposa;
+            return e;
         }
 
 	/** 
@@ -80,7 +89,7 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-        private Nadador buscarNadador(String nombre){
+        private Nadador buscarNadadorPorNombre(String nombre){
             Iterator<Nadador> it=this.nadadores.iterator();
             while(it.hasNext()){
                 Nadador n=it.next();
@@ -91,6 +100,72 @@ public class SwimmingManager {
             return null;
         }
         
+        private ArrayList<Nadador> buscarNadadoresPorEstilo(String e){
+            Estilo estilo= parseEstilos(e);
+            ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
+            Iterator<Nadador> it=this.nadadores.iterator();
+            while(it.hasNext()){
+                Nadador n=it.next();
+                if (n.getEstilos().contains((Estilo) estilo)){
+                    auxNadadores.add(n);
+                }
+            }
+            return auxNadadores;
+        }
+        private ArrayList<Nadador> buscarNadadoresPorNombre(String nombre){
+            ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
+            Iterator<Nadador> it=this.nadadores.iterator();
+            while(it.hasNext()){
+                Nadador n=it.next();
+                if (n.getNombre().contains(nombre)){
+                    auxNadadores.add(n);
+                }
+            }
+            return auxNadadores;
+        }
+        
+        private ArrayList<Nadador> buscarNadadoresPorMarca(int distancia,String e){
+            Estilo estilo=parseEstilos(e);
+            ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
+            Iterator<Nadador> it=this.nadadores.iterator();
+            while(it.hasNext()){
+                Nadador n=it.next();
+                Iterator<Marca> marc=n.getMarcas().iterator();
+                while(marc.hasNext()){
+                    Marca m = marc.next();
+                    if ((m.getDistancia()==distancia) && (m.getEstilo()==estilo)){
+                        auxNadadores.add(n);
+                    }
+                }
+            }
+            return auxNadadores;
+        }
+        
+        private ArrayList<Nadador> buscarNadadoresPorPais(String pais){
+            ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
+            Iterator<Nadador> it=this.nadadores.iterator();
+            while(it.hasNext()){
+                Nadador n=it.next();
+                if (n.getPais().getPais().equalsIgnoreCase(pais)){
+                    auxNadadores.add(n);
+                }
+            }
+            return auxNadadores;
+        }
+        
+        private ArrayList<Nadador> buscarNadadoresPorEdad(int edad){
+            ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
+            Iterator<Nadador> it=this.nadadores.iterator();
+            Date now= new Date();
+            int anyoActual = now.getYear()+1900;
+            while(it.hasNext()){
+                Nadador n=it.next();
+                if (anyoActual-n.getFecha().getAnyo()==edad){
+                    auxNadadores.add(n);
+                }
+            }
+            return auxNadadores;
+        }
         // devuelve 0 si se ha añadido bien
         //          1 si el nadador no existe
         //          2 si el formato de la marca no es correcto
@@ -98,7 +173,7 @@ public class SwimmingManager {
 	public int anadirMarcaNadador(String nombre, String marca, String fecha,
                                       int distancia, Estilo estilo){
 	
-            Nadador nadador=buscarNadador(nombre);
+            Nadador nadador=buscarNadadorPorNombre(nombre);
             if (nadador==null) return 1;
             String[] auxMarca = marca.split(" ");
             if (auxMarca.length!=5) return 2;
@@ -143,10 +218,12 @@ public class SwimmingManager {
 	}
 
 	
-	public void buscarNadadores() {
+	public ArrayList<Nadador> buscarNadadores() {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
-
+                
+                
+                return null;
 		// end-user-code
 	}
 
