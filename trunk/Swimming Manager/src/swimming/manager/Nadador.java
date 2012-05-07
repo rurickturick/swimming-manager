@@ -40,7 +40,6 @@ public class Nadador {
             String s2 = this.fechaNacimiento.toString();
             String s3 = this.pais.toString();
             String s4 = "";
-            String s5 = this.pais.toString();
             String s6 = "";
             String s7 = "";
          
@@ -54,7 +53,7 @@ public class Nadador {
                 s7 = s7 + palmares.get(i).toString();
          
             String resultado = s1 + "\n" + s2 + "\n" + s3 + "\n" +
-                               s4 + "\n" + s5 + "\n" + s6 + "\n" + s7;
+                               s4 + "\n" + s6 + "\n" + s7;
             
             return resultado;            
 	
