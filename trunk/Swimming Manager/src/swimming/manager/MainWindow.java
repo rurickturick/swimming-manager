@@ -42,11 +42,12 @@ public class MainWindow extends JFrame {
     private final JTable tabla;
     private DefaultTableModel tableModel;
     private JButton botonMolon;
+    private Image img;
     
     public MainWindow() {
         initComponents();
         this.setTitle("Swimming Manager");
-        Image img=Toolkit.getDefaultToolkit().getImage("images/Swimming_Manager_Logo_modelo_2.png");
+        img=Toolkit.getDefaultToolkit().getImage("images/Swimming_Manager_Logo_modelo_2.png");
         this.setIconImage(img);        
         initListener();
         botonMolon = new JButton("Botón Molón");
@@ -264,9 +265,10 @@ public class MainWindow extends JFrame {
     }//GEN-LAST:event_jMenu5ActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-         JOptionPane.showMessageDialog(null, ""
-                + "Creado por '6+2' para Ingeniería del Software.\nUniversidad Complutense de Madrid."
-                , "Swimming Manager 0.1", 1, null);
+        Icon icon = new ImageIcon("images/ucm.png");
+        
+        JOptionPane.showMessageDialog(null, "Creado por '6+2' para Ingeniería del Software.\nUniversidad Complutense de Madrid.\n"
+                +"Facultad de Informática.", "Swimming Manager 0.1", 1, icon);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
