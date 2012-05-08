@@ -47,8 +47,7 @@ public class MainWindow extends JFrame {
         initComponents();
         this.setTitle("Swimming Manager");
         Image img=Toolkit.getDefaultToolkit().getImage("images/Swimming_Manager_Logo_modelo_2.png");
-        this.setIconImage(img);
-        
+        this.setIconImage(img);        
         initListener();
         botonMolon = new JButton("Botón Molón");
         this.setLayout(new BorderLayout());
@@ -303,6 +302,41 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
+    private JPanel getLabelsPanel(String[] labels, JButton bAceptar, JButton bCancelar){
+        
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());                
+        JPanel auxPanelCampos = new JPanel(new SpringLayout());
+        int numPairs = labels.length;
+        //Create and populate the panel.
+        for (int i = 0; i < numPairs; i++) {
+            JLabel l = new JLabel(labels[i], JLabel.TRAILING);
+            auxPanelCampos.add(l);
+            JTextField textField = new JTextField(5);
+            l.setLabelFor(textField);
+            auxPanelCampos.add(textField);
+        }
+        //Lay out the panel.
+        SpringUtilities.makeCompactGrid(auxPanelCampos,
+                                        numPairs, 2, //rows, cols
+                                        6, 6,        //initX, initY
+                                        6, 6);       //xPad, yPad                
+        mainPanel.add(auxPanelCampos, "Center");
+        mainPanel.add(getPanelBotones(bAceptar, bCancelar), "South");
+        
+        return mainPanel;
+    }
+    
+    private JPanel getPanelBotones(JButton aceptar, JButton cancelar){
+        JPanel panelBotones = new JPanel();
+        panelBotones.setEnabled(true);
+        panelBotones.add(aceptar);
+        panelBotones.add(cancelar);
+        return panelBotones;
+    }
+    
+    
+    
     private void initListener(){
         jMenuItem2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -346,83 +380,35 @@ public class MainWindow extends JFrame {
         
         jMenuItem16.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                if(swimming==null) JOptionPane.showMessageDialog(null,"Debe crear un documento nuevo o abrir uno existente.","Dar de alta",0,null);
-                else{ 
-                    final JFrame mainVentana = new JFrame();
-                    mainVentana.setVisible(true);
-                    mainVentana.setSize(new Dimension(300, 400));
-                    mainVentana.setAlwaysOnTop(true);
-
-                    JPanel mainPanel = new JPanel();
-                    mainPanel.setLayout(new BorderLayout());                
-
-                    JPanel auxPanelCampos = new JPanel();
-                    GridLayout contenedorCampos = new GridLayout(6, 2, 10, 35);
-                    auxPanelCampos.setLayout(contenedorCampos);
-
-                    mainPanel.add(auxPanelCampos, "Center");
-                    JPanel auxPanelBotones = new JPanel();
-                    auxPanelBotones.setEnabled(true);
-
+                if(swimming==null) 
+                    JOptionPane.showMessageDialog(null,"Debe crear un documento nuevo o abrir uno existente.","Dar de alta",0,null);
+                else {
+                    final JFrame mainVentana = getVentana();               
+                    String[] labels = {"Nombre: ", "País de Origen: ", "Día de Nacimiento: ", "Mes de Nacimiento: ",
+                                    "Año de Nacimiento: "};
                     JButton botonAceptar = new JButton();
                     botonAceptar.setText("Aceptar");
                     JButton botonCancelar = new JButton();
-                    botonCancelar.setText("Cancelar");
-                    auxPanelBotones.add(botonAceptar);
-                    auxPanelBotones.add(botonCancelar);                
-                    mainPanel.add(auxPanelBotones, "South");                              
-
-                    JLabel campoNombre = new JLabel();
-                    campoNombre.setText("Nombre: ");
-                    JLabel campoNacionalidad = new JLabel("Nacionalidad: ");
-                    JLabel campoSexo = new JLabel("Sexo: ");
-                    JLabel diaNac = new JLabel("Día de Nacimiento: ");
-                    JLabel mesNac = new JLabel("Mes de Nacimiento: ");
-                    JLabel annoNac = new JLabel("Año de Nacimiento: ");
-
-                    final JTextField nombreTexto = new JTextField();
-                    final JTextField nacionTexto = new JTextField();
-                    final JTextField diaTexto = new JTextField();
-                    final JTextField mesTexto = new JTextField();
-                    final JTextField annoTexto = new JTextField();
-                    final JTextField sexoTexto = new JTextField();
-
-                    auxPanelCampos.add(campoNombre);
-                    auxPanelCampos.add(nombreTexto);
-                    auxPanelCampos.add(campoNacionalidad);
-                    auxPanelCampos.add(nacionTexto);
-                    auxPanelCampos.add(campoSexo);
-                    auxPanelCampos.add(sexoTexto);
-                    auxPanelCampos.add(diaNac);
-                    auxPanelCampos.add(diaTexto);
-                    auxPanelCampos.add(mesNac);
-                    auxPanelCampos.add(mesTexto);
-                    auxPanelCampos.add(annoNac);                
-                    auxPanelCampos.add(annoTexto);
-
-
-                    mainVentana.add(mainPanel);          
+                    botonCancelar.setText("Cancelar");               
+                    mainVentana.add(getLabelsPanel(labels, botonAceptar, botonCancelar));
 
                     botonCancelar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {
                             mainVentana.dispose();
                         }                
-                    });
-
-
+                    });                
                     botonAceptar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {
                             try{
-                                String fecha = diaTexto.getText()+"-"+mesTexto.getText()+"-"+annoTexto.getText();
+                                //String fecha = diaTexto.getText()+"-"+mesTexto.getText()+"-"+annoTexto.getText();
                                 //swimming.darDeAltaNadador(nombreTexto.getText(), fecha, nacionTexto.getText());
                             }
                             catch(Exception ex){
-
+                                
                             }
-                        }
-
+                        }  
                     });
-                }
+                }                
             }
         });
         
@@ -435,7 +421,24 @@ public class MainWindow extends JFrame {
                 tableModel.setDataVector(matriz, columnNames);     
                 swimming = new SwimmingManager();
             }
-        });                
+        });
+        
+        jMenuItem17.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                final JFrame mainVentana = getVentana();
+                JPanel mainPanel = new JPanel(new BorderLayout());
+                
+                
+            }
+        });
+    }
+    
+    private JFrame getVentana(){
+        JFrame mainVentana = new JFrame();
+        mainVentana.setVisible(true);
+        mainVentana.setSize(new Dimension(350, 275));
+        mainVentana.setAlwaysOnTop(true);
+        return mainVentana;
     }
 
 }
