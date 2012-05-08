@@ -434,10 +434,11 @@ public class MainWindow extends JFrame {
     }
     
     private JFrame getVentana(){
-        JFrame mainVentana = new JFrame();
+        JFrame mainVentana = new JFrame("Dar de alta nadador");
         mainVentana.setVisible(true);
         mainVentana.setSize(new Dimension(350, 275));
         mainVentana.setAlwaysOnTop(true);
+        mainVentana.setResizable(false);
         return mainVentana;
     }
 
