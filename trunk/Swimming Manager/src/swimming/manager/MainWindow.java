@@ -36,20 +36,33 @@ public class MainWindow extends JFrame {
     /**
      * Creates new form MainWindow
      */
-    private JTable tablaNadadores;
-    private DefaultTableModel modeloTabla;
+    
     private SwimmingManager swimming;
+    
+    private final JTable tabla;
+    private DefaultTableModel tableModel;
+    private JButton botonMolon;
     
     public MainWindow() {
         initComponents();
         this.setTitle("Swimming Manager");
         Image img=Toolkit.getDefaultToolkit().getImage("images/Swimming_Manager_Logo_modelo_2.png");
         this.setIconImage(img);
-        this.setVisible(true);
+        
         initListener();
-        this.add(jPanel1,"North");
-        jPanel1.add(panelTabla,"North");
+        botonMolon = new JButton("Botón Molón");
+        this.setLayout(new BorderLayout());
+        
+        //this.add(botonMolon, "North");
+        
+        tableModel = new DefaultTableModel();
+        tabla = new JTable(tableModel);
+        JScrollPane container = new JScrollPane(tabla);
+        this.getContentPane().add(container);        
+        
         swimming = new SwimmingManager();
+        
+        this.setVisible(true);
     }
 
     /**
@@ -61,8 +74,6 @@ public class MainWindow extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        panelTabla = new javax.swing.JScrollPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -93,28 +104,6 @@ public class MainWindow extends JFrame {
         jMenuItem21 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        panelTabla.setBackground(new java.awt.Color(0, 102, 102));
-        panelTabla.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 606, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 387, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(19, Short.MAX_VALUE)
-                    .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
 
         jMenu1.setText("Archivo");
 
@@ -243,17 +232,11 @@ public class MainWindow extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 626, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 409, Short.MAX_VALUE)
         );
 
         pack();
@@ -319,8 +302,6 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane panelTabla;
     // End of variables declaration//GEN-END:variables
     private void initListener(){
         jMenuItem2.addActionListener(new ActionListener(){
@@ -431,7 +412,7 @@ public class MainWindow extends JFrame {
                     public void actionPerformed(ActionEvent e) {
                         try{
                             String fecha = diaTexto.getText()+"-"+mesTexto.getText()+"-"+annoTexto.getText();
-                            swimming.darDeAltaNadador(nombreTexto.getText(), fecha, nacionTexto.getText());
+                            //swimming.darDeAltaNadador(nombreTexto.getText(), fecha, nacionTexto.getText());
                         }
                         catch(Exception ex){
                             
@@ -443,17 +424,12 @@ public class MainWindow extends JFrame {
         });
         
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                 
-                 String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","N. Federativo","Récord"};
-                 String [][] matriz = new String[0][7];
-                 modeloTabla=new DefaultTableModel(matriz, columnNames);
-                 tablaNadadores=new JTable(modeloTabla);
-                 panelTabla.setVisible(true);
-                 panelTabla.add(tablaNadadores);
+            public void actionPerformed(java.awt.event.ActionEvent evt) {              
+                JOptionPane.showMessageDialog(null,"Se ha creado un documento en blanco.","",1,null);
                 
-         
-                 JOptionPane.showMessageDialog(null,"Se ha creado un documento en blanco.","",1,null);
+                String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","N. Federativo","Récord"};
+                String [][] matriz = new String[0][7];
+                tableModel.setDataVector(matriz, columnNames);                 
             }
         });                
     }
