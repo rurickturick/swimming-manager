@@ -318,6 +318,8 @@ public class MainWindow extends JFrame {
             l.setLabelFor(textField);
             auxPanelCampos.add(textField);
         }
+        
+        
         //Lay out the panel.
         SpringUtilities.makeCompactGrid(auxPanelCampos,
                                         numPairs, 2, //rows, cols
@@ -387,13 +389,12 @@ public class MainWindow extends JFrame {
                 else {
                     final JFrame mainVentana = getVentana();               
                     String[] labels = {"Nombre: ", "País de Origen: ", "Día de Nacimiento: ", "Mes de Nacimiento: ",
-                                    "Año de Nacimiento: "};
+                                        "Año de Nacimiento: "};
                     JButton botonAceptar = new JButton();
                     botonAceptar.setText("Aceptar");
                     JButton botonCancelar = new JButton();
                     botonCancelar.setText("Cancelar");               
                     mainVentana.add(getLabelsPanel(labels, botonAceptar, botonCancelar));
-
                     botonCancelar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {
                             mainVentana.dispose();
@@ -402,11 +403,27 @@ public class MainWindow extends JFrame {
                     botonAceptar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {
                             try{
-                                //String fecha = diaTexto.getText()+"-"+mesTexto.getText()+"-"+annoTexto.getText();
-                                //swimming.darDeAltaNadador(nombreTexto.getText(), fecha, nacionTexto.getText());
+                                Component[] componentes = mainVentana.getContentPane().getComponents();
+                                JPanel p = (JPanel)componentes[0];
+                                componentes = p.getComponents();
+                                p = (JPanel)componentes[0];
+                                int a = p.getComponentCount();
+                                componentes = p.getComponents();
+                                JTextField[] camposTexto = new JTextField[5];
+                                int cont = 0;
+                                for(int i = 0; i<a; i++){
+                                    if(i%2==1){
+                                        camposTexto[cont] = (JTextField)componentes[i];
+                                        cont++;
+                                    }
+                                }
+
+                                String fecha = camposTexto[2].getText()+"-"+camposTexto[3].getText()+"-"+camposTexto[4].getText();
+                                swimming.darDeAltaNadador(camposTexto[0].getText(), fecha, camposTexto[1].getText());
                             }
                             catch(Exception ex){
-                                
+                                JOptionPane.showMessageDialog(null,"Debe rellenar todos los campos.","",0,null);
+                                mainVentana.dispose();
                             }
                         }  
                     });
