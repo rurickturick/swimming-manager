@@ -36,20 +36,19 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void darDeAltaNadador(String Nombre,String fechaNacimiento,String estilos,
-                                    String pais) {
+	public void darDeAltaNadador(String Nombre,String fechaNacimiento,String pais) {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 		// end-user-code
             String[] s= fechaNacimiento.split("-");
             Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
-            s=estilos.split(" ");
-            ArrayList<Estilo> estilosParsed=this.parseEstilos(s);
+            
+            ArrayList<Estilo> estilos=new ArrayList<Estilo>();
             s=pais.split(" ");
             Pais p= new Pais(s[0], s[1]);
             ArrayList<Titulo> palmares=new ArrayList<Titulo>();
             ArrayList<Marca> marca= new ArrayList<Marca>();
-            Nadador nadador=new Nadador(Nombre, fecha, estilosParsed, p, palmares, marca);
+            Nadador nadador=new Nadador(Nombre, fecha, estilos, p, palmares, marca);
             this.nadadores.add(nadador);
 	}
 
@@ -173,9 +172,25 @@ public class SwimmingManager {
                                 Integer.parseInt(auxMarca[3]),Integer.parseInt(auxMarca[4]),
                                 distancia, estilo);
             nadador.addMarca(m);
+            //añadir el estilo de la marca a los estilos el nadador si no esta
+            
+          
+            Iterator<Estilo>  it=nadador.getEstilos().iterator();
+            boolean encontrado=false;
+            //ver si esta el estilo ya añadido
+            while(it.hasNext()&&!encontrado){
+                if (it.next()==estilo) encontrado=true;
+               
+             }
+            //si no esta añadido se añade
+            if(!encontrado){
+                ArrayList<Estilo>estilosAux=nadador.getEstilos();
+                estilosAux.add(estilo);
+                nadador.setEstilo(estilosAux);
+            }
             return 0;
-		// end-user-code
-	}
+        }	// end-user-code
+	
         
         
 	public void eliminarMarcaNadador(Marca m, Nadador n) throws Exception{
