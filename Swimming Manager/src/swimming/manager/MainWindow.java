@@ -441,6 +441,7 @@ public class MainWindow extends JFrame {
         mainVentana.setSize(new Dimension(350, 275));
         mainVentana.setAlwaysOnTop(true);
         mainVentana.setResizable(false);
+        mainVentana.setIconImage(img);
         return mainVentana;
     }
 
