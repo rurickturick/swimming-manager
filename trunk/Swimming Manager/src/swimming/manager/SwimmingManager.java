@@ -231,11 +231,8 @@ public class SwimmingManager {
             
         }
 	
-	public void compararMarcas() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void compararMarcas(Marca marca, Marca marca2) {
+		System.out.println(marca.toString()+ marca2.toString());
 	}
 
 	/** 
