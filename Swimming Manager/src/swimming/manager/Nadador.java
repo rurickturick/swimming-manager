@@ -11,6 +11,7 @@ public class Nadador {
 	private ArrayList<Titulo> palmares = new ArrayList<Titulo>();
 	private ArrayList <Marca> marcas = new ArrayList<Marca>();
         private Marca record;
+        private String sexo;
 	
         public Nadador(){
             this.nombre = "";
@@ -20,6 +21,7 @@ public class Nadador {
             this.palmares = new ArrayList<Titulo>();
             this.marcas = new ArrayList<Marca>();
             this.record = null;
+            this.sexo = "";
         }
         
 	public Nadador(String nombre, Fecha fechaNacimiento, ArrayList<Estilo> estilos,
