@@ -43,7 +43,6 @@ public class MainWindow extends JFrame {
     
     private final JTable tabla;
     private DefaultTableModel tableModel;
-    private JButton botonMolon;
     private Image img;
     
     public MainWindow() {
@@ -52,10 +51,7 @@ public class MainWindow extends JFrame {
         img=Toolkit.getDefaultToolkit().getImage("images/Swimming_Manager_Logo_modelo_2.png");
         this.setIconImage(img);        
         initListener();
-        botonMolon = new JButton("Botón Molón");
         this.setLayout(new BorderLayout());
-        
-        //this.add(botonMolon, "North");
         
         tableModel = new DefaultTableModel();
         tabla = new JTable(tableModel);
@@ -396,7 +392,8 @@ public class MainWindow extends JFrame {
                 if(swimming==null) 
                     JOptionPane.showMessageDialog(null,"Debe crear un documento nuevo o abrir uno existente.","Dar de alta",0,null);
                 else {
-                    final JFrame mainVentana = getVentana();               
+                    final JFrame mainVentana = getVentana();   
+                    mainVentana.setTitle("Dar de alta nadador");
                     String[] labels = {"Nombre: ", "País de Origen: ","Ciudad de Origen: ", "Día de Nacimiento: ", "Mes de Nacimiento: ",
                                         "Año de Nacimiento: "};
                     JButton botonAceptar = new JButton();
@@ -433,6 +430,9 @@ public class MainWindow extends JFrame {
                                 String ciudad = camposTexto[2].getText();
                                 
                                 swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad);
+                                updateTabla();
+                                JOptionPane.showMessageDialog(null,"Nadador añadido.","",0,null);
+                                mainVentana.dispose();
                                 
                             }
                             catch(Exception ex){
@@ -450,7 +450,7 @@ public class MainWindow extends JFrame {
                 JOptionPane.showMessageDialog(null,"Se ha creado un documento en blanco.","",1,null);
                 
                 String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","N. Federativo","Récord"};
-                String [][] matriz = new String[0][7];
+                String [][] matriz = new String[0][columnNames.length];
                 tableModel.setDataVector(matriz, columnNames);     
                 swimming = new SwimmingManager();
                 
@@ -471,11 +471,42 @@ public class MainWindow extends JFrame {
                     else{
                         final JFrame mainVentana = getVentana();
                         mainVentana.setTitle("Dar de baja nadador");
-                        JPanel mainPanel = new JPanel(new GridLayout(0, 1, 15, 15));
-                        JComboBox caja = getCombo();
-                        mainPanel.add(caja);
-
-                        swimming.darDeBajaNadador((String)caja.getSelectedItem());
+                        mainVentana.setSize(new Dimension(400, 100));
+                        JPanel mainPanel = new JPanel(new BorderLayout());
+                        JPanel auxPanel = new JPanel(new GridLayout(1, 2, 15, 15));
+                        final JComboBox caja = getComboNadadores();         
+                        JLabel label = new JLabel("Seleccione un nadador: ");
+                        auxPanel.add(label);
+                        label.setLabelFor(caja);
+                        auxPanel.add(caja);
+                        
+                        JButton botonAceptar = new JButton();
+                        botonAceptar.setText("Aceptar");
+                        JButton botonCancelar = new JButton();
+                        botonCancelar.setText("Cancelar");
+                        
+                        mainPanel.add(auxPanel, "Center");
+                        mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                        
+                        
+                        mainVentana.add(mainPanel);
+                        
+                        botonCancelar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            mainVentana.dispose();
+                            }                
+                        });
+                        
+                        
+                        botonAceptar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            
+                            
+                            swimming.darDeBajaNadador((String)caja.getSelectedItem());
+                            mainVentana.dispose();
+                            
+                            }                
+                        });
+                        
                     }
                     
                 }
@@ -487,7 +518,7 @@ public class MainWindow extends JFrame {
     }
     
     private JFrame getVentana(){
-        JFrame mainVentana = new JFrame("Dar de alta nadador");
+        JFrame mainVentana = new JFrame();
         mainVentana.setVisible(true);
         mainVentana.setSize(new Dimension(350, 275));
         mainVentana.setAlwaysOnTop(true);
@@ -495,8 +526,26 @@ public class MainWindow extends JFrame {
         mainVentana.setIconImage(img);
         return mainVentana;
     }
+    
+    //faltan accesora a los demás campos, tales como Nacionalidad, su mejor Récord, su mejor estilo 
+    //no usamos el número federativo así que croe que podemos quitarlo y voy a añadir la pestaña sexo al formulario
+    //pero aun queda por implementar la constructora del nadador al cual pasarle el sexo.
+    
+    private void updateTabla(){
+        ArrayList<Nadador> list = swimming.getNadadores();
+        String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","N. Federativo","Récord"};
+        String[][] matriz = new String[list.size()][columnNames.length];
+        
+        for(int i=0; i<list.size(); i++){
+            matriz[i][0] = list.get(i).getNombre();
+        }
+        
+        tableModel.setDataVector(matriz, columnNames);
+        
+    }
+    
 
-    private JComboBox getCombo(){
+    private JComboBox getComboNadadores(){
         JComboBox combo = null;
         try{
             ArrayList<Nadador> list = swimming.getNadadores();
@@ -505,7 +554,6 @@ public class MainWindow extends JFrame {
                 nadadores[i] = list.get(i).getNombre();
             }
             combo = new JComboBox(nadadores);  
-            return combo;   
         }
         catch(Exception ex){
             throw new Exception();
