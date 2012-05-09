@@ -430,8 +430,8 @@ public class MainWindow extends JFrame {
                                 String ciudad = camposTexto[2].getText();
                                 
                                 swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad);
-                                updateTabla();
                                 JOptionPane.showMessageDialog(null,"Nadador añadido.","",0,null);
+                                updateTabla();
                                 mainVentana.dispose();
                                 
                             }
@@ -502,6 +502,7 @@ public class MainWindow extends JFrame {
                             
                             
                             swimming.darDeBajaNadador((String)caja.getSelectedItem());
+                            updateTabla();
                             mainVentana.dispose();
                             
                             }                
