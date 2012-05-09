@@ -397,7 +397,7 @@ public class MainWindow extends JFrame {
                     JOptionPane.showMessageDialog(null,"Debe crear un documento nuevo o abrir uno existente.","Dar de alta",0,null);
                 else {
                     final JFrame mainVentana = getVentana();               
-                    String[] labels = {"Nombre: ", "País de Origen: ", "Día de Nacimiento: ", "Mes de Nacimiento: ",
+                    String[] labels = {"Nombre: ", "País de Origen: ","Ciudad de Origen: ", "Día de Nacimiento: ", "Mes de Nacimiento: ",
                                         "Año de Nacimiento: "};
                     JButton botonAceptar = new JButton();
                     botonAceptar.setText("Aceptar");
@@ -418,7 +418,7 @@ public class MainWindow extends JFrame {
                                 p = (JPanel)componentes[0];
                                 int a = p.getComponentCount();
                                 componentes = p.getComponents();
-                                JTextField[] camposTexto = new JTextField[5];
+                                JTextField[] camposTexto = new JTextField[componentes.length/2];
                                 int cont = 0;
                                 for(int i = 0; i<a; i++){
                                     if(i%2==1){
@@ -427,11 +427,13 @@ public class MainWindow extends JFrame {
                                     }
                                 }
 
-                                String fecha = camposTexto[2].getText()+"-"+camposTexto[3].getText()+"-"+camposTexto[4].getText();
+                                String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
                                 String nombre = camposTexto[0].getText();
                                 String pais = camposTexto[1].getText();
+                                String ciudad = camposTexto[2].getText();
                                 
-                                swimming.darDeAltaNadador(nombre, fecha, pais);
+                                swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad);
+                                
                             }
                             catch(Exception ex){
                                 JOptionPane.showMessageDialog(null,"Debe rellenar todos los campos.","",0,null);

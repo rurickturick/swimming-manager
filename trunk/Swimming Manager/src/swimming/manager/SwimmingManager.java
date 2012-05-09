@@ -12,6 +12,10 @@ public class SwimmingManager {
         
         /** Metodo que se usa para generar un array list de estilos a partir de un String **/
         
+        public SwimmingManager(){
+            nadadores = new ArrayList<Nadador>();
+        }
+        
         private ArrayList<Estilo> parseEstilos(String[] estilo){
             ArrayList<Estilo> aux= new ArrayList<Estilo>();
             for (int i = 0 ; i < estilo.length;i++){
