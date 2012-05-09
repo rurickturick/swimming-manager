@@ -445,10 +445,16 @@ public class MainWindow extends JFrame {
             }
         });
         
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(ActionEvent evt){
+                    
+                }
+        });
+        
         nuevoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {              
                 JOptionPane.showMessageDialog(null,"Se ha creado un documento en blanco.","",1,null);
-                
+                //falta añadir el sexo
                 String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","N. Federativo","Récord"};
                 String [][] matriz = new String[0][columnNames.length];
                 tableModel.setDataVector(matriz, columnNames);     
