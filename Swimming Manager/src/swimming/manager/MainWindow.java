@@ -62,7 +62,14 @@ public class MainWindow extends JFrame {
         JScrollPane container = new JScrollPane(tabla);
         this.getContentPane().add(container);        
         
+        buscarMenu.setVisible(false);
+        compararMenu.setVisible(false);
+        editarMenu.setVisible(false);
         
+        saveButton.setVisible(false);
+        saveButton.setEnabled(false);
+        saveAsButton.setVisible(false);
+        showButton.setVisible(false);
         
         this.setVisible(true);
     }
@@ -77,14 +84,14 @@ public class MainWindow extends JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        fileMenu = new javax.swing.JMenu();
+        nuevoButton = new javax.swing.JMenuItem();
+        openButton = new javax.swing.JMenuItem();
+        saveButton = new javax.swing.JMenuItem();
+        saveAsButton = new javax.swing.JMenuItem();
+        showButton = new javax.swing.JMenuItem();
+        exitButton = new javax.swing.JMenuItem();
+        buscarMenu = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -94,55 +101,55 @@ public class MainWindow extends JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        editarMenu = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        compararMenu = new javax.swing.JMenu();
+        helpMenu = new javax.swing.JMenu();
         jMenuItem21 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Archivo");
+        fileMenu.setText("Archivo");
 
-        jMenuItem1.setText("Nuevo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        nuevoButton.setText("Nuevo");
+        nuevoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                nuevoButtonActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        fileMenu.add(nuevoButton);
 
-        jMenuItem2.setText("Abrir");
-        jMenu1.add(jMenuItem2);
+        openButton.setText("Abrir");
+        fileMenu.add(openButton);
 
-        jMenuItem3.setText("Guardar");
-        jMenu1.add(jMenuItem3);
+        saveButton.setText("Guardar");
+        fileMenu.add(saveButton);
 
-        jMenuItem4.setText("Guardar como...");
-        jMenu1.add(jMenuItem4);
+        saveAsButton.setText("Guardar como...");
+        fileMenu.add(saveAsButton);
 
-        jMenuItem5.setText("Mostrar todo");
-        jMenu1.add(jMenuItem5);
+        showButton.setText("Mostrar todo");
+        fileMenu.add(showButton);
 
-        jMenuItem6.setText("Salir");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        exitButton.setText("Salir");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                exitButtonActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem6);
+        fileMenu.add(exitButton);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(fileMenu);
 
-        jMenu2.setText("Buscar por...");
+        buscarMenu.setText("Buscar por...");
 
         jMenuItem7.setText("Nombre");
-        jMenu2.add(jMenuItem7);
+        buscarMenu.add(jMenuItem7);
 
         jMenuItem8.setText("Nacionalidad");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
@@ -150,19 +157,19 @@ public class MainWindow extends JFrame {
                 jMenuItem8ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem8);
+        buscarMenu.add(jMenuItem8);
 
         jMenuItem9.setText("Sexo");
-        jMenu2.add(jMenuItem9);
+        buscarMenu.add(jMenuItem9);
 
         jMenuItem10.setText("Estilo");
-        jMenu2.add(jMenuItem10);
+        buscarMenu.add(jMenuItem10);
 
         jMenuItem11.setText("Distancia");
-        jMenu2.add(jMenuItem11);
+        buscarMenu.add(jMenuItem11);
 
         jMenuItem12.setText("Núm. Federativo");
-        jMenu2.add(jMenuItem12);
+        buscarMenu.add(jMenuItem12);
 
         jMenuItem13.setText("Edad");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
@@ -170,20 +177,20 @@ public class MainWindow extends JFrame {
                 jMenuItem13ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem13);
+        buscarMenu.add(jMenuItem13);
 
         jMenuItem14.setText("Marca");
-        jMenu2.add(jMenuItem14);
+        buscarMenu.add(jMenuItem14);
 
         jMenuItem15.setText("Récord");
-        jMenu2.add(jMenuItem15);
+        buscarMenu.add(jMenuItem15);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(buscarMenu);
 
-        jMenu3.setText("Editar");
+        editarMenu.setText("Editar");
 
         jMenuItem16.setText("Dar de alta");
-        jMenu3.add(jMenuItem16);
+        editarMenu.add(jMenuItem16);
 
         jMenuItem17.setText("Dar de baja");
         jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +198,7 @@ public class MainWindow extends JFrame {
                 jMenuItem17ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem17);
+        editarMenu.add(jMenuItem17);
 
         jMenu6.setText("Nadador");
 
@@ -204,17 +211,17 @@ public class MainWindow extends JFrame {
         jMenuItem20.setText("Información");
         jMenu6.add(jMenuItem20);
 
-        jMenu3.add(jMenu6);
+        editarMenu.add(jMenu6);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(editarMenu);
 
-        jMenu4.setText("Comparar");
-        jMenuBar1.add(jMenu4);
+        compararMenu.setText("Comparar");
+        jMenuBar1.add(compararMenu);
 
-        jMenu5.setText("Ayuda");
-        jMenu5.addActionListener(new java.awt.event.ActionListener() {
+        helpMenu.setText("Ayuda");
+        helpMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu5ActionPerformed(evt);
+                helpMenuActionPerformed(evt);
             }
         });
 
@@ -224,9 +231,9 @@ public class MainWindow extends JFrame {
                 jMenuItem21ActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem21);
+        helpMenu.add(jMenuItem21);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(helpMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -244,9 +251,9 @@ public class MainWindow extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_nuevoButtonActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
@@ -260,11 +267,11 @@ public class MainWindow extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
-    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
+    private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMenuActionPerformed
         JOptionPane.showMessageDialog(null, ""
                 + "Creado por '6+2' para Ingeniería del Software.\nUniversidad Complutense de Madrid."
                 , "Swimming Manager 0.1", 1, null);
-    }//GEN-LAST:event_jMenu5ActionPerformed
+    }//GEN-LAST:event_helpMenuActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
         Icon icon = new ImageIcon("images/ucm.png");
@@ -273,18 +280,18 @@ public class MainWindow extends JFrame {
                 +"Facultad de Informática.", "Swimming Manager 0.1", 1, icon);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         System.exit(0);	
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu buscarMenu;
+    private javax.swing.JMenu compararMenu;
+    private javax.swing.JMenu editarMenu;
+    private javax.swing.JMenuItem exitButton;
+    private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
@@ -295,16 +302,16 @@ public class MainWindow extends JFrame {
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem nuevoButton;
+    private javax.swing.JMenuItem openButton;
+    private javax.swing.JMenuItem saveAsButton;
+    private javax.swing.JMenuItem saveButton;
+    private javax.swing.JMenuItem showButton;
     // End of variables declaration//GEN-END:variables
     private JPanel getLabelsPanel(String[] labels, JButton bAceptar, JButton bCancelar){
         
@@ -344,7 +351,7 @@ public class MainWindow extends JFrame {
     
     
     private void initListener(){
-        jMenuItem2.addActionListener(new ActionListener(){
+        openButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                   JFileChooser selecFich=new JFileChooser();
                   int i=selecFich.showOpenDialog(MainWindow .this);
@@ -364,7 +371,7 @@ public class MainWindow extends JFrame {
                     
             }
         });
-        jMenuItem4.addActionListener(new ActionListener(){
+        saveAsButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                   FileNameExtensionFilter filter = new FileNameExtensionFilter("Documentos de texto (*.txt)", ".txt");
 				JFileChooser selecFich=new JFileChooser();
@@ -436,7 +443,7 @@ public class MainWindow extends JFrame {
             }
         });
         
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        nuevoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {              
                 JOptionPane.showMessageDialog(null,"Se ha creado un documento en blanco.","",1,null);
                 
@@ -444,6 +451,13 @@ public class MainWindow extends JFrame {
                 String [][] matriz = new String[0][7];
                 tableModel.setDataVector(matriz, columnNames);     
                 swimming = new SwimmingManager();
+                
+                buscarMenu.setVisible(true);
+                compararMenu.setVisible(true);
+                editarMenu.setVisible(true);
+                saveButton.setVisible(true);
+                saveAsButton.setVisible(true);
+                showButton.setVisible(true);
             }
         });
         
