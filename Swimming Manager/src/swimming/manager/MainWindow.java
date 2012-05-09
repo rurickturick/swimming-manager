@@ -454,6 +454,9 @@ public class MainWindow extends JFrame {
                     JPanel mainPanel = new JPanel(new GridLayout(0, 1, 15, 15));
                     JComboBox caja = getCombo();
                     mainPanel.add(caja);
+                    
+                    swimming.darDeBajaNadador((String)caja.getSelectedItem());
+                    
                 }
                 catch(Exception ex){
                     JOptionPane.showMessageDialog(null,"Debe crear un nuevo archivo y agregar algún nadador."
