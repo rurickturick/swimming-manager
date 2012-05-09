@@ -30,7 +30,7 @@ public class SwimmingManager {
                 if(estilo.equalsIgnoreCase("mariposa")) e=Estilo.Mariposa;
             return e;
         }
-
+       
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->

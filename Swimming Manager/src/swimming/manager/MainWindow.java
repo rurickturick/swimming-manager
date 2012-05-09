@@ -16,6 +16,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -419,7 +421,10 @@ public class MainWindow extends JFrame {
                                 }
 
                                 String fecha = camposTexto[2].getText()+"-"+camposTexto[3].getText()+"-"+camposTexto[4].getText();
-                                swimming.darDeAltaNadador(camposTexto[0].getText(), fecha, camposTexto[1].getText());
+                                String nombre = camposTexto[0].getText();
+                                String pais = camposTexto[1].getText();
+                                
+                                swimming.darDeAltaNadador(nombre, fecha, pais);
                             }
                             catch(Exception ex){
                                 JOptionPane.showMessageDialog(null,"Debe rellenar todos los campos.","",0,null);
@@ -445,9 +450,16 @@ public class MainWindow extends JFrame {
         jMenuItem17.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent evt){
                 final JFrame mainVentana = getVentana();
-                JPanel mainPanel = new JPanel(new BorderLayout());
-                
-                
+                try{                    
+                    JPanel mainPanel = new JPanel(new GridLayout(0, 1, 15, 15));
+                    JComboBox caja = getCombo();
+                    mainPanel.add(caja);
+                }
+                catch(Exception ex){
+                    JOptionPane.showMessageDialog(null,"Debe crear un nuevo archivo y agregar algún nadador."
+                                                    ,"",0,null);
+                    mainVentana.dispose();
+                }
             }
         });
     }
@@ -462,4 +474,24 @@ public class MainWindow extends JFrame {
         return mainVentana;
     }
 
+    private JComboBox getCombo(){
+        JComboBox combo = null;
+        try{
+            ArrayList<Nadador> list = swimming.getNadadores();
+            String[] nadadores = new String[list.size()];
+            for(int i = 0; i<nadadores.length; i++){
+                nadadores[i] = list.get(i).getNombre();
+            }
+            combo = new JComboBox(nadadores);  
+            return combo;   
+        }
+        catch(Exception ex){
+            throw new Exception();
+        }
+        finally{
+            return combo;
+        }
+        
+             
+    }
 }
