@@ -249,6 +249,10 @@ public class SwimmingManager {
 	public void compararMarcas(Marca marca, Marca marca2) {
 		System.out.println(marca.toString()+ marca2.toString());
 	}
+        
+        public ArrayList<Nadador> getNadadores(){
+            return nadadores;
+        }
 
 	/** 
 	 * <!-- begin-UML-doc -->

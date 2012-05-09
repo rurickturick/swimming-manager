@@ -449,19 +449,22 @@ public class MainWindow extends JFrame {
         
         jMenuItem17.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent evt){
-                final JFrame mainVentana = getVentana();
+                
                 try{                    
-                    JPanel mainPanel = new JPanel(new GridLayout(0, 1, 15, 15));
-                    JComboBox caja = getCombo();
-                    mainPanel.add(caja);
-                    
-                    swimming.darDeBajaNadador((String)caja.getSelectedItem());
+                    if(swimming==null) JOptionPane.showMessageDialog(null,"Debe crear un documento nuevo o abrir uno existente.","",0,null);
+                    else{
+                        final JFrame mainVentana = getVentana();
+                        mainVentana.setTitle("Dar de baja nadador");
+                        JPanel mainPanel = new JPanel(new GridLayout(0, 1, 15, 15));
+                        JComboBox caja = getCombo();
+                        mainPanel.add(caja);
+
+                        swimming.darDeBajaNadador((String)caja.getSelectedItem());
+                    }
                     
                 }
                 catch(Exception ex){
-                    JOptionPane.showMessageDialog(null,"Debe crear un nuevo archivo y agregar algún nadador."
-                                                    ,"",0,null);
-                    mainVentana.dispose();
+                    
                 }
             }
         });
