@@ -249,6 +249,19 @@ public class MainWindow extends JFrame {
 
     private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoButtonActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null,"Se ha creado un documento en blanco.","",1,null);
+                //falta añadir el sexo
+                String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","N. Federativo","Récord"};
+                String [][] matriz = new String[0][columnNames.length];
+                tableModel.setDataVector(matriz, columnNames);     
+                swimming = new SwimmingManager();
+                
+                buscarMenu.setVisible(true);
+                compararMenu.setVisible(true);
+                editarMenu.setVisible(true);
+                saveButton.setVisible(true);
+                saveAsButton.setVisible(true);
+                showButton.setVisible(true);
     }//GEN-LAST:event_nuevoButtonActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -261,6 +274,55 @@ public class MainWindow extends JFrame {
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         // TODO add your handling code here:
+                
+                try{                    
+                    if(swimming==null) JOptionPane.showMessageDialog(null,"Debe crear un documento nuevo o abrir uno existente.","",0,null);
+                    else{
+                        final JFrame mainVentana = getVentana();
+                        mainVentana.setTitle("Dar de baja nadador");
+                        mainVentana.setSize(new Dimension(400, 100));
+                        JPanel mainPanel = new JPanel(new BorderLayout());
+                        JPanel auxPanel = new JPanel(new GridLayout(1, 2, 15, 15));
+                        final JComboBox caja = getComboNadadores();         
+                        JLabel label = new JLabel("Seleccione un nadador: ");
+                        auxPanel.add(label);
+                        label.setLabelFor(caja);
+                        auxPanel.add(caja);
+                        
+                        JButton botonAceptar = new JButton();
+                        botonAceptar.setText("Aceptar");
+                        JButton botonCancelar = new JButton();
+                        botonCancelar.setText("Cancelar");
+                        
+                        mainPanel.add(auxPanel, "Center");
+                        mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                        
+                        
+                        mainVentana.add(mainPanel);
+                        
+                        botonCancelar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            mainVentana.dispose();
+                            }                
+                        });
+                        
+                        
+                        botonAceptar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            
+                            
+                            swimming.darDeBajaNadador((String)caja.getSelectedItem());
+                            updateTabla();
+                            mainVentana.dispose();
+                            
+                            }                
+                        });
+                        
+                    }
+                    
+                }
+                catch(Exception ex){
+                    
+                }
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMenuActionPerformed
@@ -394,7 +456,7 @@ public class MainWindow extends JFrame {
         
         jMenuItem16.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                if(swimming==null) 
+            if(swimming==null) 
                     JOptionPane.showMessageDialog(null,"Debe crear un documento nuevo o abrir uno existente.","Dar de alta",0,null);
                 else {
                     final JFrame mainVentana = getVentana();   
@@ -447,85 +509,13 @@ public class MainWindow extends JFrame {
                         }  
                     });
                 }                
-            }
+            }    
         });
         
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(ActionEvent evt){
                     
                 }
-        });
-        
-        nuevoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {              
-                JOptionPane.showMessageDialog(null,"Se ha creado un documento en blanco.","",1,null);
-                //falta añadir el sexo
-                String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","N. Federativo","Récord"};
-                String [][] matriz = new String[0][columnNames.length];
-                tableModel.setDataVector(matriz, columnNames);     
-                swimming = new SwimmingManager();
-                
-                buscarMenu.setVisible(true);
-                compararMenu.setVisible(true);
-                editarMenu.setVisible(true);
-                saveButton.setVisible(true);
-                saveAsButton.setVisible(true);
-                showButton.setVisible(true);
-            }
-        });
-        
-        jMenuItem17.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent evt){
-                
-                try{                    
-                    if(swimming==null) JOptionPane.showMessageDialog(null,"Debe crear un documento nuevo o abrir uno existente.","",0,null);
-                    else{
-                        final JFrame mainVentana = getVentana();
-                        mainVentana.setTitle("Dar de baja nadador");
-                        mainVentana.setSize(new Dimension(400, 100));
-                        JPanel mainPanel = new JPanel(new BorderLayout());
-                        JPanel auxPanel = new JPanel(new GridLayout(1, 2, 15, 15));
-                        final JComboBox caja = getComboNadadores();         
-                        JLabel label = new JLabel("Seleccione un nadador: ");
-                        auxPanel.add(label);
-                        label.setLabelFor(caja);
-                        auxPanel.add(caja);
-                        
-                        JButton botonAceptar = new JButton();
-                        botonAceptar.setText("Aceptar");
-                        JButton botonCancelar = new JButton();
-                        botonCancelar.setText("Cancelar");
-                        
-                        mainPanel.add(auxPanel, "Center");
-                        mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                        
-                        
-                        mainVentana.add(mainPanel);
-                        
-                        botonCancelar.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent e) {
-                            mainVentana.dispose();
-                            }                
-                        });
-                        
-                        
-                        botonAceptar.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent e) {
-                            
-                            
-                            swimming.darDeBajaNadador((String)caja.getSelectedItem());
-                            updateTabla();
-                            mainVentana.dispose();
-                            
-                            }                
-                        });
-                        
-                    }
-                    
-                }
-                catch(Exception ex){
-                    
-                }
-            }
         });
     }
     
