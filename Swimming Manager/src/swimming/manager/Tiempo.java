@@ -100,14 +100,20 @@ public class Tiempo {
             this.centesimas = centesimas;
         }
         
-        // devuelve true si a es mayor que b
-        //          false si b es mayor o igual a a
+        
+         // devuelve true si a es mayor que b
+         //          false si b es mayor o igual a a
         public boolean compara(Tiempo a){
-            if(a.getHoras()>this.getHoras()) return true;
-            if(a.getMinutos()>this.getMinutos()) return true;
-            if(a.getSegundos()>this.getSegundos()) return true;
-            if(a.getDecimas()>this.getDecimas()) return true;
-            if(a.getCentesimas()>this.getCentesimas()) return true;
+            if (a.getHoras() > this.getHoras())
+                return true;
+            if (a.getMinutos() > this.getMinutos())
+                return true;
+            if (a.getSegundos() > this.getSegundos())
+                return true;
+            if (a.getDecimas() > this.getDecimas())
+                return true;
+            if (a.getCentesimas() > this.getCentesimas())
+                return true;
             return false;
         }
 }
