@@ -86,7 +86,7 @@ public class Titulo {
             return this.marca;
         }
         
-        public void setDescripcion(Marca marca){
+        public void setMarca(Marca marca){
             this.marca = marca;
         }
 }
