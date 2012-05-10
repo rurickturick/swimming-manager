@@ -70,6 +70,7 @@ public class MainWindow extends JFrame implements WindowListener{
         showButton.setVisible(false);
         showButton.setEnabled(false);
         
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
@@ -283,6 +284,7 @@ public class MainWindow extends JFrame implements WindowListener{
                         final JFrame mainVentana = getVentana();
                         mainVentana.setTitle("Dar de baja nadador");
                         mainVentana.setSize(new Dimension(400, 100));
+                        mainVentana.setLocationRelativeTo(this);
                         JPanel mainPanel = new JPanel(new BorderLayout());
                         
                         JPanel auxPanel = new JPanel(new GridLayout(1, 2, 15, 15));
@@ -501,13 +503,18 @@ public class MainWindow extends JFrame implements WindowListener{
                                 String ciudad = camposTexto[2].getText();
                                 
                                 swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad);
-                                JOptionPane.showMessageDialog(null,"Nadador añadido.","",1,null);
+                               // JOptionPane.showMessageDialog(null,"Nadador añadido.","",1,null);
+                                JOptionPane pane = new JOptionPane("Debe rellenar todos los campos.", 1 );
+                                //showMessage("Nadador añadido.", "Añadir", 0);
                                 updateTabla();
                                 mainVentana.dispose();
                                 
                             }
                             catch(Exception ex){
-                                JOptionPane.showMessageDialog(null,"Debe rellenar todos los campos.","",0,null);
+                                JOptionPane pane = new JOptionPane("Debe rellenar todos los campos.", 0 );
+                                JDialog dialog = pane.createDialog("Añadir");
+                                dialog.setAlwaysOnTop(true);
+                                dialog.setVisible(true);
                                 mainVentana.dispose();
                             }
                         }  
@@ -518,15 +525,41 @@ public class MainWindow extends JFrame implements WindowListener{
         
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(ActionEvent evt){
+                    JFrame mainVentana = getVentana();
+                    JPanel mainPanel = new JPanel(new BorderLayout());
+                    mainVentana.setTitle("Añadir Marca");
                     
+                    String[] labels = {"Marca: ", "Estilo: ", "Distancia: ", "Día: ", "Mes: ", "Año: " };
+                    JButton botonAceptar = new JButton();
+                    botonAceptar.setText("Aceptar");
+                    JButton botonCancelar = new JButton();
+                    botonCancelar.setText("Cancelar");
+                    JPanel panelCamposBotones = getLabelsPanel(labels, botonAceptar, botonCancelar);
+                    
+                    JComboBox caja = getComboNadadores();
+                    JPanel panelBoxLabel = new JPanel(new GridLayout());
+                    panelBoxLabel.add(new JLabel("Seleccione Nadador: "));
+                    panelBoxLabel.add(caja);
+                    
+                    mainPanel.add(panelCamposBotones, "Center");
+                    mainPanel.add(panelBoxLabel, "North");
+                    
+                    mainVentana.add(mainPanel);
                 }
         });
     }
-    
+    private void showMessage(String s, String title, int typeMessage){
+        JOptionPane pane = new JOptionPane(s, typeMessage, 0);
+        JDialog dialog = pane.createDialog(title);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
+
     private JFrame getVentana(){
         JFrame mainVentana = new JFrame();
         mainVentana.setVisible(true);
         mainVentana.setSize(new Dimension(350, 275));
+        mainVentana.setLocationRelativeTo(this);
         mainVentana.setAlwaysOnTop(true);
         mainVentana.setResizable(false);
         mainVentana.setIconImage(img);
@@ -566,11 +599,10 @@ public class MainWindow extends JFrame implements WindowListener{
         }
         finally{
             return combo;
-        }
-        
-             
+        }             
     }
-
+    
+    
     @Override
     public void windowOpened(WindowEvent e) {
 //        throw new UnsupportedOperationException("Not supported yet.");
