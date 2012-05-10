@@ -277,7 +277,12 @@ public class MainWindow extends JFrame {
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        System.exit(0);	
+        if(swimming!=null) {
+            int respuesta;
+            respuesta = JOptionPane.showConfirmDialog(null,"Se perderán los cambios no guardados.","Salir",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+            if(respuesta==0) System.exit(0);
+        }
+        else System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu buscarMenu;
@@ -430,7 +435,7 @@ public class MainWindow extends JFrame {
                                 String ciudad = camposTexto[2].getText();
                                 
                                 swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad);
-                                JOptionPane.showMessageDialog(null,"Nadador añadido.","",0,null);
+                                JOptionPane.showMessageDialog(null,"Nadador añadido.","",1,null);
                                 updateTabla();
                                 mainVentana.dispose();
                                 
