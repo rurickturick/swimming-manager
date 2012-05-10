@@ -6,7 +6,7 @@ public class Nadador {
     
 	private String nombre;
 	private Fecha fechaNacimiento;
-        private Sexo sexo;
+        private boolean masculino;
 	private ArrayList<Estilo> estilos = new ArrayList<Estilo>();
 	private Pais pais;
 	private ArrayList<Titulo> palmares = new ArrayList<Titulo>();
@@ -16,21 +16,24 @@ public class Nadador {
 	public Nadador(String nombre, Fecha fechaNacimiento, 
                 ArrayList<Estilo> estilos, Pais pais, 
                 ArrayList<Titulo> palmares, ArrayList<Marca> marcas, 
-                Sexo sexo) {
+                boolean masculino) {
             this.nombre = nombre;
             this.fechaNacimiento = fechaNacimiento;
-            this.sexo = sexo;
+            this.masculino = masculino;
             this.estilos = estilos;
             this.pais = pais;
             this.palmares = palmares;
             this.marcas = marcas;
             this.record = null;
-            this.sexo = sexo;
 	}
 	
 	public String toString() {
             String s1 = this.nombre;
-            String s2 = this.sexo.name();
+            String s2 = "";
+            if (this.masculino)
+                s2 = "Masculino";
+            else
+                s2 = "Femenino";
             String s3 = this.fechaNacimiento.toString();
             String s4 = this.pais.toString();
             String s5 = "";

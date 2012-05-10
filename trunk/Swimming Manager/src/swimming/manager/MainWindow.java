@@ -502,7 +502,7 @@ public class MainWindow extends JFrame implements WindowListener{
                                 String pais = camposTexto[1].getText();
                                 String ciudad = camposTexto[2].getText();
                                 
-                                swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad);
+                                //swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad);
                                // JOptionPane.showMessageDialog(null,"Nadador añadido.","",1,null);
                                 JOptionPane pane = new JOptionPane("Debe rellenar todos los campos.", 1 );
                                 //showMessage("Nadador añadido.", "Añadir", 0);
