@@ -4,14 +4,7 @@
  */
 
 package swimming.manager;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
-import javax.swing.JOptionPane;
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -19,15 +12,8 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -190,6 +176,11 @@ public class MainWindow extends JFrame implements WindowListener{
         editarMenu.setText("Editar");
 
         jMenuItem16.setText("Dar de alta");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         editarMenu.add(jMenuItem16);
 
         jMenuItem17.setText("Dar de baja");
@@ -350,6 +341,11 @@ public class MainWindow extends JFrame implements WindowListener{
         }
         else System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu buscarMenu;
     private javax.swing.JMenu compararMenu;
@@ -468,7 +464,7 @@ public class MainWindow extends JFrame implements WindowListener{
                     final JFrame mainVentana = getVentana();   
                     mainVentana.setTitle("Dar de alta nadador");
                     String[] labels = {"Nombre: ", "País de Origen: ","Ciudad de Origen: ", "Día de Nacimiento: ", "Mes de Nacimiento: ",
-                                        "Año de Nacimiento: "};
+                                        "Año de Nacimiento: ", "Sexo: "};
                     JButton botonAceptar = new JButton();
                     botonAceptar.setText("Aceptar");
                     JButton botonCancelar = new JButton();
@@ -490,25 +486,35 @@ public class MainWindow extends JFrame implements WindowListener{
                                 componentes = p.getComponents();
                                 JTextField[] camposTexto = new JTextField[componentes.length/2];
                                 int cont = 0;
-                                for(int i = 0; i<a; i++){
-                                    if(i%2==1){
-                                        camposTexto[cont] = (JTextField)componentes[i];
-                                        cont++;
-                                    }
+                                boolean completos=true;
+                                int i=0;
+                                while ((i<a) && completos){
+                                    if(i%2==1)
+                                        if (!(camposTexto[i].getText().equals(""))) {
+                                            camposTexto[cont] = (JTextField)componentes[i];
+                                            cont++;
+                                        }else completos =false;
                                 }
-
-                                String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
-                                String nombre = camposTexto[0].getText();
-                                String pais = camposTexto[1].getText();
-                                String ciudad = camposTexto[2].getText();
+                                /*for(int i = 0; i<a; i++){
+                                    if(i%2==1){
+                                            camposTexto[cont] = (JTextField)componentes[i];
+                                            cont++;
+                                        }
+                                }*/
+                                if (completos){
+                                    String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
+                                    String nombre = camposTexto[0].getText();
+                                    String pais = camposTexto[1].getText();
+                                    String ciudad = camposTexto[2].getText();
+                                    boolean sexo = camposTexto[6].getText().equalsIgnoreCase("masculino");
                                 
-                                //swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad);
-                               // JOptionPane.showMessageDialog(null,"Nadador añadido.","",1,null);
-                                JOptionPane pane = new JOptionPane("Debe rellenar todos los campos.", 1 );
-                                //showMessage("Nadador añadido.", "Añadir", 0);
-                                updateTabla();
-                                mainVentana.dispose();
-                                
+                                    swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad,sexo);
+                                    // JOptionPane.showMessageDialog(null,"Nadador añadido.","",1,null);
+                                     JOptionPane pane = new JOptionPane("Debe rellenar todos los campos.", 1 );
+                                     //showMessage("Nadador añadido.", "Añadir", 0);
+                                     updateTabla();
+                                     mainVentana.dispose();
+                                }
                             }
                             catch(Exception ex){
                                 JOptionPane pane = new JOptionPane("Debe rellenar todos los campos.", 0 );
@@ -572,11 +578,16 @@ public class MainWindow extends JFrame implements WindowListener{
     
     private void updateTabla(){
         ArrayList<Nadador> list = swimming.getNadadores();
-        String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","N. Federativo","Récord"};
+        String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","Récord"};
         String[][] matriz = new String[list.size()][columnNames.length];
         
         for(int i=0; i<list.size(); i++){
             matriz[i][0] = list.get(i).getNombre();
+            matriz[i][1] = list.get(i).getFecha().toString();
+            matriz[i][2] = list.get(i).toStringSexo();
+            matriz[i][3] = list.get(i).getPais().toString();
+            matriz[i][4] = list.get(i).toStringEstilos();
+            matriz[i][5] = list.get(i).getRecord().toString();
         }
         
         tableModel.setDataVector(matriz, columnNames);

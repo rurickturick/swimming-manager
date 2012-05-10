@@ -57,6 +57,19 @@ public class Nadador {
 	
 	}
         
+        public String toStringEstilos(){
+            String s="";
+            for (int i=0; i < this.estilos.size();i++){
+                s = s + this.estilos.get(i).name() + ", ";
+            }
+            return s;
+        }
+        
+        public String toStringSexo(){
+            if (this.masculino)  return "Masculino";
+            else return "Femenino";
+        }
+        
         public void setNombre(String nombre){
             this.nombre = nombre;
         }
