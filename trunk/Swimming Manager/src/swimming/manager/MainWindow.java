@@ -277,7 +277,6 @@ public class MainWindow extends JFrame implements WindowListener{
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         // TODO add your handling code here:
-                
                 try{                    
                     if(swimming==null) JOptionPane.showMessageDialog(null,"Debe crear un documento nuevo o abrir uno existente.","",0,null);
                     else{
@@ -285,22 +284,22 @@ public class MainWindow extends JFrame implements WindowListener{
                         mainVentana.setTitle("Dar de baja nadador");
                         mainVentana.setSize(new Dimension(400, 100));
                         JPanel mainPanel = new JPanel(new BorderLayout());
+                        
                         JPanel auxPanel = new JPanel(new GridLayout(1, 2, 15, 15));
                         final JComboBox caja = getComboNadadores();         
                         JLabel label = new JLabel("Seleccione un nadador: ");
                         auxPanel.add(label);
                         label.setLabelFor(caja);
                         auxPanel.add(caja);
+                        mainPanel.add(auxPanel, "Center");
                         
                         JButton botonAceptar = new JButton();
                         botonAceptar.setText("Aceptar");
                         JButton botonCancelar = new JButton();
-                        botonCancelar.setText("Cancelar");
+                        botonCancelar.setText("Cancelar");                        
                         
-                        mainPanel.add(auxPanel, "Center");
-                        mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                        
-                        
-                        mainVentana.add(mainPanel);
+                        mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                             
+                        mainVentana.add(mainPanel, "Center");
                         
                         botonCancelar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {
