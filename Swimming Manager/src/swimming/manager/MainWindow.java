@@ -14,6 +14,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Juanlu
  */
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements WindowListener{
 
     /**
      * Creates new form MainWindow
@@ -66,6 +68,7 @@ public class MainWindow extends JFrame {
         saveButton.setEnabled(false);
         saveAsButton.setVisible(false);
         showButton.setVisible(false);
+        showButton.setEnabled(false);
         
         this.setVisible(true);
     }
@@ -108,7 +111,7 @@ public class MainWindow extends JFrame {
         helpMenu = new javax.swing.JMenu();
         jMenuItem21 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         fileMenu.setText("Archivo");
 
@@ -414,6 +417,8 @@ public class MainWindow extends JFrame {
     
     
     private void initListener(){
+        this.addWindowListener(this);
+        
         openButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                   JFileChooser selecFich=new JFileChooser();
@@ -565,5 +570,44 @@ public class MainWindow extends JFrame {
         }
         
              
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void windowClosing(WindowEvent e) {
+        if(swimming!=null) {
+            int respuesta;
+            respuesta = JOptionPane.showConfirmDialog(null,"Se perderán los cambios no guardados.","Salir",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+            if(respuesta==0) System.exit(0);
+        }
+        else System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
