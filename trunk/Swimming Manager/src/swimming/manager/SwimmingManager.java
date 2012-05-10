@@ -40,7 +40,7 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void darDeAltaNadador(String Nombre, String fechaNacimiento, String pais, Sexo sexo) {
+	public void darDeAltaNadador(String Nombre, String fechaNacimiento, String pais, boolean masculino) {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 		// end-user-code
@@ -52,7 +52,7 @@ public class SwimmingManager {
             Pais p= new Pais(s[0], s[1]);
             ArrayList<Titulo> palmares=new ArrayList<Titulo>();
             ArrayList<Marca> marca= new ArrayList<Marca>();
-            Nadador nadador = new Nadador(Nombre, fecha, estilos, p, palmares, marca, sexo);
+            Nadador nadador = new Nadador(Nombre, fecha, estilos, p, palmares, marca, masculino);
             this.nadadores.add(nadador);
 	}
 
