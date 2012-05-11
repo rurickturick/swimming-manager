@@ -146,10 +146,8 @@ public class Nadador {
             return marcas;
         }
         
-        public Marca getRecord() throws Exception{
-            if (this.record == null)
-                throw new Exception("No existe record.");
-            else
+        public Marca getRecord() {
+            
                 return this.record;
         }
         
