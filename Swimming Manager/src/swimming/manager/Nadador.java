@@ -1,6 +1,7 @@
 package swimming.manager;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Nadador {
     
@@ -84,6 +85,24 @@ public class Nadador {
         
         public Fecha getFecha(){
             return fechaNacimiento;
+        }
+       //funcion que devuelve la edad de un nadador
+        public int getEdad(){
+           int edad;
+           Date now= new Date();
+           //calculo los años que han pasado desde el nacimiento, menos el actual
+           edad=(now.getYear()+1900)- (this.getFecha().getAnyo())-1;
+           //calculo si el mes de nacimiento ya ha pasado
+           if((now.getMonth()+1)>this.getFecha().getMes())
+               edad++;
+           else{
+              // calculo si el dia de nacimiento ya ha pasado
+               if((now.getMonth()+1)==this.getFecha().getMes()){
+                  if((now.getDate())>=this.getFecha().getDia())
+                      edad++;
+               }
+           }
+            return edad;
         }
         
         public void setEstilo(ArrayList<Estilo> estilo){
