@@ -577,7 +577,9 @@ public class MainWindow extends JFrame implements WindowListener{
             matriz[i][2] = list.get(i).toStringSexo();
             matriz[i][3] = list.get(i).getPais().toString();
             matriz[i][4] = list.get(i).toStringEstilos();
-            matriz[i][5] = list.get(i).getRecord().toString();
+            if(list.get(i).getRecord()!=null)
+              matriz[i][5] = list.get(i).getRecord().toString();
+            else matriz[i][5] = "no hay record";
         }
         
         tableModel.setDataVector(matriz, columnNames);
