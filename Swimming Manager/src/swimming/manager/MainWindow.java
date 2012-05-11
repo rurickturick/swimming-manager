@@ -486,35 +486,25 @@ public class MainWindow extends JFrame implements WindowListener{
                                 componentes = p.getComponents();
                                 JTextField[] camposTexto = new JTextField[componentes.length/2];
                                 int cont = 0;
-                                boolean completos=true;
-                                int i=0;
-                                while ((i<a) && completos){
-                                    if(i%2==1)
-                                        if (!(camposTexto[i].getText().equals(""))) {
-                                            camposTexto[cont] = (JTextField)componentes[i];
-                                            cont++;
-                                        }else completos =false;
-                                }
-                                /*for(int i = 0; i<a; i++){
+                                for(int i = 0; i<a; i++){
                                     if(i%2==1){
-                                            camposTexto[cont] = (JTextField)componentes[i];
-                                            cont++;
-                                        }
-                                }*/
-                                if (completos){
-                                    String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
-                                    String nombre = camposTexto[0].getText();
-                                    String pais = camposTexto[1].getText();
-                                    String ciudad = camposTexto[2].getText();
-                                    boolean sexo = camposTexto[6].getText().equalsIgnoreCase("masculino");
-                                
-                                    swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad,sexo);
-                                    // JOptionPane.showMessageDialog(null,"Nadador añadido.","",1,null);
-                                     JOptionPane pane = new JOptionPane("Debe rellenar todos los campos.", 1 );
-                                     //showMessage("Nadador añadido.", "Añadir", 0);
-                                     updateTabla();
-                                     mainVentana.dispose();
+                                        camposTexto[cont] = (JTextField)componentes[i];
+                                        cont++;
+                                    }
                                 }
+                                String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
+                                String nombre = camposTexto[0].getText();
+                                String pais = camposTexto[1].getText();
+                                String ciudad = camposTexto[2].getText();
+                                boolean sexo = camposTexto[6].getText().equalsIgnoreCase("masculino");
+
+                                swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad,sexo);
+                                // JOptionPane.showMessageDialog(null,"Nadador añadido.","",1,null);
+                                JOptionPane pane = new JOptionPane("Debe rellenar todos los campos.", 1 );
+                                //showMessage("Nadador añadido.", "Añadir", 0);
+                                updateTabla();
+                                mainVentana.dispose();
+                                
                             }
                             catch(Exception ex){
                                 JOptionPane pane = new JOptionPane("Debe rellenar todos los campos.", 0 );
