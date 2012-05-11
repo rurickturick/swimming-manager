@@ -24,7 +24,7 @@ public class Fecha {
 	}
     @Override
 	public String toString(){
-		return "La fecha es "+dia+"/"+mes+"/"+anyo;
+		return dia + "/" + mes + "/" + anyo;
 	}
 	
 	public void sumarDias(int x){
