@@ -129,30 +129,45 @@ public class Nadador {
             return pais;
         }
         
-        public void setMarcas(ArrayList<Marca> marcas){
-            this.marcas = marcas;
+        public void setMarcas(ArrayList<Marca> marcas) throws DataException{
+            
+                this.marcas = marcas;
+            
         }
         
-        public void addMarca(Marca marca){
-            this.marcas.add(marca);
-            if (this.record == null) 
-                this.record = marca;
-            else 
-                if (!this.record.getTiempo().compara(marca.getTiempo())) 
-                    this.record = marca;
+        public void addMarca(Marca marca) throws DataException{
+            if(marca!=null){
+                this.marcas.add(marca);
+                
+                if (this.record == null) 
+                 this.record = marca;
+                
+                else 
+                    if (!this.record.getTiempo().compara(marca.getTiempo())) 
+                        this.record = marca;
+            }
+            else throw new DataException("La marca introducida no es válida.");
         }
+            
         
         public ArrayList<Marca> getMarcas(){
             return marcas;
         }
         
+<<<<<<< .mine
+        public Marca getRecord() throws DataException{
+            if (this.record == null)
+                throw new DataException("No existe record.");
+            else
+=======
         public Marca getRecord() {
             
+>>>>>>> .r69
                 return this.record;
         }
         
         
-        public int getPosicionMarca(Marca m){
+        public int getPosicionMarca(Marca m) throws DataException{
             boolean encontrado = false;
             // Devuelve -1 en caso de no encontrar la marca en el ArrayList
             int position = -1; 
@@ -165,6 +180,7 @@ public class Nadador {
                 }
                 i++;
             }
+            if(!encontrado) throw new DataException("No se ha encontrado la marca.");
             return position;
         }
         
