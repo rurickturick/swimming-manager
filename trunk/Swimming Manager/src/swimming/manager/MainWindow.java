@@ -573,7 +573,7 @@ public class MainWindow extends JFrame implements WindowListener{
         
         for(int i=0; i<list.size(); i++){
             matriz[i][0] = list.get(i).getNombre();
-            matriz[i][1] = list.get(i).getFecha().toString();
+            matriz[i][1] = Integer.toString( list.get(i).getEdad());
             matriz[i][2] = list.get(i).toStringSexo();
             matriz[i][3] = list.get(i).getPais().toString();
             matriz[i][4] = list.get(i).toStringEstilos();
