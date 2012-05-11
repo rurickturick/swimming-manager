@@ -4,6 +4,8 @@ package swimming.manager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SwimmingManager {
 	
@@ -40,10 +42,8 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void darDeAltaNadador(String Nombre, String fechaNacimiento, String pais, boolean masculino) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		// end-user-code
+	public void darDeAltaNadador(String Nombre, String fechaNacimiento, String pais, boolean masculino){
+		
             String[] s= fechaNacimiento.split("-");
             Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
             
@@ -61,16 +61,16 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void darDeBajaNadador(String nombre) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+	public void darDeBajaNadador(String nombre) throws DataException{
             Iterator<Nadador> it=this.nadadores.iterator();
+           
             while(it.hasNext()){
                 Nadador n=it.next();
                 if (n.getNombre().equalsIgnoreCase(nombre)){
                     it.remove();
                     return;
                 }
+                else throw new DataException("El nadador introducido no existe.");
             }
 		// end-user-code
 	}
@@ -80,18 +80,25 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-        public Nadador buscarNadadorPorNombre(String nombre){
-            Iterator<Nadador> it=this.nadadores.iterator();
-            while(it.hasNext()){
-                Nadador n=it.next();
-                if (n.getNombre().equalsIgnoreCase(nombre)){
-                    return n;
+        public Nadador buscarNadadorPorNombre(String nombre) throws DataException{
+            Nadador nad = null;
+            boolean encontrado = false;
+            int i = 0;
+            while(!encontrado && i<this.nadadores.size()){
+                if(this.nadadores.get(i).getNombre().equalsIgnoreCase(nombre)){
+                    nad = this.nadadores.get(i); 
+                    encontrado = true;
                 }
+                i++;
+                    
             }
-            return null;
+            
+            if(nad == null) throw new DataException("No hay correspondencia con el nombre introducido.");
+           
+            return nad;
         }
         
-        public ArrayList<Nadador> buscarNadadoresPorEstilo(String e){
+        public ArrayList<Nadador> buscarNadadoresPorEstilo(String e) throws DataException {
             Estilo estilo= parseEstilos(e);
             ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
             Iterator<Nadador> it=this.nadadores.iterator();
@@ -100,10 +107,15 @@ public class SwimmingManager {
                 if (n.getEstilos().contains((Estilo) estilo)){
                     auxNadadores.add(n);
                 }
+                
             }
+            
+            if(auxNadadores.isEmpty()) throw new DataException("No se han encontrado nadadores asociados al estilo introducido.");
+       
+            
             return auxNadadores;
         }
-        public ArrayList<Nadador> buscarNadadoresPorNombre(String nombre){
+        public ArrayList<Nadador> buscarNadadoresPorNombre(String nombre) throws DataException{
             ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
             Iterator<Nadador> it=this.nadadores.iterator();
             while(it.hasNext()){
@@ -112,10 +124,11 @@ public class SwimmingManager {
                     auxNadadores.add(n);
                 }
             }
+            if(auxNadadores.isEmpty()) throw new DataException("No se han encontrado nadadores asociados al nombre introducido.");
             return auxNadadores;
         }
         
-        public ArrayList<Nadador> buscarNadadoresPorMarca(int distancia,String e){
+        public ArrayList<Nadador> buscarNadadoresPorMarca(int distancia,String e) throws DataException{
             Estilo estilo=parseEstilos(e);
             ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
             Iterator<Nadador> it=this.nadadores.iterator();
@@ -129,10 +142,11 @@ public class SwimmingManager {
                     }
                 }
             }
+            if(auxNadadores.isEmpty()) throw new DataException("No se han encontrado nadadores asociados a la marca introducida.");
             return auxNadadores;
         }
         
-        public ArrayList<Nadador> buscarNadadoresPorPais(String pais){
+        public ArrayList<Nadador> buscarNadadoresPorPais(String pais) throws DataException{
             ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
             Iterator<Nadador> it=this.nadadores.iterator();
             while(it.hasNext()){
@@ -141,10 +155,11 @@ public class SwimmingManager {
                     auxNadadores.add(n);
                 }
             }
+            if(auxNadadores.isEmpty()) throw new DataException("No se han encontrado nadadores asociados al país introducido.");
             return auxNadadores;
         }
         
-        public ArrayList<Nadador> buscarNadadoresPorEdad(int edad){
+        public ArrayList<Nadador> buscarNadadoresPorEdad(int edad) throws DataException{
             ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
             Iterator<Nadador> it=this.nadadores.iterator();
             Date now= new Date();
@@ -155,16 +170,20 @@ public class SwimmingManager {
                     auxNadadores.add(n);
                 }
             }
+            if(auxNadadores.isEmpty()) throw new DataException("No se han encontrado nadadores asociados a la edad introducida.");
             return auxNadadores;
         }
         // devuelve 0 si se ha añadido bien
         //          1 si el nadador no existe
         //          2 si el formato de la marca no es correcto
         //          3 si el formato de la fecha no es correcto
-	public int anadirMarcaNadador(String nombre, String marca, String fecha,
+	
+            public int anadirMarcaNadador(String nombre, String marca, String fecha,
                                       int distancia, Estilo estilo){
 	
-            Nadador nadador=buscarNadadorPorNombre(nombre);
+           try{
+               Nadador nadador=buscarNadadorPorNombre(nombre);
+           
             if (nadador==null) return 1;
             String[] auxMarca = marca.split(" ");
             if (auxMarca.length!=5) return 2;
@@ -192,12 +211,19 @@ public class SwimmingManager {
                 estilosAux.add(estilo);
                 nadador.setEstilo(estilosAux);
             }
+            
+           }
+           
+           catch(DataException e){
+               e.getMessage();
+           }
+           
             return 0;
         }	// end-user-code
 	
         
         
-	public void eliminarMarcaNadador(Marca m, Nadador n) throws Exception{
+	public void eliminarMarcaNadador(Marca m, Nadador n) throws DataException{
          
             if(n!=null || m!=null){
                 if(hayNadador(n)){
@@ -207,12 +233,12 @@ public class SwimmingManager {
                             marcasNadadores.remove(pos);
                             n.setMarcas(marcasNadadores);
                         }
-                        else throw new Exception("No existe esa marca");
+                        else throw new DataException("No existe esa marca");
                   
                  }
-                else throw new Exception("No está el nadador");
+                else throw new DataException("No está el nadador");
             }
-            else throw new Exception("El nadador o la marca introducidos no son válidos");
+            else throw new DataException("El nadador o la marca introducidos no son válidos");
                   
        }
 
@@ -250,8 +276,10 @@ public class SwimmingManager {
             
         }
 	
-	public void compararMarcas(Marca marca, Marca marca2) {
+	public void compararMarcas(Marca marca, Marca marca2) throws DataException{
+            if(marca != null && marca2!=null)
 		System.out.println(marca.toString()+ marca2.toString());
+            else throw new DataException("Alguna de las marcas introducidas o ambas no son correctas.");
 	}
         
         public ArrayList<Nadador> getNadadores(){
@@ -294,7 +322,7 @@ public class SwimmingManager {
 		// end-user-code
 	}
         
-        public boolean hayNadador(Nadador nadador) {
+        public boolean hayNadador(Nadador nadador) throws DataException{
             boolean encontrado = false;
             int i=0;
             
@@ -302,6 +330,8 @@ public class SwimmingManager {
                 encontrado = this.nadadores.get(i)== nadador;
                 i++;
             }
+            
+            if (!encontrado) throw new DataException ("No existe el nadador.");
             return encontrado;
         }
         
