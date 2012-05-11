@@ -130,7 +130,8 @@ public class Nadador {
         public Marca getRecord() throws Exception{
             if (this.record == null)
                 throw new Exception("No existe record.");
-            return this.record;
+            else
+                return this.record;
         }
         
         
