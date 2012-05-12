@@ -1,10 +1,12 @@
 package swimming.manager;
 
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class SwimmingManager {
 	
@@ -313,10 +315,11 @@ public class SwimmingManager {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void verLista() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+		String s="";
+                for (int i=0;i<this.nadadores.size();i++){
+                    s+=this.nadadores.get(i).toString();
+                }
+               JOptionPane.showMessageDialog(null, s,"Lista" , 1, null);
 	}
         
         public boolean hayNadador(Nadador nadador) throws DataException{

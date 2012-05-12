@@ -44,7 +44,7 @@ public class Pais {
 	 */
 	public String toString() {
 		String s="";
-                s="Ciudad "+ this.ciudad + ", País " + this.pais;
+                s=this.ciudad + ", " + this.pais;
 		return s;
 		// end-user-code
 	}
