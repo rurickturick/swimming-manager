@@ -304,18 +304,25 @@ public class MainWindow extends JFrame implements WindowListener{
                         botonAceptar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {
                             
+                            try{
+                            
                             
                             swimming.darDeBajaNadador((String)caja.getSelectedItem());
                             updateTabla();
                             mainVentana.dispose();
                             
-                            }                
+                            }   
+                            catch (DataException exc){
+                                
+                            }
+                        }
                         });
                         
                     }
                     
                 }
                 catch(Exception ex){
+                    
                     
                 }
     }//GEN-LAST:event_jMenuItem17ActionPerformed
@@ -567,7 +574,7 @@ public class MainWindow extends JFrame implements WindowListener{
     //pero aun queda por implementar la constructora del nadador al cual pasarle el sexo.
     
     private void updateTabla(){
-        ArrayList<Nadador> list = swimming.getNadadores();
+        try{ArrayList<Nadador> list = swimming.getNadadores();
         String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","Récord"};
         String[][] matriz = new String[list.size()][columnNames.length];
         
@@ -583,6 +590,10 @@ public class MainWindow extends JFrame implements WindowListener{
         }
         
         tableModel.setDataVector(matriz, columnNames);
+        }
+        catch(DataException e){
+            
+        }
         
     }
     
