@@ -2,7 +2,6 @@ package swimming.manager;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -161,15 +160,13 @@ public class SwimmingManager {
         
         public ArrayList<Nadador> buscarNadadoresPorEdad(int edad) throws DataException{
             ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
-            Iterator<Nadador> it=this.nadadores.iterator();
-            Date now= new Date();
-            int anyoActual = now.getYear()+1900;
+            Iterator<Nadador> it=this.nadadores.iterator();                   
             while(it.hasNext()){
                 Nadador n=it.next();
-                if (anyoActual-n.getFecha().getAnyo()==edad){
+                if (n.getEdad()==edad){
                     auxNadadores.add(n);
                 }
-            }
+             }
             if(auxNadadores.isEmpty()) throw new DataException("No se han encontrado nadadores asociados a la edad introducida.");
             return auxNadadores;
         }
