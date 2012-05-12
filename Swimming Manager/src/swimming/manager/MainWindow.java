@@ -174,11 +174,6 @@ public class MainWindow extends JFrame implements WindowListener{
         editarMenu.setText("Editar");
 
         jMenuItem16.setText("Dar de alta");
-        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
-            }
-        });
         editarMenu.add(jMenuItem16);
 
         jMenuItem17.setText("Dar de baja");
@@ -192,6 +187,11 @@ public class MainWindow extends JFrame implements WindowListener{
         jMenu6.setText("Nadador");
 
         jMenuItem18.setText("Añadir marca");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem18);
 
         jMenuItem19.setText("Eliminar marca");
@@ -343,6 +343,10 @@ public class MainWindow extends JFrame implements WindowListener{
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu buscarMenu;

@@ -64,7 +64,7 @@ public class Marca {
             String s3= ""+this.distancia;
             String s4= this.estilo.name();
             
-            String resultado = s1 + " " + s2 + " " + s3 + " " + s4;
+            String resultado =" Fecha: " + s1 + " Tiempo: " + s2 + " Distancia: " + s3 + " Estilo: " + s4;
             return resultado;
 	}
                 

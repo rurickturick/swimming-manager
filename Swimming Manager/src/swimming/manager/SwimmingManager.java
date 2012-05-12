@@ -181,11 +181,11 @@ public class SwimmingManager {
                 try{
                     Nadador nadador=buscarNadadorPorNombre(nombre);
 
-                    if (nadador==null) return 1;
-                    String[] auxMarca = marca.split(" ");
-                    if (auxMarca.length!=5) return 2;
+                 //   if (nadador==null) return 1;
+                    String[] auxMarca = marca.split(":");
+                  //  if (auxMarca.length!=6) return 2;
                     String[] auxfecha = fecha.split("-");
-                    if (auxfecha.length!=3) return 3;
+               //     if (auxfecha.length!=3) return 3;
                     Marca m = new Marca(Integer.parseInt(auxfecha[0]),Integer.parseInt(auxfecha[1]),
                                         Integer.parseInt(auxfecha[2]),Integer.parseInt(auxMarca[0]),
                                         Integer.parseInt(auxMarca[1]),Integer.parseInt(auxMarca[2]),
