@@ -154,15 +154,11 @@ public class Nadador {
             return marcas;
         }
         
-<<<<<<< .mine
+        
         public Marca getRecord() throws DataException{
             if (this.record == null)
                 throw new DataException("No existe record.");
             else
-=======
-        public Marca getRecord() {
-            
->>>>>>> .r69
                 return this.record;
         }
         
