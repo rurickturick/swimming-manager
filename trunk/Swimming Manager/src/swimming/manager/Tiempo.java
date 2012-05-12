@@ -15,7 +15,7 @@ public class Tiempo {
 	public Tiempo() {
             this.horas=0;
             this.minutos=0;
-            this.segundos=0;
+            this.segundos=00;
             this.decimas=0;
             this.centesimas=0;
 	}
@@ -116,4 +116,16 @@ public class Tiempo {
                 return true;
             return false;
         }
+        
+
+         public String toString() {
+            String s1= ""+this.horas;
+            String s2= ""+this.minutos;
+            String s3= ""+this.segundos;
+            String s4= ""+this.decimas;
+            String s5= ""+this.centesimas;
+            
+            String resultado = s1 + ":" + s2 + ":" + s3 + ":" + s4 + ":" + s5;
+            return resultado;
+	}
 }
