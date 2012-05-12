@@ -154,13 +154,18 @@ public class Nadador {
             return marcas;
         }
         
+
+
+        public Marca getRecord(){        
+            return this.record;
+        }
         
-        public Marca getRecord() throws DataException {
+        /*public Marca getRecord() throws DataException {
             if (this.record == null)
                 throw new DataException("No existe récord");
             else
                 return this.record;
-        }
+        }*/
         
         
         public int getPosicionMarca(Marca m) throws DataException{

@@ -61,7 +61,7 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void darDeBajaNadador(String nombre) throws DataException{
+	public void darDeBajaNadador(String nombre)throws DataException{
             Iterator<Nadador> it=this.nadadores.iterator();
            
             while(it.hasNext()){
@@ -179,46 +179,46 @@ public class SwimmingManager {
         //          3 si el formato de la fecha no es correcto
 	
             public int anadirMarcaNadador(String nombre, String marca, String fecha,
-                                      int distancia, Estilo estilo){
+                                      int distancia, Estilo estilo) throws DataException{
 	
-           try{
-               Nadador nadador=buscarNadadorPorNombre(nombre);
-           
-            if (nadador==null) return 1;
-            String[] auxMarca = marca.split(" ");
-            if (auxMarca.length!=5) return 2;
-            String[] auxfecha = fecha.split("-");
-            if (auxfecha.length!=3) return 3;
-            Marca m = new Marca(Integer.parseInt(auxfecha[0]),Integer.parseInt(auxfecha[1]),
-                                Integer.parseInt(auxfecha[2]),Integer.parseInt(auxMarca[0]),
-                                Integer.parseInt(auxMarca[1]),Integer.parseInt(auxMarca[2]),
-                                Integer.parseInt(auxMarca[3]),Integer.parseInt(auxMarca[4]),
-                                distancia, estilo);
-            nadador.addMarca(m);
-            //añadir el estilo de la marca a los estilos el nadador si no esta
-            
-          
-            Iterator<Estilo>  it=nadador.getEstilos().iterator();
-            boolean encontrado=false;
-            //ver si esta el estilo ya añadido
-            while(it.hasNext()&&!encontrado){
-                if (it.next()==estilo) encontrado=true;
-               
-             }
-            //si no esta añadido se añade
-            if(!encontrado){
-                ArrayList<Estilo>estilosAux=nadador.getEstilos();
-                estilosAux.add(estilo);
-                nadador.setEstilo(estilosAux);
-            }
-            
-           }
-           
-           catch(DataException e){
-               e.getMessage();
-           }
-           
-            return 0;
+                try{
+                    Nadador nadador=buscarNadadorPorNombre(nombre);
+
+                    if (nadador==null) return 1;
+                    String[] auxMarca = marca.split(" ");
+                    if (auxMarca.length!=5) return 2;
+                    String[] auxfecha = fecha.split("-");
+                    if (auxfecha.length!=3) return 3;
+                    Marca m = new Marca(Integer.parseInt(auxfecha[0]),Integer.parseInt(auxfecha[1]),
+                                        Integer.parseInt(auxfecha[2]),Integer.parseInt(auxMarca[0]),
+                                        Integer.parseInt(auxMarca[1]),Integer.parseInt(auxMarca[2]),
+                                        Integer.parseInt(auxMarca[3]),Integer.parseInt(auxMarca[4]),
+                                        distancia, estilo);
+                    nadador.addMarca(m);
+                    //añadir el estilo de la marca a los estilos el nadador si no esta
+
+
+                    Iterator<Estilo>  it=nadador.getEstilos().iterator();
+                    boolean encontrado=false;
+                    //ver si esta el estilo ya añadido
+                    while(it.hasNext()&&!encontrado){
+                        if (it.next()==estilo) encontrado=true;
+
+                    }
+                    //si no esta añadido se añade
+                    if(!encontrado){
+                        ArrayList<Estilo>estilosAux=nadador.getEstilos();
+                        estilosAux.add(estilo);
+                        nadador.setEstilo(estilosAux);
+                    }
+
+                }
+
+                catch(DataException e){
+                    throw new DataException(e.getMessage());
+                }
+
+                    return 0;
         }	// end-user-code
 	
         

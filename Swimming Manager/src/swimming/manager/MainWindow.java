@@ -5,10 +5,7 @@
 
 package swimming.manager;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +29,7 @@ public class MainWindow extends JFrame implements WindowListener{
     private final JTable tabla;
     private DefaultTableModel tableModel;
     private Image img;
+    private boolean sexo;
     
     public MainWindow() {
         initComponents();
@@ -244,19 +242,18 @@ public class MainWindow extends JFrame implements WindowListener{
 
     private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoButtonActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Se ha creado un documento en blanco.","",1,null);
-                //falta añadir el sexo
-                String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","N. Federativo","Récord"};
-                String [][] matriz = new String[0][columnNames.length];
-                tableModel.setDataVector(matriz, columnNames);     
-                swimming = new SwimmingManager();
-                
-                buscarMenu.setVisible(true);
-                compararMenu.setVisible(true);
-                editarMenu.setVisible(true);
-                saveButton.setVisible(true);
-                saveAsButton.setVisible(true);
-                showButton.setVisible(true);
+        showMessage("Se ha creado un documento en blanco.","Archivo Nuevo",1);                
+        String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","Récord"};
+        String [][] matriz = new String[0][columnNames.length];
+        tableModel.setDataVector(matriz, columnNames);     
+        swimming = new SwimmingManager();
+
+        buscarMenu.setVisible(true);
+        compararMenu.setVisible(true);
+        editarMenu.setVisible(true);
+        saveButton.setVisible(true);
+        saveAsButton.setVisible(true);
+        showButton.setVisible(true);
     }//GEN-LAST:event_nuevoButtonActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -268,74 +265,68 @@ public class MainWindow extends JFrame implements WindowListener{
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        // TODO add your handling code here:
-                try{                    
-                    if(swimming==null) JOptionPane.showMessageDialog(null,"Debe crear un documento nuevo o abrir uno existente.","",0,null);
-                    else{
-                        final JFrame mainVentana = getVentana();
-                        mainVentana.setTitle("Dar de baja nadador");
-                        mainVentana.setSize(new Dimension(400, 100));
-                        mainVentana.setLocationRelativeTo(this);
-                        JPanel mainPanel = new JPanel(new BorderLayout());
-                        
-                        JPanel auxPanel = new JPanel(new GridLayout(1, 2, 15, 15));
-                        final JComboBox caja = getComboNadadores();         
-                        JLabel label = new JLabel("Seleccione un nadador: ");
-                        auxPanel.add(label);
-                        label.setLabelFor(caja);
-                        auxPanel.add(caja);
-                        mainPanel.add(auxPanel, "Center");
-                        
-                        JButton botonAceptar = new JButton();
-                        botonAceptar.setText("Aceptar");
-                        JButton botonCancelar = new JButton();
-                        botonCancelar.setText("Cancelar");                        
-                        
-                        mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                             
-                        mainVentana.add(mainPanel, "Center");
-                        
-                        botonCancelar.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent e) {
-                            mainVentana.dispose();
-                            }                
-                        });
-                        
-                        
-                        botonAceptar.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent e) {
-                            
-                            try{
-                            
-                            
+        // TODO add your handling code here:                
+            if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
+            else{
+                final JFrame mainVentana = getVentana();
+                mainVentana.setTitle("Dar de baja nadador");
+                mainVentana.setSize(new Dimension(400, 100));
+                mainVentana.setLocationRelativeTo(this);
+                JPanel mainPanel = new JPanel(new BorderLayout());
+
+                JPanel auxPanel = new JPanel(new GridLayout(1, 1));
+                JPanel auxPanelIz = new JPanel(new FlowLayout());
+                JPanel mainPanelDr = new JPanel(new BorderLayout());
+                JPanel auxPanelDr = new JPanel(new FlowLayout());
+                final JComboBox caja = getComboNadadores();
+
+                JLabel label = new JLabel("Seleccione un nadador: ");
+                auxPanelIz.add(label);
+                auxPanelDr.add(caja);
+                mainPanelDr.add(auxPanelDr);
+                auxPanel.add(auxPanelIz);
+                auxPanel.add(mainPanelDr);
+                mainPanel.add(auxPanel, "Center");
+
+                JButton botonAceptar = new JButton();
+                botonAceptar.setText("Aceptar");
+                JButton botonCancelar = new JButton();
+                botonCancelar.setText("Cancelar");                        
+
+                mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                             
+                mainVentana.add(mainPanel, "Center");
+
+                botonCancelar.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e) {
+                    mainVentana.dispose();
+                    }                
+                });
+
+
+                botonAceptar.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e) {
+                        try{                            
                             swimming.darDeBajaNadador((String)caja.getSelectedItem());
                             updateTabla();
                             mainVentana.dispose();
-                            
-                            }   
-                            catch (DataException exc){
-                                
-                            }
+                        }   
+                        catch (DataException exc){
+                            showMessage(exc.getMessage(), "Error", 0);
                         }
-                        });
-                        
                     }
-                    
-                }
-                catch(Exception ex){
-                    
-                    
-                }
+
+                });                       
+            }                    
+        
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMenuActionPerformed
-        JOptionPane.showMessageDialog(null, ""
-                + "Creado por '6+2' para Ingeniería del Software.\nUniversidad Complutense de Madrid."
-                , "Swimming Manager 0.1", 1, null);
+        showMessage("Creado por '6+2' para Ingeniería del Software.\nUniversidad Complutense de Madrid.",
+                    "Swimming Manager 0.1", 1);
     }//GEN-LAST:event_helpMenuActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        Icon icon = new ImageIcon("images/ucm.png");
-        
+        Icon icon = new ImageIcon("images/ucm.png");        
         JOptionPane.showMessageDialog(null, "Creado por '6+2' para Ingeniería del Software.\nUniversidad Complutense de Madrid.\n"
                 +"Facultad de Informática.", "Swimming Manager 0.1", 1, icon);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
@@ -396,9 +387,7 @@ public class MainWindow extends JFrame implements WindowListener{
             JTextField textField = new JTextField(5);
             l.setLabelFor(textField);
             auxPanelCampos.add(textField);
-        }
-        
-        
+        }        
         //Lay out the panel.
         SpringUtilities.makeCompactGrid(auxPanelCampos,
                                         numPairs, 2, //rows, cols
@@ -421,8 +410,7 @@ public class MainWindow extends JFrame implements WindowListener{
     
     
     private void initListener(){
-        this.addWindowListener(this);
-        
+        this.addWindowListener(this);        
         openButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                   JFileChooser selecFich=new JFileChooser();
@@ -437,7 +425,7 @@ public class MainWindow extends JFrame implements WindowListener{
                                     
                             }
                     } catch (IOException e1) {
-                            JOptionPane.showMessageDialog(null,"No se ha seleccionado archivo");
+                            showMessage("No se ha seleccionado archivo", "Error", 1);
                     }	  
                     
                     
@@ -466,95 +454,154 @@ public class MainWindow extends JFrame implements WindowListener{
         jMenuItem16.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
             if(swimming==null) 
-                    JOptionPane.showMessageDialog(null,"Debe crear un documento nuevo o abrir uno existente.","Dar de alta",0,null);
-                else {
-                    final JFrame mainVentana = getVentana();   
-                    mainVentana.setTitle("Dar de alta nadador");
-                    String[] labels = {"Nombre: ", "País de Origen: ","Ciudad de Origen: ", "Día de Nacimiento: ", "Mes de Nacimiento: ",
-                                        "Año de Nacimiento: ", "Sexo: "};
-                    JButton botonAceptar = new JButton();
-                    botonAceptar.setText("Aceptar");
-                    JButton botonCancelar = new JButton();
-                    botonCancelar.setText("Cancelar");               
-                    mainVentana.add(getLabelsPanel(labels, botonAceptar, botonCancelar));
-                    botonCancelar.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent e) {
-                            mainVentana.dispose();
-                        }                
-                    });                
-                    botonAceptar.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent e) {
-                            try{
-                                Component[] componentes = mainVentana.getContentPane().getComponents();
-                                JPanel p = (JPanel)componentes[0];
-                                componentes = p.getComponents();
-                                p = (JPanel)componentes[0];
-                                int a = p.getComponentCount();
-                                componentes = p.getComponents();
-                                JTextField[] camposTexto = new JTextField[componentes.length/2];
-                                int cont = 0;
-                                for(int i = 0; i<a; i++){
-                                    if(i%2==1){
-                                        camposTexto[cont] = (JTextField)componentes[i];
-                                        cont++;
-                                    }
-                                }
-                                String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
-                                String nombre = camposTexto[0].getText();
-                                String pais = camposTexto[1].getText();
-                                String ciudad = camposTexto[2].getText();
-                                boolean sexo = camposTexto[6].getText().equalsIgnoreCase("masculino");
+                    showMessage("Debe crear un documento nuevo o abrir uno existente.","Dar de alta",0);
+            else {
+                final JFrame mainVentana = getVentana();   
+                mainVentana.setTitle("Dar de alta nadador");
+                mainVentana.setLayout(new BorderLayout());
+                String[] labels = {"Nombre: ", "País de Origen: ","Ciudad de Origen: ", "Día de Nacimiento: ", "Mes de Nacimiento: ",
+                                    "Año de Nacimiento: "};
+                JButton botonAceptar = new JButton();
+                botonAceptar.setText("Aceptar");
+                JButton botonCancelar = new JButton();
+                botonCancelar.setText("Cancelar");
 
-                                swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad,sexo);
-                                // JOptionPane.showMessageDialog(null,"Nadador añadido.","",1,null);
-                                JOptionPane pane = new JOptionPane("Debe rellenar todos los campos.", 1 );
-                                //showMessage("Nadador añadido.", "Añadir", 0);
-                                updateTabla();
-                                mainVentana.dispose();
-                                
-                            }
-                            catch(Exception ex){
-                                JOptionPane pane = new JOptionPane("Debe rellenar todos los campos.", 0 );
-                                JDialog dialog = pane.createDialog("Añadir");
-                                dialog.setAlwaysOnTop(true);
-                                dialog.setVisible(true);
-                                mainVentana.dispose();
-                            }
-                        }  
-                    });
-                }                
-            }    
-        });
+                JRadioButton boton1 = new JRadioButton("Hombre");
+                boton1.setActionCommand("Hombre");
+                boton1.setMnemonic(KeyEvent.VK_H);
+
+                JRadioButton boton2 = new JRadioButton("Mujer");
+                boton2.setActionCommand("Mujer");
+                boton2.setMnemonic(KeyEvent.VK_M);
+
+                ButtonGroup grupo = new ButtonGroup();
+                grupo.add(boton1);
+                grupo.add(boton2);
+
+                boton1.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        sexo = true;
+                    }
+                });
+
+                boton2.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        sexo = false;
+                    }
+                });
+
+                JPanel panelRadio = new JPanel(new FlowLayout());
+                JLabel l1 = new JLabel("Sexo: ");
+                panelRadio.add(l1);
+                panelRadio.add(boton1);
+                panelRadio.add(boton2);
+
+                mainVentana.add(panelRadio, "North");
+                mainVentana.add(getLabelsPanel(labels, botonAceptar, botonCancelar), "Center");
+
+                botonCancelar.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e) {
+                        mainVentana.dispose();
+                    }                
+                });                
+                botonAceptar.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e) {
+                        try{
+                            int[] posiciones = {1, 0};
+                            JTextField[] camposTexto = getTextFields(mainVentana.getContentPane().getComponents(),
+                                                                        posiciones);
+                            String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
+                            String nombre = camposTexto[0].getText();
+                            String pais = camposTexto[1].getText();
+                            String ciudad = camposTexto[2].getText();
+
+                            swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad,sexo);
+                            showMessage("Nadador añadido.", "Añadir", 1);
+                            updateTabla();
+                            mainVentana.dispose();
+                        }
+                        catch(Exception ex){
+                            showMessage("Debe rellenar todos los campos", "Error", 0);
+                            mainVentana.dispose();
+                        }
+                    }  
+                });
+            }                
+        }    
+    });
         
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(ActionEvent evt){
-                    JFrame mainVentana = getVentana();
-                    JPanel mainPanel = new JPanel(new BorderLayout());
-                    mainVentana.setTitle("Añadir Marca");
-                    
-                    String[] labels = {"Marca: ", "Estilo: ", "Distancia: ", "Día: ", "Mes: ", "Año: " };
-                    JButton botonAceptar = new JButton();
-                    botonAceptar.setText("Aceptar");
-                    JButton botonCancelar = new JButton();
-                    botonCancelar.setText("Cancelar");
-                    JPanel panelCamposBotones = getLabelsPanel(labels, botonAceptar, botonCancelar);
-                    
-                    JComboBox caja = getComboNadadores();
-                    JPanel panelBoxLabel = new JPanel(new GridLayout());
-                    panelBoxLabel.add(new JLabel("Seleccione Nadador: "));
-                    panelBoxLabel.add(caja);
-                    
-                    mainPanel.add(panelCamposBotones, "Center");
-                    mainPanel.add(panelBoxLabel, "North");
-                    
-                    mainVentana.add(mainPanel);
+                        if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
+                        else{
+                            final JFrame mainVentana = getVentana();
+                            JPanel mainPanel = new JPanel(new BorderLayout());
+                            mainVentana.setTitle("Añadir Marca");
+
+                            String[] labels = {"Marca: ", "Estilo: ", "Distancia: ", "Día: ", "Mes: ", "Año: " };
+                            JButton botonAceptar = new JButton();
+                            botonAceptar.setText("Aceptar");
+                            JButton botonCancelar = new JButton();
+                            botonCancelar.setText("Cancelar");
+                            JPanel panelCamposBotones = getLabelsPanel(labels, botonAceptar, botonCancelar);
+
+                            final JComboBox caja = getComboNadadores();
+
+                            JPanel panelBoxLabel = new JPanel(new GridLayout(1, 1));
+                            JPanel auxPanelLabel = new JPanel(new FlowLayout());
+                            JPanel mainPanelBox = new JPanel(new BorderLayout());
+                            JPanel auxPanelBox = new JPanel(new FlowLayout());
+                            auxPanelLabel.add(new JLabel("Seleccione Nadador: "));                        
+                            auxPanelBox.add(caja);
+                            mainPanelBox.add(auxPanelBox, "Center");
+                            panelBoxLabel.add(auxPanelLabel);
+                            panelBoxLabel.add(mainPanelBox);
+                            
+                            mainPanel.add(panelBoxLabel, "North");
+                            mainPanel.add(panelCamposBotones, "Center");
+
+                            mainVentana.add(mainPanel);
+                            botonCancelar.addActionListener(new ActionListener(){
+                                public void actionPerformed(ActionEvent e) {
+                                    mainVentana.dispose();
+                                }
+                            });
+                            
+                            botonAceptar.addActionListener(new ActionListener(){
+                                public void actionPerformed(ActionEvent e){
+                                    try{
+                                        int[] posiciones = {0, 1, 0};
+                                        JTextField [] camposTexto = getTextFields(mainVentana.getContentPane().getComponents(),
+                                                                            posiciones);
+                                        String nombre = (String)caja.getSelectedItem();
+                                        String marca = camposTexto[0].getText();
+                                        Estilo estilo = Estilo.getEstilo(camposTexto[1].getText());
+                                        int distancia = Integer.parseInt(camposTexto[2].getText());
+                                        String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
+                                        swimming.anadirMarcaNadador(nombre, marca, fecha, distancia, estilo);
+                                        updateTabla();
+                                        showMessage("Marca añadida", "Añadir Marca", 1);
+                                        mainVentana.dispose();
+                                    }
+                                    catch(Exception ex){
+                                        showMessage(ex.getMessage(), "Error", 0);
+                                        mainVentana.dispose();
+                                    }
+                                }
+                            
+                            });
+                        
+                    }
                 }
         });
     }
+
+
     private void showMessage(String s, String title, int typeMessage){
-        JOptionPane pane = new JOptionPane(s, typeMessage, 0);
+        JOptionPane pane = new JOptionPane(s, typeMessage);
         JDialog dialog = pane.createDialog(title);
         dialog.setAlwaysOnTop(true);
+        dialog.setIconImage(img);
         dialog.setVisible(true);
     }
 
@@ -574,28 +621,26 @@ public class MainWindow extends JFrame implements WindowListener{
     //pero aun queda por implementar la constructora del nadador al cual pasarle el sexo.
     
     private void updateTabla(){
-        try{ArrayList<Nadador> list = swimming.getNadadores();
-        String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","Récord"};
-        String[][] matriz = new String[list.size()][columnNames.length];
+            ArrayList<Nadador> list = swimming.getNadadores();
         
-        for(int i=0; i<list.size(); i++){
-            matriz[i][0] = list.get(i).getNombre();
-            matriz[i][1] = Integer.toString( list.get(i).getEdad());
-            matriz[i][2] = list.get(i).toStringSexo();
-            matriz[i][3] = list.get(i).getPais().toString();
-            matriz[i][4] = list.get(i).toStringEstilos();
-            if(list.get(i).getRecord()!=null)
-              matriz[i][5] = list.get(i).getRecord().toString();
-            else matriz[i][5] = "no hay record";
-        }
-        
-        tableModel.setDataVector(matriz, columnNames);
-        }
-        catch(DataException e){
+            String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","Récord"};
+            String[][] matriz = new String[list.size()][columnNames.length];
+
+            for(int i=0; i<list.size(); i++){
+                matriz[i][0] = list.get(i).getNombre();
+                matriz[i][1] = Integer.toString( list.get(i).getEdad());
+                matriz[i][2] = list.get(i).toStringSexo();
+                matriz[i][3] = list.get(i).getPais().toString();
+                matriz[i][4] = list.get(i).toStringEstilos();
+
+                if(list.get(i).getRecord()!=null)
+                matriz[i][5] = list.get(i).getRecord().toString();
+                else matriz[i][5] = "no hay record";
+            }
+
+            tableModel.setDataVector(matriz, columnNames);
             
         }
-        
-    }
     
 
     private JComboBox getComboNadadores(){
@@ -614,6 +659,29 @@ public class MainWindow extends JFrame implements WindowListener{
         finally{
             return combo;
         }             
+    }
+    
+    private JTextField[] getTextFields(Component[] losComponentes, int[] pos){
+        JTextField[] camposTexto = null;
+        JPanel p = (JPanel)losComponentes[pos[0]];
+        Component[] componentes = p.getComponents();
+        for(int i = 1; i< pos.length;i ++){
+            p = (JPanel)componentes[pos[i]];
+            componentes = p.getComponents();
+        }
+        
+        int a = p.getComponentCount();
+        componentes = p.getComponents();
+        camposTexto = new JTextField[componentes.length/2];
+        int cont = 0;
+        for(int i = 0; i<a; i++){
+            if(i%2==1){
+                camposTexto[cont] = (JTextField)componentes[i];
+                cont++;
+            }
+        }
+        
+        return camposTexto;
     }
     
     
@@ -655,4 +723,7 @@ public class MainWindow extends JFrame implements WindowListener{
     public void windowDeactivated(WindowEvent e) {
 //        throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    
+
 }
