@@ -155,9 +155,9 @@ public class Nadador {
         }
         
         
-        public Marca getRecord() throws DataException{
+        public Marca getRecord() throws DataException {
             if (this.record == null)
-                throw new DataException("No existe record.");
+                throw new DataException("No existe récord");
             else
                 return this.record;
         }
