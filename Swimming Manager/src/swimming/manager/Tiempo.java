@@ -117,6 +117,15 @@ public class Tiempo {
             return false;
         }
         
+        public String saveToString(){
+            String s=""+this.horas+" "+
+                        this.minutos+" "+
+                        this.segundos+" "+
+                        this.decimas+" "+
+                        this.centesimas;
+            return s;
+        }
+        
 
          public String toString() {
             String s1= ""+this.horas;

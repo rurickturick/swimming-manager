@@ -2,6 +2,7 @@ package swimming.manager;
 
 
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -290,10 +291,36 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void saveToFile() {
+        
+        //-- Le entra al método un string con el nombre del archivo
+        
+	public void saveToFile(String filename) throws IOException {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            File file = new File(filename);
 
+            if (!file.exists()) {
+
+            if (file.createNewFile()) {
+            System.out.println("El fichero se ha creado correctamente");
+            } else {
+
+            System.out.println("No ha podido ser creado el fichero");
+            }
+            }
+
+
+            /*la clave de activar o no la sobreescritura esta en FileOutputStream(file, true) si le ponemos en true entonces agregas al final de la linea */
+
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "UTF8"));
+            Iterator<Nadador> it=this.nadadores.iterator();                   
+            while(it.hasNext()){
+                Nadador n=it.next();
+                out.write(n.saveToString());
+                
+             }
+            out.close();
 		// end-user-code
 	}
 
