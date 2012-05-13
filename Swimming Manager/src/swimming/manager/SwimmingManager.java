@@ -44,19 +44,22 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void darDeAltaNadador(String Nombre, String fechaNacimiento, String pais, boolean masculino){
+	public void darDeAltaNadador(String nombre, String fechaNacimiento, String pais, boolean masculino) throws DataException{
+            if(nombre != null && fechaNacimiento!=null && pais !=null){
 		
-            String[] s= fechaNacimiento.split("-");
-            Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
+                String[] s= fechaNacimiento.split("-");
+                Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
             
-            ArrayList<Estilo> estilos=new ArrayList<Estilo>();
-            s=pais.split(" ");
-            Pais p= new Pais(s[0], s[1]);
-            ArrayList<Titulo> palmares=new ArrayList<Titulo>();
-            ArrayList<Marca> marca= new ArrayList<Marca>();
-            Nadador nadador = new Nadador(Nombre, fecha, estilos, p, palmares, marca, masculino);
-            this.nadadores.add(nadador);
-	}
+                ArrayList<Estilo> estilos=new ArrayList<Estilo>();
+                s=pais.split(" ");
+                Pais p= new Pais(s[0], s[1]);
+                ArrayList<Titulo> palmares=new ArrayList<Titulo>();
+                ArrayList<Marca> marca= new ArrayList<Marca>();
+                Nadador nadador = new Nadador(nombre, fecha, estilos, p, palmares, marca, masculino);
+                this.nadadores.add(nadador);
+            }
+            else throw new DataException("Deben introducirse todos los campos.");
+        }
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -181,6 +184,46 @@ public class SwimmingManager {
             public int anadirMarcaNadador(String nombre, String marca, String fecha,
                                       int distancia, Estilo estilo) throws DataException{
 	
+
+           try{
+               Nadador nadador=buscarNadadorPorNombre(nombre);
+           
+            if (nadador==null) return 1;
+            String[] auxMarca = marca.split(" ");
+            if (auxMarca.length!=5) return 2;
+            String[] auxfecha = fecha.split("-");
+            if (auxfecha.length!=3) return 3;
+            Marca m = new Marca(Integer.parseInt(auxfecha[0]),Integer.parseInt(auxfecha[1]),
+                                Integer.parseInt(auxfecha[2]),Integer.parseInt(auxMarca[0]),
+                                Integer.parseInt(auxMarca[1]),Integer.parseInt(auxMarca[2]),
+                                Integer.parseInt(auxMarca[3]),Integer.parseInt(auxMarca[4]),
+                                distancia, estilo);
+            nadador.addMarca(m);
+            //añadir el estilo de la marca a los estilos el nadador si no esta
+            
+          
+            Iterator<Estilo>  it=nadador.getEstilos().iterator();
+            boolean encontrado=false;
+            //ver si esta el estilo ya añadido
+            while(it.hasNext()&&!encontrado){
+                if (it.next()==estilo) encontrado=true;
+               
+             }
+            //si no esta añadido se añade
+            if(!encontrado){
+                ArrayList<Estilo>estilosAux=nadador.getEstilos();
+                estilosAux.add(estilo);
+                nadador.setEstilo(estilosAux);
+            }
+            
+           }
+           
+           catch(DataException e){
+               System.out.println(e.getMessage());
+           }
+           
+            return 0;
+
                 try{
                     Nadador nadador=buscarNadadorPorNombre(nombre);
 
@@ -219,6 +262,7 @@ public class SwimmingManager {
                 }
 
                     return 0;
+
         }	// end-user-code
 	
         
@@ -282,8 +326,10 @@ public class SwimmingManager {
             else throw new DataException("Alguna de las marcas introducidas o ambas no son correctas.");
 	}
         
-        public ArrayList<Nadador> getNadadores(){
-            return nadadores;
+        public ArrayList<Nadador> getNadadores() throws DataException{
+            if(nadadores !=null)
+                return nadadores;
+            else throw new DataException("Error nadadores");
         }
 
 	/** 
