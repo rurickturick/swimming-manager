@@ -189,7 +189,8 @@ public class Nadador {
             // los simbolos "/*/" son para separar las variables para hacer el
             // split cuando se carga el nadador.
             String NEWLINE= System.getProperty("line.separator");
-            String s= this.nombre+"/*/";
+            String s="/*nadador*/";
+            s+=this.nombre+"/*/";
             String fecha=this.fechaNacimiento.toString();
             fecha.replaceAll("/", "-");
             s+=fecha+"/*/";
@@ -211,6 +212,7 @@ public class Nadador {
                 }
                 s+="/*finmarcas*/";
             }
+            s+="/*finnadador*/";
             return s;
         }
         
