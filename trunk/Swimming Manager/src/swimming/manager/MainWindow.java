@@ -41,6 +41,7 @@ public class MainWindow extends JFrame implements WindowListener{
         
         tableModel = new DefaultTableModel();
         tabla = new JTable(tableModel);
+        tabla.setEnabled(false);
         JScrollPane container = new JScrollPane(tabla);
         this.getContentPane().add(container);        
         
@@ -195,6 +196,11 @@ public class MainWindow extends JFrame implements WindowListener{
         jMenu6.add(jMenuItem18);
 
         jMenuItem19.setText("Eliminar marca");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem19);
 
         jMenuItem20.setText("Información");
@@ -268,8 +274,7 @@ public class MainWindow extends JFrame implements WindowListener{
         // TODO add your handling code here:                
             if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
             else{
-                final JFrame mainVentana = getVentana();
-                mainVentana.setTitle("Dar de baja nadador");
+                final JFrame mainVentana = getVentana("Dar de baja nadador");
                 mainVentana.setSize(new Dimension(400, 100));
                 mainVentana.setLocationRelativeTo(this);
                 JPanel mainPanel = new JPanel(new BorderLayout());
@@ -307,7 +312,7 @@ public class MainWindow extends JFrame implements WindowListener{
                     public void actionPerformed(ActionEvent e) {
                         try{                            
                             swimming.darDeBajaNadador((String)caja.getSelectedItem());
-                            updateTabla();
+                            updateTabla(swimming.getNadadores());
                             mainVentana.dispose();
                         }   
                         catch (DataException exc){
@@ -332,7 +337,7 @@ public class MainWindow extends JFrame implements WindowListener{
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        if(swimming!=null) {
+        if(!swimming.getNadadores().isEmpty()) {
             int respuesta;
             respuesta = JOptionPane.showConfirmDialog(null,"Se perderán los cambios no guardados.","Salir",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
             if(respuesta==0) System.exit(0);
@@ -347,6 +352,111 @@ public class MainWindow extends JFrame implements WindowListener{
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        // TODO add your handling code here:
+        if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
+                else{
+                    final JFrame ventana = this;
+                    final JFrame mainVentana = getVentana("Eliminar Marca");
+                    mainVentana.setSize(new Dimension(400, 100));
+                    mainVentana.setLocationRelativeTo(ventana);
+                    JPanel mainPanel = new JPanel(new BorderLayout());
+
+                    JPanel auxPanel = new JPanel(new GridLayout(1, 1));
+                    JPanel auxPanelIz = new JPanel(new FlowLayout());
+                    JPanel mainPanelDr = new JPanel(new BorderLayout());
+                    JPanel auxPanelDr = new JPanel(new FlowLayout());
+                    final JComboBox caja = getComboNadadores();
+
+                    JLabel label = new JLabel("Seleccione un nadador: ");
+                    auxPanelIz.add(label);
+                    auxPanelDr.add(caja);
+                    mainPanelDr.add(auxPanelDr);
+                    auxPanel.add(auxPanelIz);
+                    auxPanel.add(mainPanelDr);
+                    mainPanel.add(auxPanel, "Center");
+
+                    JButton botonSiguiente = new JButton();
+                    botonSiguiente.setText("Siguiente");
+                    JButton botonCancelar = new JButton();
+                    botonCancelar.setText("Cancelar");                        
+
+                    mainPanel.add(getPanelBotones(botonSiguiente, botonCancelar), "South");                             
+                    mainVentana.add(mainPanel, "Center");
+                    
+                    botonCancelar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            mainVentana.dispose();
+                        }
+                    });
+                    
+                    botonSiguiente.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            final String nombreNadador = (String)caja.getSelectedItem();
+                            try{
+                                if(swimming.buscarNadadorPorNombre(nombreNadador).getMarcas().isEmpty())
+                                    throw new DataException("Este Nadador no tiene marcas añadidas, añada primero alguna.");
+                                mainVentana.setVisible(false);
+                                final JFrame mainVentana = getVentana("Eliminar Marca");
+                                mainVentana.setSize(new Dimension(400, 100));
+                                mainVentana.setLocationRelativeTo(ventana);
+                                JPanel mainPanel = new JPanel(new BorderLayout());
+
+                                JPanel auxPanel = new JPanel(new GridLayout(1, 1));
+                                JPanel auxPanelIz = new JPanel(new FlowLayout());
+                                JPanel mainPanelDr = new JPanel(new BorderLayout());
+                                JPanel auxPanelDr = new JPanel(new FlowLayout());
+                                final JComboBox caja2 = getComboMarcas(swimming.buscarNadadorPorNombre(nombreNadador));
+
+                                JLabel label = new JLabel("Seleccione una marca: ");
+                                auxPanelIz.add(label);
+                                auxPanelDr.add(caja2);
+                                mainPanelDr.add(auxPanelDr);
+                                auxPanel.add(auxPanelIz);
+                                auxPanel.add(mainPanelDr);
+                                mainPanel.add(auxPanel, "Center");
+
+                                JButton botonAceptar = new JButton();
+                                botonAceptar.setText("Aceptar");
+                                JButton botonCancelar = new JButton();
+                                botonCancelar.setText("Cancelar");                        
+
+                                mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                             
+                                mainVentana.add(mainPanel, "Center");
+                                
+                                botonCancelar.addActionListener(new ActionListener(){
+                                    public void actionPerformed(ActionEvent e) {
+                                        mainVentana.dispose();
+                                    }
+                                });
+                                 botonAceptar.addActionListener(new ActionListener(){
+                                    public void actionPerformed(ActionEvent e) {
+                                        try{
+                                            Nadador nadador = swimming.buscarNadadorPorNombre(nombreNadador);
+                                            int i = caja2.getSelectedIndex();
+                                            ArrayList<Marca> marcas = nadador.getMarcas();
+                                            Marca marca = marcas.get(i);
+                                            swimming.eliminarMarcaNadador(marca, nadador);
+                                            updateTabla(swimming.getNadadores());
+                                            mainVentana.dispose();                                            
+                                        }
+                                        catch(Exception ex){
+                                            showMessage(ex.getMessage(), "Error", 0);
+                                            mainVentana.dispose();
+                                        }
+                                    }
+                                 });
+                                
+                            }
+                            catch(DataException ex){
+                                showMessage(ex.getMessage(), "Error", 0);
+                                mainVentana.dispose();
+                            }
+                        }
+                    });
+                }
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu buscarMenu;
@@ -457,147 +567,145 @@ public class MainWindow extends JFrame implements WindowListener{
         
         jMenuItem16.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-            if(swimming==null) 
-                    showMessage("Debe crear un documento nuevo o abrir uno existente.","Dar de alta",0);
-            else {
-                final JFrame mainVentana = getVentana();   
-                mainVentana.setTitle("Dar de alta nadador");
-                mainVentana.setLayout(new BorderLayout());
-                String[] labels = {"Nombre: ", "País de Origen: ","Ciudad de Origen: ", "Día de Nacimiento: ", "Mes de Nacimiento: ",
-                                    "Año de Nacimiento: "};
-                JButton botonAceptar = new JButton();
-                botonAceptar.setText("Aceptar");
-                JButton botonCancelar = new JButton();
-                botonCancelar.setText("Cancelar");
+                if(swimming==null) 
+                        showMessage("Debe crear un documento nuevo o abrir uno existente.","Dar de alta",0);
+                else {
+                    final JFrame mainVentana = getVentana("Dar de alta nadador");   
+                    mainVentana.setLayout(new BorderLayout());
+                    String[] labels = {"Nombre: ", "País de Origen: ","Ciudad de Origen: ", "Día de Nacimiento: ", "Mes de Nacimiento: ",
+                                        "Año de Nacimiento: "};
+                    JButton botonAceptar = new JButton();
+                    botonAceptar.setText("Aceptar");
+                    JButton botonCancelar = new JButton();
+                    botonCancelar.setText("Cancelar");
 
-                JRadioButton boton1 = new JRadioButton("Hombre");
-                boton1.setActionCommand("Hombre");
-                boton1.setMnemonic(KeyEvent.VK_H);
+                    JRadioButton boton1 = new JRadioButton("Hombre");
+                    boton1.setActionCommand("Hombre");
+                    boton1.setMnemonic(KeyEvent.VK_H);
 
-                JRadioButton boton2 = new JRadioButton("Mujer");
-                boton2.setActionCommand("Mujer");
-                boton2.setMnemonic(KeyEvent.VK_M);
+                    JRadioButton boton2 = new JRadioButton("Mujer");
+                    boton2.setActionCommand("Mujer");
+                    boton2.setMnemonic(KeyEvent.VK_M);
 
-                ButtonGroup grupo = new ButtonGroup();
-                grupo.add(boton1);
-                grupo.add(boton2);
+                    ButtonGroup grupo = new ButtonGroup();
+                    grupo.add(boton1);
+                    grupo.add(boton2);
 
-                boton1.addActionListener(new ActionListener(){
-                    public void actionPerformed(ActionEvent e){
-                        sexo = true;
-                    }
-                });
-
-                boton2.addActionListener(new ActionListener(){
-                    public void actionPerformed(ActionEvent e){
-                        sexo = false;
-                    }
-                });
-
-                JPanel panelRadio = new JPanel(new FlowLayout());
-                JLabel l1 = new JLabel("Sexo: ");
-                panelRadio.add(l1);
-                panelRadio.add(boton1);
-                panelRadio.add(boton2);
-
-                mainVentana.add(panelRadio, "North");
-                mainVentana.add(getLabelsPanel(labels, botonAceptar, botonCancelar), "Center");
-
-                botonCancelar.addActionListener(new ActionListener(){
-                    public void actionPerformed(ActionEvent e) {
-                        mainVentana.dispose();
-                    }                
-                });                
-                botonAceptar.addActionListener(new ActionListener(){
-                    public void actionPerformed(ActionEvent e) {
-                        try{
-                            int[] posiciones = {1, 0};
-                            JTextField[] camposTexto = getTextFields(mainVentana.getContentPane().getComponents(),
-                                                                        posiciones);
-                            String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
-                            String nombre = camposTexto[0].getText();
-                            String pais = camposTexto[1].getText();
-                            String ciudad = camposTexto[2].getText();
-
-                            swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad,sexo);
-                            showMessage("Nadador añadido.", "Añadir", 1);
-                            updateTabla();
-                            mainVentana.dispose();
+                    boton1.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                            sexo = true;
                         }
-                        catch(Exception ex){
-                            showMessage("Debe rellenar todos los campos", "Error", 0);
-                            mainVentana.dispose();
+                    });
+
+                    boton2.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                            sexo = false;
                         }
-                    }  
-                });
-            }                
-        }    
-    });
+                    });
+
+                    JPanel panelRadio = new JPanel(new FlowLayout());
+                    JLabel l1 = new JLabel("Sexo: ");
+                    panelRadio.add(l1);
+                    panelRadio.add(boton1);
+                    panelRadio.add(boton2);
+
+                    mainVentana.add(panelRadio, "North");
+                    mainVentana.add(getLabelsPanel(labels, botonAceptar, botonCancelar), "Center");
+
+                    botonCancelar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            mainVentana.dispose();
+                        }                
+                    });                
+                    botonAceptar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            try{
+                                int[] posiciones = {1, 0};
+                                JTextField[] camposTexto = getTextFields(mainVentana.getContentPane().getComponents(),
+                                                                            posiciones);
+                                String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
+                                String nombre = camposTexto[0].getText();
+                                String pais = camposTexto[1].getText();
+                                String ciudad = camposTexto[2].getText();
+
+                                swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad,sexo);
+                                showMessage("Nadador añadido.", "Añadir", 1);
+                                updateTabla(swimming.getNadadores());
+                                mainVentana.dispose();
+                            }
+                            catch(Exception ex){
+                                showMessage("Debe rellenar todos los campos", "Error", 0);
+                                mainVentana.dispose();
+                            }
+                        }
+                    });
+                }                
+            }    
+        });
         
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent evt){
-                        if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
-                        else{
-                            final JFrame mainVentana = getVentana();
-                            JPanel mainPanel = new JPanel(new BorderLayout());
-                            mainVentana.setTitle("Añadir Marca");
+            public void actionPerformed(ActionEvent evt){
+                if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
+                else{
+                    final JFrame mainVentana = getVentana("Añadir Marca");
+                    JPanel mainPanel = new JPanel(new BorderLayout());
 
-                            String[] labels = {"Marca: ", "Estilo: ", "Distancia: ", "Día: ", "Mes: ", "Año: " };
-                            JButton botonAceptar = new JButton();
-                            botonAceptar.setText("Aceptar");
-                            JButton botonCancelar = new JButton();
-                            botonCancelar.setText("Cancelar");
-                            JPanel panelCamposBotones = getLabelsPanel(labels, botonAceptar, botonCancelar);
+                    String[] labels = {"Marca: ", "Estilo: ", "Distancia: ", "Día: ", "Mes: ", "Año: " };
+                    JButton botonAceptar = new JButton();
+                    botonAceptar.setText("Aceptar");
+                    JButton botonCancelar = new JButton();
+                    botonCancelar.setText("Cancelar");
+                    JPanel panelCamposBotones = getLabelsPanel(labels, botonAceptar, botonCancelar);
 
-                            final JComboBox caja = getComboNadadores();
+                    final JComboBox caja = getComboNadadores();
 
-                            JPanel panelBoxLabel = new JPanel(new GridLayout(1, 1));
-                            JPanel auxPanelLabel = new JPanel(new FlowLayout());
-                            JPanel mainPanelBox = new JPanel(new BorderLayout());
-                            JPanel auxPanelBox = new JPanel(new FlowLayout());
-                            auxPanelLabel.add(new JLabel("Seleccione Nadador: "));                        
-                            auxPanelBox.add(caja);
-                            mainPanelBox.add(auxPanelBox, "Center");
-                            panelBoxLabel.add(auxPanelLabel);
-                            panelBoxLabel.add(mainPanelBox);
-                            
-                            mainPanel.add(panelBoxLabel, "North");
-                            mainPanel.add(panelCamposBotones, "Center");
+                    JPanel panelBoxLabel = new JPanel(new GridLayout(1, 1));
+                    JPanel auxPanelLabel = new JPanel(new FlowLayout());
+                    JPanel mainPanelBox = new JPanel(new BorderLayout());
+                    JPanel auxPanelBox = new JPanel(new FlowLayout());
+                    auxPanelLabel.add(new JLabel("Seleccione Nadador: "));                        
+                    auxPanelBox.add(caja);
+                    mainPanelBox.add(auxPanelBox, "Center");
+                    panelBoxLabel.add(auxPanelLabel);
+                    panelBoxLabel.add(mainPanelBox);
 
-                            mainVentana.add(mainPanel);
-                            botonCancelar.addActionListener(new ActionListener(){
-                                public void actionPerformed(ActionEvent e) {
-                                    mainVentana.dispose();
-                                }
-                            });
-                            
-                            botonAceptar.addActionListener(new ActionListener(){
-                                public void actionPerformed(ActionEvent e){
-                                    try{
-                                        int[] posiciones = {0, 1, 0};
-                                        JTextField [] camposTexto = getTextFields(mainVentana.getContentPane().getComponents(),
-                                                                            posiciones);
-                                        String nombre = (String)caja.getSelectedItem();
-                                        String marca = camposTexto[0].getText();
-                                        Estilo estilo = Estilo.getEstilo(camposTexto[1].getText());
-                                        int distancia = Integer.parseInt(camposTexto[2].getText());
-                                        String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
-                                        swimming.anadirMarcaNadador(nombre, marca, fecha, distancia, estilo);
-                                        updateTabla();
-                                        showMessage("Marca añadida", "Añadir Marca", 1);
-                                        mainVentana.dispose();
-                                    }
-                                    catch(Exception ex){
-                                        showMessage(ex.getMessage(), "Error", 0);
-                                        mainVentana.dispose();
-                                    }
-                                }
-                            
-                            });
-                        
-                    }
+                    mainPanel.add(panelBoxLabel, "North");
+                    mainPanel.add(panelCamposBotones, "Center");
+
+                    mainVentana.add(mainPanel);
+                    botonCancelar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            mainVentana.dispose();
+                        }
+                    });
+
+                    botonAceptar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                            try{
+                                int[] posiciones = {0, 1, 0};
+                                JTextField [] camposTexto = getTextFields(mainVentana.getContentPane().getComponents(),
+                                                                    posiciones);
+                                String nombre = (String)caja.getSelectedItem();
+                                String marca = camposTexto[0].getText();
+                                Estilo estilo = Estilo.getEstilo(camposTexto[1].getText());
+                                int distancia = Integer.parseInt(camposTexto[2].getText());
+                                String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
+                                swimming.anadirMarcaNadador(nombre, marca, fecha, distancia, estilo);
+                                updateTabla(swimming.getNadadores());
+                                showMessage("Marca añadida", "Añadir Marca", 1);
+                                mainVentana.dispose();
+                            }
+                            catch(Exception ex){
+                                showMessage(ex.getMessage(), "Error", 0);
+                                mainVentana.dispose();
+                            }
+                        }
+                    });
                 }
+            }
         });
+        
+                
     }
 
 
@@ -609,7 +717,7 @@ public class MainWindow extends JFrame implements WindowListener{
         dialog.setVisible(true);
     }
 
-    private JFrame getVentana(){
+    private JFrame getVentana(String title){
         JFrame mainVentana = new JFrame();
         mainVentana.setVisible(true);
         mainVentana.setSize(new Dimension(350, 275));
@@ -617,16 +725,11 @@ public class MainWindow extends JFrame implements WindowListener{
         mainVentana.setAlwaysOnTop(true);
         mainVentana.setResizable(false);
         mainVentana.setIconImage(img);
+        mainVentana.setTitle(title);
         return mainVentana;
     }
     
-    //faltan accesora a los demás campos, tales como Nacionalidad, su mejor Récord, su mejor estilo 
-    //no usamos el número federativo así que croe que podemos quitarlo y voy a añadir la pestaña sexo al formulario
-    //pero aun queda por implementar la constructora del nadador al cual pasarle el sexo.
-    
-    private void updateTabla(){
-            ArrayList<Nadador> list = swimming.getNadadores();
-        
+    private void updateTabla(ArrayList<Nadador> list){        
             String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","Récord"};
             String[][] matriz = new String[list.size()][columnNames.length];
 
@@ -634,18 +737,15 @@ public class MainWindow extends JFrame implements WindowListener{
                 matriz[i][0] = list.get(i).getNombre();
                 matriz[i][1] = Integer.toString( list.get(i).getEdad());
                 matriz[i][2] = list.get(i).toStringSexo();
-                matriz[i][3] = list.get(i).getPais().toString();
+                matriz[i][3] = list.get(i).getPais().getPais();
                 matriz[i][4] = list.get(i).toStringEstilos();
 
                 if(list.get(i).getRecord()!=null)
-                matriz[i][5] = list.get(i).getRecord().toString();
+                matriz[i][5] = list.get(i).getRecord().getTiempo().toString();
                 else matriz[i][5] = "no hay record";
             }
-
             tableModel.setDataVector(matriz, columnNames);
-            
-        }
-    
+    }    
 
     private JComboBox getComboNadadores(){
         JComboBox combo = null;
@@ -658,11 +758,27 @@ public class MainWindow extends JFrame implements WindowListener{
             combo = new JComboBox(nadadores);  
         }
         catch(Exception ex){
-            throw new Exception();
         }
         finally{
             return combo;
         }             
+    }
+    
+    private JComboBox getComboMarcas(Nadador nadador){
+        JComboBox combo = null;
+        try{
+            ArrayList<Marca> list = nadador.getMarcas();
+            String[] marcas = new String[list.size()];
+            for(int i=0; i<list.size(); i++){
+                marcas[i] = list.get(i).getEstilo().toString()+": "+list.get(i).getTiempo().toString();
+            }
+            combo = new JComboBox(marcas);
+        }
+        catch(Exception ex){            
+        }
+        finally{     
+            return combo;
+        }
     }
     
     private JTextField[] getTextFields(Component[] losComponentes, int[] pos){
@@ -686,8 +802,7 @@ public class MainWindow extends JFrame implements WindowListener{
         }
         
         return camposTexto;
-    }
-    
+    }    
     
     @Override
     public void windowOpened(WindowEvent e) {
@@ -695,7 +810,7 @@ public class MainWindow extends JFrame implements WindowListener{
     }
 
     public void windowClosing(WindowEvent e) {
-        if(swimming!=null) {
+        if(!swimming.getNadadores().isEmpty()) {
             int respuesta;
             respuesta = JOptionPane.showConfirmDialog(null,"Se perderán los cambios no guardados.","Salir",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
             if(respuesta==0) System.exit(0);
@@ -727,7 +842,4 @@ public class MainWindow extends JFrame implements WindowListener{
     public void windowDeactivated(WindowEvent e) {
 //        throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    
-
 }
