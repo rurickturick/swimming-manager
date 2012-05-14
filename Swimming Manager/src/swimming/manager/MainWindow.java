@@ -612,13 +612,14 @@ public class MainWindow extends JFrame implements WindowListener{
                     mainVentana.add(getLabelsPanel(labels, botonAceptar, botonCancelar), "Center");
 
                     botonCancelar.addActionListener(new ActionListener(){
+                        
                         public void actionPerformed(ActionEvent e) {
                             mainVentana.dispose();
                         }                
                     });                
                     botonAceptar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {
-                            try{
+                            
                                 int[] posiciones = {1, 0};
                                 JTextField[] camposTexto = getTextFields(mainVentana.getContentPane().getComponents(),
                                                                             posiciones);
@@ -626,16 +627,13 @@ public class MainWindow extends JFrame implements WindowListener{
                                 String nombre = camposTexto[0].getText();
                                 String pais = camposTexto[1].getText();
                                 String ciudad = camposTexto[2].getText();
-
-                                swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad,sexo);
-                                showMessage("Nadador añadido.", "Añadir", 1);
-                                updateTabla(swimming.getNadadores());
-                                mainVentana.dispose();
-                            }
-                            catch(DataException ex){
-                                showMessage("Debe rellenar todos los campos", "Error", 0);
-                                mainVentana.dispose();
-                            }
+                                if(fecha.equals("---")||(nombre.equals(""))||(pais.equals(""))||(ciudad.equals("")))
+                                    showMessage("Debe rellenar todos los campos.", "Error", 0);
+                                else
+                                    swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad,sexo);
+                                    showMessage("Nadador añadido.", "Añadir", 1);
+                                    updateTabla(swimming.getNadadores());
+                                    mainVentana.dispose();
                         }
                     });
                 }                
@@ -802,7 +800,7 @@ public class MainWindow extends JFrame implements WindowListener{
     }
 
     public void windowClosing(WindowEvent e) {
-        if(!swimming.getNadadores().isEmpty()) {
+        if(swimming!=null) {
             int respuesta;
             respuesta = JOptionPane.showConfirmDialog(null,"Se perderán los cambios no guardados.","Salir",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
             if(respuesta==0) System.exit(0);
