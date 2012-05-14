@@ -757,11 +757,10 @@ public class MainWindow extends JFrame implements WindowListener{
                 matriz[i][1] = Integer.toString( list.get(i).getEdad());
                 matriz[i][2] = list.get(i).toStringSexo();
                 matriz[i][3] = list.get(i).getPais().getPais();
-                //en vez de pasarle un toString de estilos, le paso el estilo del record
-                if(list.get(i).getRecord()!=null){
-                    matriz[i][4] = list.get(i).getRecord().getEstilo().name();
-                    matriz[i][5] = list.get(i).getRecord().getTiempo().toString();
-                }else matriz[i][5] = "No hay record";
+                matriz[i][4] = list.get(i).toStringEstilos();
+               if(list.get(i).getRecord()!=null)
+                 matriz[i][5] = list.get(i).getRecord().getTiempo().toString();
+                else matriz[i][5] = "No hay record";
             }
             
             tableModel.setDataVector(matriz, columnNames);
