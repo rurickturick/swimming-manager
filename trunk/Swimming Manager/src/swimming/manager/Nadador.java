@@ -60,8 +60,11 @@ public class Nadador {
         
         public String toStringEstilos(){
             String s="";
-            for (int i=0; i < this.estilos.size();i++){
-                s = s + this.estilos.get(i).name() + ", ";
+            if(this.estilos.size()!=0){
+              s=this.estilos.get(0).name();
+              for (int i=1; i < this.estilos.size();i++){
+                  s = s + ", " + this.estilos.get(i).name() ;
+              }
             }
             return s;
         }
