@@ -34,7 +34,7 @@ public class MainWindow extends JFrame implements WindowListener{
     public MainWindow() {
         initComponents();
         this.setTitle("Swimming Manager");
-        img=Toolkit.getDefaultToolkit().getImage("images/Swimming_Manager_Logo_modelo_2.png");
+        img=Toolkit.getDefaultToolkit().getImage("images/SW.png");
         this.setIconImage(img);        
         initListener();
         this.setLayout(new BorderLayout());
