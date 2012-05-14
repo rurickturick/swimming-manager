@@ -160,6 +160,9 @@ public class Nadador {
             return this.record;
         }
         
+        public void setRecord(Marca record){
+            this.record=record;
+        }
         /*public Marca getRecord() throws DataException {
             if (this.record == null)
                 throw new DataException("No existe récord");
@@ -195,7 +198,7 @@ public class Nadador {
             fecha.replaceAll("/", "-");
             s+=fecha+"/*/";
             s+=this.pais.getPais()+"/*/";
-            s+=this.pais.getCiudad()+"/*/";
+            //s+=this.pais.getCiudad()+"/*/";
             s+=this.masculino;
             // ahora metemos todos las marcas (si hay)
             if(!this.marcas.isEmpty()){
@@ -215,6 +218,25 @@ public class Nadador {
             s+="/*finnadador*/";
             return s;
         }
+
+    public void actualizaMarca(Nadador n) {
+        ArrayList<Marca> marcas = n.marcas;
+        boolean encontrada=false;
+        int i=1;
+        //si no hay ninguna marca asigno null
+        if (marcas.isEmpty()) this.record= null;
+        //empiezo asignando la primera y la comparo con el resto
+        Marca m=marcas.get(0);
+        while ((!encontrada) && i<marcas.size()){
+            //si la que leo es mejor que la maxima las cambio
+            if (m.getTiempo().compara(marcas.get(i).getTiempo())){
+                m=marcas.get(i);
+                encontrada=true;
+            }else i++;
+        }
+        this.record=m;
+        
+    }
         
         
 }

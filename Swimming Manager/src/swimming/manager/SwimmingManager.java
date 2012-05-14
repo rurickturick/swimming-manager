@@ -50,8 +50,8 @@ public class SwimmingManager {
             Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
 
             ArrayList<Estilo> estilos=new ArrayList<Estilo>();
-            s=pais.split(" ");
-            Pais p= new Pais(s[0], s[1]);
+            //s=pais.split(" ");
+            Pais p= new Pais(pais);
             ArrayList<Titulo> palmares=new ArrayList<Titulo>();
             ArrayList<Marca> marca= new ArrayList<Marca>();
             Nadador nadador = new Nadador(nombre, fecha, estilos, p, palmares, marca, masculino);
@@ -232,6 +232,9 @@ public class SwimmingManager {
                        if(pos!=-1){
                             marcasNadadores.remove(pos);
                             n.setMarcas(marcasNadadores);
+                            //ahora hay que actualizar el record
+                            if (n.getMarcas().isEmpty()) n.setRecord(null);
+                            else n.actualizaMarca(n);
                         }
                         else throw new DataException("No existe esa marca");
                   

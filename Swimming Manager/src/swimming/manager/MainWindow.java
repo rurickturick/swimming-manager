@@ -579,7 +579,7 @@ public class MainWindow extends JFrame implements WindowListener{
                 else {
                     final JFrame mainVentana = getVentana("Dar de alta nadador");   
                     mainVentana.setLayout(new BorderLayout());
-                    String[] labels = {"Nombre: ", "País de Origen: ","Ciudad de Origen: ", "Día de Nacimiento: ", "Mes de Nacimiento: ",
+                    String[] labels = {"Nombre: ", "País de Origen: ","Día de Nacimiento: ", "Mes de Nacimiento: ",
                                         "Año de Nacimiento: "};
                     JButton botonAceptar = new JButton();
                     botonAceptar.setText("Aceptar");
@@ -631,11 +631,11 @@ public class MainWindow extends JFrame implements WindowListener{
                                 int[] posiciones = {1, 0};
                                 JTextField[] camposTexto = getTextFields(mainVentana.getContentPane().getComponents(),
                                                                             posiciones);
-                                String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
+                                String fecha = camposTexto[2].getText()+"-"+camposTexto[3].getText()+"-"+camposTexto[4].getText();
                                 String nombre = camposTexto[0].getText();
                                 String pais = camposTexto[1].getText();
-                                String ciudad = camposTexto[2].getText();
-                                if(fecha.equals("---")||(nombre.equals(""))||(pais.equals(""))||(ciudad.equals("")))
+                                //String ciudad = camposTexto[2].getText();
+                                if(fecha.equals("---")||(nombre.equals(""))||(pais.equals("")))
                                     showMessage("Debe rellenar todos los campos.", "Error", 0);
                                 else{
                                     String [] fechaAux=fecha.split("-");
@@ -645,7 +645,7 @@ public class MainWindow extends JFrame implements WindowListener{
                                             ||(Integer.parseInt(fechaAux[2])<0)||(Integer.parseInt(fechaAux[2])>9999))
                                         showMessage("El formato de la fecha es DD-MM-AAAA", "Formato de fecha no válido",0);
                                         else{
-                                    swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad,sexo);
+                                    swimming.darDeAltaNadador(nombre, fecha, pais,sexo);
                                     showMessage("Nadador añadido.", "Añadir", 1);
                                     updateTabla(swimming.getNadadores());
                                     mainVentana.dispose();
@@ -757,12 +757,13 @@ public class MainWindow extends JFrame implements WindowListener{
                 matriz[i][1] = Integer.toString( list.get(i).getEdad());
                 matriz[i][2] = list.get(i).toStringSexo();
                 matriz[i][3] = list.get(i).getPais().getPais();
-                matriz[i][4] = list.get(i).toStringEstilos();
-
-                if(list.get(i).getRecord()!=null)
-                matriz[i][5] = list.get(i).getRecord().getTiempo().toString();
-                else matriz[i][5] = "no hay record";
+                //en vez de pasarle un toString de estilos, le paso el estilo del record
+                if(list.get(i).getRecord()!=null){
+                    matriz[i][4] = list.get(i).getRecord().getEstilo().name();
+                    matriz[i][5] = list.get(i).getRecord().getTiempo().toString();
+                }else matriz[i][5] = "No hay record";
             }
+            
             tableModel.setDataVector(matriz, columnNames);
             tabla.getColumn("Sexo").setPreferredWidth(21);
             tabla.getColumn("Nombre").setPreferredWidth(120);
