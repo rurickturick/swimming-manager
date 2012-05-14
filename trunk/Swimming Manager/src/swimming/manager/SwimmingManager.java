@@ -44,21 +44,19 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void darDeAltaNadador(String nombre, String fechaNacimiento, String pais, boolean masculino) throws DataException{
-            if(nombre != null && fechaNacimiento!=null && pais !=null){
+	public void darDeAltaNadador(String nombre, String fechaNacimiento, String pais, boolean masculino){
 		
-                String[] s= fechaNacimiento.split("-");
-                Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
-            
-                ArrayList<Estilo> estilos=new ArrayList<Estilo>();
-                s=pais.split(" ");
-                Pais p= new Pais(s[0], s[1]);
-                ArrayList<Titulo> palmares=new ArrayList<Titulo>();
-                ArrayList<Marca> marca= new ArrayList<Marca>();
-                Nadador nadador = new Nadador(nombre, fecha, estilos, p, palmares, marca, masculino);
-                this.nadadores.add(nadador);
-            }
-            else throw new DataException("Deben introducirse todos los campos.");
+            String[] s= fechaNacimiento.split("-");
+            Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
+
+            ArrayList<Estilo> estilos=new ArrayList<Estilo>();
+            s=pais.split(" ");
+            Pais p= new Pais(s[0], s[1]);
+            ArrayList<Titulo> palmares=new ArrayList<Titulo>();
+            ArrayList<Marca> marca= new ArrayList<Marca>();
+            Nadador nadador = new Nadador(nombre, fecha, estilos, p, palmares, marca, masculino);
+            this.nadadores.add(nadador);
+
         }
 
 	/** 
