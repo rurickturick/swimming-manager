@@ -338,7 +338,7 @@ public class MainWindow extends JFrame implements WindowListener{
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
         Icon icon = new ImageIcon(getClass().getClassLoader().getResource("ucm.png"));        
         JOptionPane.showMessageDialog(null, "Creado por '6+2' para Ingeniería del Software.\nUniversidad Complutense de Madrid.\n"
-                +"Facultad de Informática.", "Swimming Manager 0.1", 1, icon);
+                +"Facultad de Informática.", "Swimming Manager 0.2.1", 1, icon);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
