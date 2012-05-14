@@ -34,7 +34,7 @@ public class MainWindow extends JFrame implements WindowListener{
     public MainWindow() {
         initComponents();
         this.setTitle("Swimming Manager");
-        img=Toolkit.getDefaultToolkit().getImage("images/SW.png");
+        img=Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("SW.png"));
         this.setIconImage(img);        
         initListener();
         this.setLayout(new BorderLayout());
@@ -336,7 +336,7 @@ public class MainWindow extends JFrame implements WindowListener{
     }//GEN-LAST:event_helpMenuActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        Icon icon = new ImageIcon("images/ucm.png");        
+        Icon icon = new ImageIcon(getClass().getClassLoader().getResource("ucm.png"));        
         JOptionPane.showMessageDialog(null, "Creado por '6+2' para Ingeniería del Software.\nUniversidad Complutense de Madrid.\n"
                 +"Facultad de Informática.", "Swimming Manager 0.1", 1, icon);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
