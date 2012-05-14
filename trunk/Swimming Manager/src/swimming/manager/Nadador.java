@@ -143,7 +143,7 @@ public class Nadador {
                  this.record = marca;
                 
                 else 
-                    if (!this.record.getTiempo().compara(marca.getTiempo())) 
+                    if (this.record.getTiempo().compara(marca.getTiempo())) 
                         this.record = marca;
             }
             else throw new DataException("La marca introducida no es válida.");
