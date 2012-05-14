@@ -5,8 +5,8 @@ package swimming.manager;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class SwimmingManager {
@@ -20,26 +20,33 @@ public class SwimmingManager {
         }
         
         private ArrayList<Estilo> parseEstilos(String[] estilo){
-            ArrayList<Estilo> aux= new ArrayList<Estilo>();
-            for (int i = 0 ; i < estilo.length;i++){
-                if(estilo[i].equalsIgnoreCase("braza")) aux.add(Estilo.Braza);
-                if(estilo[i].equalsIgnoreCase("espalda")) aux.add(Estilo.Espalda);
-                if(estilo[i].equalsIgnoreCase("libre")) aux.add(Estilo.Libre);
-                if(estilo[i].equalsIgnoreCase("mariposa")) aux.add(Estilo.Mariposa);
+            ArrayList<Estilo> aux = new ArrayList<Estilo>();
+            for(int i = 0 ; i < estilo.length; i++){
+                if(estilo[i].equalsIgnoreCase("braza")) 
+                    aux.add(Estilo.Braza);
+                if(estilo[i].equalsIgnoreCase("espalda")) 
+                    aux.add(Estilo.Espalda);
+                if(estilo[i].equalsIgnoreCase("libre")) 
+                    aux.add(Estilo.Libre);
+                if(estilo[i].equalsIgnoreCase("mariposa")) 
+                    aux.add(Estilo.Mariposa);
             }
             return aux;
         }
         
         private Estilo parseEstilos(String estilo){
            Estilo e = null;
-                if(estilo.equalsIgnoreCase("braza")) e=Estilo.Braza;
-                if(estilo.equalsIgnoreCase("espalda")) e=Estilo.Espalda;
-                if(estilo.equalsIgnoreCase("libre")) e=Estilo.Libre;
-                if(estilo.equalsIgnoreCase("mariposa")) e=Estilo.Mariposa;
-            return e;
+           if(estilo.equalsIgnoreCase("braza")) 
+               e = Estilo.Braza;
+           if(estilo.equalsIgnoreCase("espalda")) 
+               e = Estilo.Espalda;
+           if(estilo.equalsIgnoreCase("libre")) 
+               e = Estilo.Libre;
+           if(estilo.equalsIgnoreCase("mariposa")) 
+               e = Estilo.Mariposa;
+           return e;
         }
        
-
 	public void darDeAltaNadador(String nombre, String fechaNacimiento, String pais, boolean masculino){	
             String[] s = fechaNacimiento.split("-");
             Fecha fecha = new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
