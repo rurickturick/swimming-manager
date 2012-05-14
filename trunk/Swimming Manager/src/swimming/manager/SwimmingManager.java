@@ -179,9 +179,8 @@ public class SwimmingManager {
         //          2 si el formato de la marca no es correcto
         //          3 si el formato de la fecha no es correcto
 	
-            public int anadirMarcaNadador(String nombre, String marca, String fecha,
+        public int anadirMarcaNadador(String nombre, String marca, String fecha,
                                       int distancia, Estilo estilo) throws DataException{
-	
 
            try{
                Nadador nadador=buscarNadadorPorNombre(nombre);
@@ -245,12 +244,12 @@ public class SwimmingManager {
 
 
 	public String verInformacionNadador(Nadador n) {
-            String LabelNombre = "Nombre: ";
-            String LabelFN = "Fecha de nacimiento: ";
-            String LabelPais = "País: ";
-            String LabelEstilos = "Estilos: ";
-            String LabelMarcas = "Marcas: ";
-            String LabelPalmares = "Títulos: ";
+            String labelNombre = "Nombre: ";
+            String labelFN = "Fecha de nacimiento: ";
+            String labelPais = "País: ";
+            String labelEstilos = "Estilos: ";
+            String labelMarcas = "Marcas: ";
+            String labelPalmares = "Títulos: ";
             
             String s1 = n.getNombre();
             String s2 = n.getFecha().toString();
@@ -268,10 +267,10 @@ public class SwimmingManager {
             for(int i = 0; i < n.getPalmares().size(); i++)
                 s7 = s7 + n.getPalmares().get(i).toString()+ LINE_SEPARATOR;
           
-            resultado = LabelNombre + s1 + LINE_SEPARATOR + 
-                    LabelFN + s2 + LINE_SEPARATOR + LabelPais + s3 + LINE_SEPARATOR +
-                    LabelEstilos + s4 + LINE_SEPARATOR + LabelMarcas + s6 + LINE_SEPARATOR + 
-                    LabelPalmares + s7 + LINE_SEPARATOR;
+            resultado = labelNombre + s1 + LINE_SEPARATOR + 
+                    labelFN + s2 + LINE_SEPARATOR + labelPais + s3 + LINE_SEPARATOR +
+                    labelEstilos + s4 + LINE_SEPARATOR + labelMarcas + s6 + LINE_SEPARATOR + 
+                    labelPalmares + s7 + LINE_SEPARATOR;
             
             return resultado;
             
