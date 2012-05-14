@@ -44,9 +44,7 @@ public class SwimmingManager {
 		
             String[] s= fechaNacimiento.split("-");
             Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
-
             ArrayList<Estilo> estilos=new ArrayList<Estilo>();
-            //s=pais.split(" ");
             Pais p= new Pais(pais);
             ArrayList<Titulo> palmares=new ArrayList<Titulo>();
             ArrayList<Marca> marca= new ArrayList<Marca>();
@@ -60,16 +58,16 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void darDeBajaNadador(String nombre)throws DataException{
+	public void darDeBajaNadador(String nombre){
             Iterator<Nadador> it=this.nadadores.iterator();
-           
-            while(it.hasNext()){
+            boolean borrado=false;
+            while(it.hasNext()&& !borrado){
                 Nadador n=it.next();
-                if (n.getNombre().equalsIgnoreCase(nombre)){
+                if (n.getNombre().equalsIgnoreCase(nombre))
                     it.remove();
-                    return;
-                }
-                else throw new DataException("El nadador introducido no existe.");
+                   
+                
+              
             }
 		// end-user-code
 	}
@@ -175,7 +173,7 @@ public class SwimmingManager {
         //          2 si el formato de la marca no es correcto
         //          3 si el formato de la fecha no es correcto
 	
-        public int anadirMarcaNadador(String nombre, String marca, String fecha,
+          public int anadirMarcaNadador(String nombre, String marca, String fecha,
                                       int distancia, Estilo estilo) throws DataException{
 
            try{
@@ -215,8 +213,8 @@ public class SwimmingManager {
            }
            
             return 0;
-        }	// end-user-code
-	
+        }       // end-user-code
+        
         
         
 	public void eliminarMarcaNadador(Marca m, Nadador n) throws DataException{
