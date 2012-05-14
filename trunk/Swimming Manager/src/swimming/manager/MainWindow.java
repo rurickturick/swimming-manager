@@ -273,6 +273,7 @@ public class MainWindow extends JFrame implements WindowListener{
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         // TODO add your handling code here:                
             if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
+            
             else{
                 final JFrame mainVentana = getVentana("Dar de baja nadador");
                 mainVentana.setSize(new Dimension(400, 100));
@@ -314,24 +315,13 @@ public class MainWindow extends JFrame implements WindowListener{
                             swimming.darDeBajaNadador((String)caja.getSelectedItem());
                             updateTabla(swimming.getNadadores());
                             mainVentana.dispose();
-
-                            
-                            }   
-                            catch (DataException exc){
-                                JOptionPane.showMessageDialog(null,exc.getMessage(),"",1,null);
-                                
-                            }
-
-                        }   
+                        } 
                         catch (DataException exc){
                             showMessage(exc.getMessage(), "Error", 0);
-
                         }
                     }
-
-                });                       
-            }                    
-        
+                });
+            }
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMenuActionPerformed
@@ -738,38 +728,6 @@ public class MainWindow extends JFrame implements WindowListener{
         return mainVentana;
     }
     
-<<<<<<< .mine
-    //faltan accesora a los demás campos, tales como Nacionalidad, su mejor Récord, su mejor estilo 
-    //no usamos el número federativo así que croe que podemos quitarlo y voy a añadir la pestaña sexo al formulario
-    //pero aun queda por implementar la constructora del nadador al cual pasarle el sexo.
-    
-    private void updateTabla(){
-        try{
-            ArrayList<Nadador> list = swimming.getNadadores();
-            String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","Récord"};
-            String[][] matriz = new String[list.size()][columnNames.length];
-        
-            for(int i=0; i<list.size(); i++){
-                matriz[i][0] = list.get(i).getNombre();
-                matriz[i][1] = Integer.toString( list.get(i).getEdad());
-                matriz[i][2] = list.get(i).toStringSexo();
-                matriz[i][3] = list.get(i).getPais().toString();
-                matriz[i][4] = list.get(i).toStringEstilos();
-                if(list.get(i).getRecord()!=null)
-                    matriz[i][5] = list.get(i).getRecord().toString();
-                else matriz[i][5] = "no hay record";
-            }
-        
-            tableModel.setDataVector(matriz, columnNames);
-        }
-        catch(DataException e){
-            JOptionPane.showMessageDialog(null,e.getMessage(),"",1,null);
-            
-        }
-        
-    }
-    
-=======
     private void updateTabla(ArrayList<Nadador> list){        
             String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","Récord"};
             String[][] matriz = new String[list.size()][columnNames.length];
@@ -790,26 +748,12 @@ public class MainWindow extends JFrame implements WindowListener{
 
 
     private JComboBox getComboNadadores(){
-        JComboBox combo = null;
-        try{
-            ArrayList<Nadador> list = swimming.getNadadores();
-            String[] nadadores = new String[list.size()];
-            for(int i = 0; i<nadadores.length; i++){
-                nadadores[i] = list.get(i).getNombre();
-            }
-            combo = new JComboBox(nadadores);  
+        ArrayList<Nadador> list = swimming.getNadadores();
+        String[] nadadores = new String[list.size()];
+        for(int i = 0; i<nadadores.length; i++){
+            nadadores[i] = list.get(i).getNombre();
         }
-
-        catch(DataException ex){
-            JOptionPane.showMessageDialog(null,ex.getMessage(),"",1,null);
-            //throw new Exception();
-
-        catch(Exception ex){
-
-        }
-        finally{
-            return combo;
-        }             
+        return new JComboBox(nadadores);            
     }
     
     private JComboBox getComboMarcas(Nadador nadador){
