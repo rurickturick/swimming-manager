@@ -317,14 +317,14 @@ public class MainWindow extends JFrame implements WindowListener{
 
                 botonAceptar.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
-                        try{                            
+                       // try{                            
                             swimming.darDeBajaNadador((String)caja.getSelectedItem());
                             updateTabla(swimming.getNadadores());
                             mainVentana.dispose();
-                        } 
-                        catch (DataException exc){
+                      //  } 
+                      /*  catch (DataException exc){
                             showMessage(exc.getMessage(), "Error", 0);
-                        }
+                        }*/
                     }
                 });
             }

@@ -229,6 +229,23 @@ public class SwimmingManager {
                             //ahora hay que actualizar el record
                             if (n.getMarcas().isEmpty()) n.setRecord(null);
                             else n.actualizaMarca(n);
+                            //ahora se actualiza el estilo
+                           Iterator<Marca>  it=n.getMarcas().iterator();
+                           boolean encontrado=false;
+                           //buscar si hay otras marcas con ese estilo
+                           while(it.hasNext()&&!encontrado){
+                               if(it.next().getEstilo()== m.getEstilo())
+                                  encontrado=true; 
+                           }
+                           //si no las hay borrar el estilo de la lista de estilos
+                           if(!encontrado){
+                                ArrayList<Estilo>estilosAux=n.getEstilos();
+                               for(int i=0;i<estilosAux.size();i++){
+                                   if(estilosAux.get(i)==m.getEstilo())
+                                       estilosAux.remove(i);
+                               }
+                               n.setEstilo(estilosAux); 
+                           }
                         }
                         else throw new DataException("No existe esa marca");
                   
