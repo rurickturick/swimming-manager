@@ -187,7 +187,7 @@ public class SwimmingManager {
                Nadador nadador=buscarNadadorPorNombre(nombre);
            
             if (nadador==null) return 1;
-            String[] auxMarca = marca.split(" ");
+            String[] auxMarca = marca.split(":");
             if (auxMarca.length!=5) return 2;
             String[] auxfecha = fecha.split("-");
             if (auxfecha.length!=3) return 3;

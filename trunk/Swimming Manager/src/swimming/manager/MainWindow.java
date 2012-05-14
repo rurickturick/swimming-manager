@@ -42,6 +42,7 @@ public class MainWindow extends JFrame implements WindowListener{
         tableModel = new DefaultTableModel();
         tabla = new JTable(tableModel);
         tabla.setEnabled(false);
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         JScrollPane container = new JScrollPane(tabla);
         this.getContentPane().add(container);        
         
@@ -694,7 +695,6 @@ public class MainWindow extends JFrame implements WindowListener{
                             }
                             catch(Exception ex){
                                 showMessage(ex.getMessage(), "Error", 0);
-                                mainVentana.dispose();
                             }
                         }
                     });
