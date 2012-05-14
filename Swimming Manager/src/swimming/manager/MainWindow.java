@@ -255,6 +255,11 @@ public class MainWindow extends JFrame implements WindowListener{
         tableModel.setDataVector(matriz, columnNames);     
         swimming = new SwimmingManager();
 
+        tabla.getColumn("Sexo").setPreferredWidth(21);
+        tabla.getColumn("Nombre").setPreferredWidth(120);
+        tabla.getColumn("Edad").setPreferredWidth(10);
+        tabla.getColumn("Nacionalidad").setPreferredWidth(33);
+        
         buscarMenu.setVisible(true);
         compararMenu.setVisible(true);
         editarMenu.setVisible(true);
@@ -536,11 +541,13 @@ public class MainWindow extends JFrame implements WindowListener{
                                     Scanner f= new Scanner(new File(fich));
                                     fich = fich.substring(0, fich.length()-4); 
                                     JMenu archivo=new JMenu(fich);
+                                    swimming.loadFromFile(fich);
                                     
                             }
-                    } catch (IOException e1) {
-                            showMessage("No se ha seleccionado archivo", "Error", 1);
+                    } catch (Exception e1) {
+                            showMessage(e1.getMessage(), "Error", 1);
                     }	  
+                    
                     
                     
             }
@@ -630,11 +637,20 @@ public class MainWindow extends JFrame implements WindowListener{
                                 String ciudad = camposTexto[2].getText();
                                 if(fecha.equals("---")||(nombre.equals(""))||(pais.equals(""))||(ciudad.equals("")))
                                     showMessage("Debe rellenar todos los campos.", "Error", 0);
-                                else
+                                else{
+                                    String [] fechaAux=fecha.split("-");
+                                    if(fechaAux.length!=3) showMessage("Formato de fecha no válido", "Error",0);
+                                    else if((Integer.parseInt(fechaAux[0])<1)||(Integer.parseInt(fechaAux[0])>31)||
+                                            (Integer.parseInt(fechaAux[1])<0)||(Integer.parseInt(fechaAux[1])>12)
+                                            ||(Integer.parseInt(fechaAux[2])<0)||(Integer.parseInt(fechaAux[2])>9999))
+                                        showMessage("El formato de la fecha es DD-MM-AAAA", "Formato de fecha no válido",0);
+                                        else{
                                     swimming.darDeAltaNadador(nombre, fecha, pais+" "+ciudad,sexo);
                                     showMessage("Nadador añadido.", "Añadir", 1);
                                     updateTabla(swimming.getNadadores());
                                     mainVentana.dispose();
+                                    }
+                            }
                         }
                     });
                 }                
@@ -748,6 +764,10 @@ public class MainWindow extends JFrame implements WindowListener{
                 else matriz[i][5] = "no hay record";
             }
             tableModel.setDataVector(matriz, columnNames);
+            tabla.getColumn("Sexo").setPreferredWidth(21);
+            tabla.getColumn("Nombre").setPreferredWidth(120);
+            tabla.getColumn("Edad").setPreferredWidth(10);
+            tabla.getColumn("Nacionalidad").setPreferredWidth(33);
     }    
 
 
