@@ -702,6 +702,12 @@ public class MainWindow extends JFrame implements WindowListener{
             }
         });
         
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent evt){
+                JFrame mainVentana = getVentana("Buscar");
+            }
+        });
+        
                 
     }
 
