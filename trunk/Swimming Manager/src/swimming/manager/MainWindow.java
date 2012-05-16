@@ -640,17 +640,23 @@ public class MainWindow extends JFrame implements WindowListener{
                                 else{
                                     String [] fechaAux=fecha.split("-");
                                     if(fechaAux.length!=3) showMessage("Formato de fecha no válido", "Error",0);
-                                    else if((Integer.parseInt(fechaAux[0])<1)||(Integer.parseInt(fechaAux[0])>31)||
-                                            (Integer.parseInt(fechaAux[1])<0)||(Integer.parseInt(fechaAux[1])>12)
-                                            ||(Integer.parseInt(fechaAux[2])<0)||(Integer.parseInt(fechaAux[2])>9999))
-                                        showMessage("El formato de la fecha es DD-MM-AAAA", "Formato de fecha no válido",0);
-                                        else{
-                                    swimming.darDeAltaNadador(nombre, fecha, pais,sexo);
-                                    showMessage("Nadador añadido.", "Añadir", 1);
-                                    updateTabla(swimming.getNadadores());
-                                    mainVentana.dispose();
-                                    }
-                            }
+                                    else
+                                        try{
+                                            if((Integer.parseInt(fechaAux[0])<1)||(Integer.parseInt(fechaAux[0])>31)||
+                                                (Integer.parseInt(fechaAux[1])<0)||(Integer.parseInt(fechaAux[1])>12)
+                                                ||(Integer.parseInt(fechaAux[2])<0)||(Integer.parseInt(fechaAux[2])>9999))
+                                            showMessage("El formato de la fecha es DD-MM-AAAA", "Formato de fecha no válido",0);
+                                            else{
+                                                swimming.darDeAltaNadador(nombre, fecha, pais,sexo);
+                                                showMessage("Nadador añadido.", "Añadir", 1);
+                                                updateTabla(swimming.getNadadores());
+                                                mainVentana.dispose();
+                                            }
+                                        }
+                                        catch(Exception ex){
+                                            showMessage(ex.getMessage(), "Error", 0);
+                                        }
+                                }
                         }
                     });
                 }                

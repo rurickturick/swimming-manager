@@ -40,9 +40,13 @@ public class SwimmingManager {
         }
        
 	
-	public void darDeAltaNadador(String nombre, String fechaNacimiento, String pais, boolean masculino){
+	//al añadir un nadador, debe comprobar si ese nadado ya ha sido añadido anteriormente.
+       //Que devuelva una excepción DataException con el mensaje 
+       public void darDeAltaNadador(String nombre, String fechaNacimiento, String pais, boolean masculino){
 		
             String[] s= fechaNacimiento.split("-");
+            
+            //Aquí debe ir una estructura try-catch ya que si lo que se le pasa es un string y no un número lanza una excepción quue no está controlada.
             Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
             ArrayList<Estilo> estilos=new ArrayList<Estilo>();
             Pais p= new Pais(pais);
