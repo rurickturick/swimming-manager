@@ -1,7 +1,5 @@
 package swimming.manager;
 
-
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,11 +11,13 @@ public class SwimmingManager {
 	
 	private ArrayList<Nadador> nadadores;
         public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+        private String nombreFichero;
         
         /** Metodo que se usa para generar un array list de estilos a partir de un String **/
         
         public SwimmingManager(){
             nadadores = new ArrayList<Nadador>();
+            nombreFichero="";
         }
         
         private ArrayList<Estilo> parseEstilos(String[] estilo){
@@ -68,10 +68,7 @@ public class SwimmingManager {
             while(it.hasNext()&& !borrado){
                 Nadador n=it.next();
                 if (n.getNombre().equalsIgnoreCase(nombre))
-                    it.remove();
-                   
-                
-              
+                    it.remove();    
             }
 		// end-user-code
 	}
@@ -310,11 +307,13 @@ public class SwimmingManager {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
         
-        //-- Le entra al método un string con el nombre del archivo
+        public void saveToFile() throws IOException{
+            saveToFile(nombreFichero);  // Solo llamado en el boton Guardar.
+        }
         
+        //-- Le entra al método un string con el nombre del archivo
 	public void saveToFile(String filename) throws IOException {
-		// begin-user-code
-		// TODO Ap?ndice de m?todo generado autom?ticamente
+            nombreFichero=filename;
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             File file = new File(filename);
 
@@ -344,11 +343,7 @@ public class SwimmingManager {
 		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	public void loadFromFile(String filename) throws DataException, FileNotFoundException, UnsupportedEncodingException, IOException {
 		// begin-user-code
 		// TODO Ap?ndice de m?todo generado autom?ticamente
