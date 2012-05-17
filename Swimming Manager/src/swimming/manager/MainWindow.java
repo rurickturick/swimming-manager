@@ -46,7 +46,7 @@ public class MainWindow extends JFrame implements WindowListener{
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Documentos de texto (*.txt)", ".txt");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Documentos de texto (*.txt)", "txt");
         selecFich=new JFileChooser();
         selecFich.addChoosableFileFilter(filter);
     }
@@ -593,6 +593,10 @@ private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
                 try{
                     if(i==JFileChooser.APPROVE_OPTION){
                         File fich=selecFich.getSelectedFile(); 
+                        String filePath = fich.getPath();
+                        if(!filePath.toLowerCase().endsWith(".txt")){
+                            fich = new File(filePath + ".txt");
+                        }                        
                         swimming.saveToFile(fich);
                         saveButton.setEnabled(true);
                     }					
