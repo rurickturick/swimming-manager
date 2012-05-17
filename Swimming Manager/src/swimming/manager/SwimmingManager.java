@@ -335,8 +335,8 @@ public class SwimmingManager {
 
 
             /*la clave de activar o no la sobreescritura esta en FileOutputStream(file, true) si le ponemos en true entonces agregas al final de la linea */
-
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "UTF8"));
+            
+            BufferedWriter out = new BufferedWriter(new FileWriter(ficheroActual));
             Iterator<Nadador> it=this.nadadores.iterator(); 
             out.write("/*inif*/"+LINE_SEPARATOR);
             while(it.hasNext()){
@@ -354,8 +354,7 @@ public class SwimmingManager {
 		// begin-user-code
 		// TODO Ap?ndice de m?todo generado autom?ticamente
             this.nadadores.clear();
-            InputStream file= new FileInputStream(f);
-            BufferedReader reader= new BufferedReader(new InputStreamReader(file,"UTF-8"));
+            BufferedReader reader = new BufferedReader(new FileReader(f));
             String s = "";
             String tmp[];
             s=reader.readLine();
@@ -364,14 +363,14 @@ public class SwimmingManager {
             while(!s.equalsIgnoreCase("/*endf*/")){
                 if (!s.equalsIgnoreCase("/*nadador*/")) throw new DataException("Error en el formato del archivo");
                 s=reader.readLine();
-                tmp=s.split("/*/");
-                if (tmp.length!=5) throw new DataException("Error en el formato del archivo");
-                this.darDeAltaNadador(tmp[0], tmp[1], tmp[2]+" "+tmp[3], Boolean.parseBoolean(tmp[4]));
+                tmp=s.split("%");
+                if (tmp.length!=4) throw new DataException("Error en el formato del archivo");
+                this.darDeAltaNadador(tmp[0], tmp[1], tmp[2], Boolean.parseBoolean(tmp[3]));
                 s=reader.readLine();
                 if (s.equalsIgnoreCase("/*marcas*/")){
                     s=reader.readLine();
                     while (!s.equalsIgnoreCase("/*finmarcas*/")){
-                        tmp=s.split("/*/");
+                        tmp=s.split("%");
                         if (tmp.length!=6) throw new DataException("Error en el formato del archivo");
                         this.anadirMarcaNadador(tmp[0], tmp[1], tmp[2],
                                 Integer.parseInt(tmp[3]), this.parseEstilos(tmp[4]));
@@ -379,6 +378,7 @@ public class SwimmingManager {
                     }
                 }
                 if (!s.equalsIgnoreCase("/*finnadador*/")) throw new DataException("Error en el formato del archivo");
+                s=reader.readLine();
             }	
             // end-user-code
 	}
