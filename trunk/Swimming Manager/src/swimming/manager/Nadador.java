@@ -195,30 +195,30 @@ public class Nadador {
             // los simbolos "/*/" son para separar las variables para hacer el
             // split cuando se carga el nadador.
             String NEWLINE= System.getProperty("line.separator");
-            String s="/*nadador*/";
-            s+=this.nombre+"/*/";
-            String fecha=this.fechaNacimiento.toString();
-            fecha.replaceAll("/", "-");
-            s+=fecha+"/*/";
-            s+=this.pais.getPais()+"/*/";
+            String s="/*nadador*/"+NEWLINE;
+            s+=this.nombre+"%";
+            String fechaNadador=this.fechaNacimiento.toString();
+            fechaNadador=fechaNadador.replaceAll("/", "-");
+            s+=fechaNadador+"%";
+            s+=this.pais.getPais()+"%";
             //s+=this.pais.getCiudad()+"/*/";
             s+=this.masculino;
+            s+=NEWLINE;
             // ahora metemos todos las marcas (si hay)
             if(!this.marcas.isEmpty()){
-                s+=NEWLINE;
                 s+="/*marcas*/"+NEWLINE;
                 for (int i=0; i < this.marcas.size();i++){
-                    s+=this.nombre+"/*/";
-                    s+=this.marcas.get(i).getTiempo().saveToString()+"/*/";
+                    s+=this.nombre+"%";
+                    s+=this.marcas.get(i).getTiempo().saveToString()+"%";
                     String fechaMarca=this.marcas.get(i).getFecha().toString();
                     fechaMarca.replaceAll("/", " ");
-                    s+=fecha+"/*/";
-                    s+=this.marcas.get(i).getDistancia()+"/*/";
+                    s+=fechaMarca+"%";
+                    s+=this.marcas.get(i).getDistancia()+"%";
                     s+=this.marcas.get(i).getEstilo()+NEWLINE;
                 }
-                s+="/*finmarcas*/";
+                s+="/*finmarcas*/"+NEWLINE;
             }
-            s+="/*finnadador*/";
+            s+="/*finnadador*/"+NEWLINE;
             return s;
         }
 
