@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +15,7 @@ public class MainWindow extends JFrame implements WindowListener{
     private final JTable tabla;
     private DefaultTableModel tableModel;
     private Image img;
+    JFileChooser selecFich;
     private boolean sexo;
     
     public MainWindow() {
@@ -45,6 +45,10 @@ public class MainWindow extends JFrame implements WindowListener{
         
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Documentos de texto (*.txt)", ".txt");
+        selecFich=new JFileChooser();
+        selecFich.addChoosableFileFilter(filter);
     }
     
     @SuppressWarnings("unchecked")
@@ -571,17 +575,13 @@ private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
         this.addWindowListener(this);        
         openButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                  JFileChooser selecFich=new JFileChooser();
                   int i=selecFich.showOpenDialog(MainWindow .this);
                   try {
-                      if(i==1) throw new IOException("No se ha seleccionado ningún archivo");
-                      else{
-                            String fich=selecFich.getSelectedFile().getName();
-                            Scanner f= new Scanner(new File(fich));
-                            fich = fich.substring(0, fich.length()-4); 
-                            JMenu archivo=new JMenu(fich);
-                            swimming.loadFromFile(fich);                                  
-                      }
+                       if (i == JFileChooser.APPROVE_OPTION) {
+                            File fich = selecFich.getSelectedFile();                
+                            swimming.loadFromFile(fich);
+                       }
+                        
                     } catch (Exception e1) {
                             showMessage(e1.getMessage(), "Error", 1);
                     }
@@ -589,15 +589,10 @@ private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
         });
         saveAsButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("Documentos de texto (*.txt)", ".txt");
-                JFileChooser selecFich=new JFileChooser();
-                selecFich.addChoosableFileFilter(filter);
                 int i=selecFich.showSaveDialog(MainWindow.this);
                 try{
-                    if(i==1) throw new IOException("No se ha guardado ningún archivo");
-                    else{
-                        String fich=selecFich.getSelectedFile().getName();
-                        fich+=".txt";
+                    if(i==JFileChooser.APPROVE_OPTION){
+                        File fich=selecFich.getSelectedFile(); 
                         swimming.saveToFile(fich);
                         saveButton.setEnabled(true);
                     }					
