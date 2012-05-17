@@ -53,38 +53,17 @@ public class SwimmingManager {
        public void darDeAltaNadador(String nombre, String fechaNacimiento, String pais, boolean masculino)throws DataException{
 		
             String[] s= fechaNacimiento.split("-");
-            //Es un poco bestia, pero es para que compruebe que los campos de la fecha son enteros.
-            //No acabo de entender lo de los castings, el caso es que asi funciona
-            if ((Integer.parseInt(s[0])>=0)||(Integer.parseInt(s[0])<0)){
-                if ((Integer.parseInt(s[1])>=0)||(Integer.parseInt(s[1])<0)){
-                    if ((Integer.parseInt(s[2])>=0)||(Integer.parseInt(s[2])<0)){
-                        
-                        //busca si hay otro nadador con ese nombre, se le pueden meter mas parametros, pero creo que asi valdria
-                        if (hayNadador(nombre)) throw new DataException();
-                        
-                        else{
-                            
-                            Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
-                            
-                            //si el año es bisiesto, en febrero debe tener 29 dias como mucho
-                            if ((fecha.esBisiesto())&&(Integer.parseInt(s[1])==2)&&(Integer.parseInt(s[0])<=29)){
-                                
-                                ArrayList<Estilo> estilos=new ArrayList<Estilo>();
-                                Pais p= new Pais(pais);
-                                ArrayList<Titulo> palmares=new ArrayList<Titulo>();
-                                ArrayList<Marca> marca= new ArrayList<Marca>();
-                                Nadador nadador = new Nadador(nombre, fecha, estilos, p, palmares, marca, masculino);
-                                this.nadadores.add(nadador);
-                                
-                            }else throw new DataException();
-                        }
-                        
-                    }else throw new DataException();
-                    
-                }else throw new DataException();
-                
-            }else throw new DataException();
-            
+                //busca si hay otro nadador con ese nombre, se le pueden meter mas parametros, pero creo que asi valdria
+                if (hayNadador(nombre)) throw new DataException("Ya existe el nadador.");
+                else{
+                    Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
+                    ArrayList<Estilo> estilos=new ArrayList<Estilo>();
+                    Pais p= new Pais(pais);
+                    ArrayList<Titulo> palmares=new ArrayList<Titulo>();
+                    ArrayList<Marca> marca= new ArrayList<Marca>();
+                    Nadador nadador = new Nadador(nombre, fecha, estilos, p, palmares, marca, masculino);
+                    this.nadadores.add(nadador);
+                }                   
             //Aquí debe ir una estructura try-catch ya que si lo que se le pasa es un string y no un número lanza una excepción quue no está controlada.
         }
 
