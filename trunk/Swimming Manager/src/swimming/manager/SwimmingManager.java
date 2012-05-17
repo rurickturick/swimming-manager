@@ -3,21 +3,18 @@ package swimming.manager;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class SwimmingManager {
 	
 	private ArrayList<Nadador> nadadores;
         public static final String LINE_SEPARATOR = System.getProperty("line.separator");
-        private String nombreFichero;
+        private File ficheroActual;
         
         /** Metodo que se usa para generar un array list de estilos a partir de un String **/
         
         public SwimmingManager(){
             nadadores = new ArrayList<Nadador>();
-            nombreFichero="";
         }
         
         private ArrayList<Estilo> parseEstilos(String[] estilo){
@@ -318,14 +315,13 @@ public class SwimmingManager {
 	 */
         
         public void saveToFile() throws IOException{
-            saveToFile(nombreFichero);  // Solo llamado en el boton Guardar.
+            saveToFile(ficheroActual);  // Solo llamado en el boton Guardar.
         }
         
         //-- Le entra al método un string con el nombre del archivo
-	public void saveToFile(String filename) throws IOException {
-            nombreFichero=filename;
+	public void saveToFile(File file) throws IOException {
+            ficheroActual=file;
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-            File file = new File(filename);
 
             if (!file.exists()) {
 
@@ -354,10 +350,9 @@ public class SwimmingManager {
 	}
 
 
-	public void loadFromFile(String filename) throws DataException, FileNotFoundException, UnsupportedEncodingException, IOException {
+	public void loadFromFile(File f) throws DataException, FileNotFoundException, UnsupportedEncodingException, IOException {
 		// begin-user-code
 		// TODO Ap?ndice de m?todo generado autom?ticamente
-            File f = new File(filename);
             this.nadadores.clear();
             InputStream file= new FileInputStream(f);
             BufferedReader reader= new BufferedReader(new InputStreamReader(file,"UTF-8"));
