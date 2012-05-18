@@ -371,12 +371,13 @@ public class SwimmingManager {
                     s=reader.readLine();
                     while (!s.equalsIgnoreCase("/*finmarcas*/")){
                         tmp=s.split("%");
-                        if (tmp.length!=6) throw new DataException("Error en el formato del archivo");
+                        if (tmp.length!=5) throw new DataException("Error en el formato del archivo");
                         this.anadirMarcaNadador(tmp[0], tmp[1], tmp[2],
                                 Integer.parseInt(tmp[3]), this.parseEstilos(tmp[4]));
                         s=reader.readLine();
                     }
                 }
+                s=reader.readLine();
                 if (!s.equalsIgnoreCase("/*finnadador*/")) throw new DataException("Error en el formato del archivo");
                 s=reader.readLine();
             }	
