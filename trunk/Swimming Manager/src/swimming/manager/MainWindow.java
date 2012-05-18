@@ -580,6 +580,7 @@ private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
                        if (i == JFileChooser.APPROVE_OPTION) {
                             File fich = selecFich.getSelectedFile();                
                             swimming.loadFromFile(fich);
+                            updateTabla(swimming.getNadadores());
                        }
                         
                     } catch (Exception e1) {
