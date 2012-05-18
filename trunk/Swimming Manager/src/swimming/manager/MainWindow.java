@@ -264,6 +264,54 @@ public class MainWindow extends JFrame implements WindowListener{
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
+        if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
+
+        else{
+            final JFrame mainVentana = getVentana("Dar de baja nadador");
+            mainVentana.setSize(new Dimension(400, 100));
+            mainVentana.setLocationRelativeTo(this);
+            JPanel mainPanel = new JPanel(new BorderLayout());
+
+            JPanel auxPanel = new JPanel(new GridLayout(1, 1));
+            JPanel auxPanelIz = new JPanel(new FlowLayout());
+            JPanel mainPanelDr = new JPanel(new BorderLayout());
+            JPanel auxPanelDr = new JPanel(new FlowLayout());
+            final JComboBox caja = getComboEdad();
+
+            JLabel label = new JLabel("Seleccione una edad: ");
+            auxPanelIz.add(label);
+            auxPanelDr.add(caja);
+            mainPanelDr.add(auxPanelDr);
+            auxPanel.add(auxPanelIz);
+            auxPanel.add(mainPanelDr);
+            mainPanel.add(auxPanel, "Center");
+
+            JButton botonAceptar = new JButton();
+            botonAceptar.setText("Aceptar");
+            JButton botonCancelar = new JButton();
+            botonCancelar.setText("Cancelar");                        
+
+            mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                             
+            mainVentana.add(mainPanel, "Center");
+            
+            botonCancelar.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e) {
+                    mainVentana.dispose();
+                }
+            });
+            botonAceptar.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e) {                  
+                    try{    
+                        ArrayList<Nadador> lista = swimming.buscarNadadoresPorEdad(Integer.parseInt((String)caja.getSelectedItem()));
+                        updateTabla(lista);
+                        mainVentana.dispose();
+                    }
+                    catch(DataException ex){
+                        showMessage(ex.getMessage(),"Error", 0);
+                    }
+                }
+            });            
+        }
     }                                           
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -316,7 +364,7 @@ public class MainWindow extends JFrame implements WindowListener{
                     }*/
                 }
             });
-            }
+        }
     }                                           
 
     private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -452,59 +500,59 @@ public class MainWindow extends JFrame implements WindowListener{
         }
     }                                           
 
-private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {                                           
 // TODO add your handling code here:
-    if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
-        else{    
-            final JFrame mainVentana = getVentana("Buscar");
-            mainVentana.setSize(350, 100);
-            mainVentana.setLocationRelativeTo(this);
-            JPanel mainPanel = new JPanel(new BorderLayout());
+        if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
+            else{    
+                final JFrame mainVentana = getVentana("Buscar");
+                mainVentana.setSize(350, 100);
+                mainVentana.setLocationRelativeTo(this);
+                JPanel mainPanel = new JPanel(new BorderLayout());
 
-            JButton botonAceptar = new JButton();
-            botonAceptar.setText("Aceptar");
-            JButton botonCancelar = new JButton();
-            botonCancelar.setText("Cancelar");
+                JButton botonAceptar = new JButton();
+                botonAceptar.setText("Aceptar");
+                JButton botonCancelar = new JButton();
+                botonCancelar.setText("Cancelar");
 
-            final JComboBox caja = getComboNadadores();
+                final JComboBox caja = getComboNadadores();
 
-            JPanel panelBoxLabel = new JPanel(new GridLayout(1, 1));
-            JPanel auxPanelLabel = new JPanel(new FlowLayout());
-            JPanel mainPanelBox = new JPanel(new BorderLayout());
-            JPanel auxPanelBox = new JPanel(new FlowLayout());
-            auxPanelLabel.add(new JLabel("Seleccione Nadador: "));                        
-            auxPanelBox.add(caja);
-            mainPanelBox.add(auxPanelBox, "Center");
-            panelBoxLabel.add(auxPanelLabel);
-            panelBoxLabel.add(mainPanelBox);
+                JPanel panelBoxLabel = new JPanel(new GridLayout(1, 1));
+                JPanel auxPanelLabel = new JPanel(new FlowLayout());
+                JPanel mainPanelBox = new JPanel(new BorderLayout());
+                JPanel auxPanelBox = new JPanel(new FlowLayout());
+                auxPanelLabel.add(new JLabel("Seleccione Nadador: "));                        
+                auxPanelBox.add(caja);
+                mainPanelBox.add(auxPanelBox, "Center");
+                panelBoxLabel.add(auxPanelLabel);
+                panelBoxLabel.add(mainPanelBox);
 
-            mainPanel.add(panelBoxLabel, "Center");
-            mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");
+                mainPanel.add(panelBoxLabel, "Center");
+                mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");
 
-            mainVentana.add(mainPanel);
-            
-            botonCancelar.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e) {
-                    mainVentana.dispose();
-                }
-            });
-            
-            botonAceptar.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    try{
-                        ArrayList<Nadador> list = new ArrayList<Nadador>();
-                        list.add(swimming.buscarNadadorPorNombre((String)caja.getSelectedItem()));
-                        updateTabla(list);
+                mainVentana.add(mainPanel);
+
+                botonCancelar.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e) {
                         mainVentana.dispose();
                     }
-                    catch(DataException ex){
-                        showMessage(ex.getMessage(),"Error", 0);
+                });
+
+                botonAceptar.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        try{
+                            ArrayList<Nadador> list = new ArrayList<Nadador>();
+                            list.add(swimming.buscarNadadorPorNombre((String)caja.getSelectedItem()));
+                            updateTabla(list);
+                            mainVentana.dispose();
+                        }
+                        catch(DataException ex){
+                            showMessage(ex.getMessage(),"Error", 0);
+                        }
                     }
-                }
-            
-            });
-    }
-}                                          
+
+                });
+        }
+    } 
 
     // Variables declaration - do not modify                     
     private javax.swing.JMenu buscarMenu;
@@ -822,6 +870,17 @@ private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
             nadadores[i] = list.get(i).getNombre();
         }
         return new JComboBox(nadadores);            
+    }
+    
+    private JComboBox getComboEdad(){
+        ArrayList<Nadador> list = swimming.getNadadores();
+        ArrayList<String> nadadores = new ArrayList<String>();
+        int i = 0;
+        for(Nadador nadador : list){
+            if(!nadadores.contains(Integer.toString(nadador.getEdad())))
+                nadadores.add(Integer.toString(nadador.getEdad()));
+        }
+        return new JComboBox(nadadores.toArray());
     }
     
     private JComboBox getComboMarcas(Nadador nadador){
