@@ -396,10 +396,15 @@ public class SwimmingManager {
                         s=reader.readLine();
                     }
                 }
+                if(!s.equalsIgnoreCase("/*finnadador*/")){
                 s=reader.readLine();
-                if (!s.equalsIgnoreCase("/*finnadador*/")) throw new DataException("Error en el formato del archivo");
-                s=reader.readLine();
-            }	
+                if(!s.equalsIgnoreCase("/*endf*/")){
+                  if (!s.equalsIgnoreCase("/*finnadador*/")) throw new DataException("Error en el formato del archivo");
+                  s=reader.readLine();
+                }  
+            }
+                else  s=reader.readLine();
+            }    
             // end-user-code
 	}
 
