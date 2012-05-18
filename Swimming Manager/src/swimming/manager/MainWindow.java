@@ -33,15 +33,7 @@ public class MainWindow extends JFrame implements WindowListener{
         JScrollPane container = new JScrollPane(tabla);
         this.getContentPane().add(container);        
         
-        buscarMenu.setVisible(false);
-        compararMenu.setVisible(false);
-        editarMenu.setVisible(false);
-        
-        saveButton.setVisible(false);
-        saveButton.setEnabled(false);
-        saveAsButton.setVisible(false);
-        showButton.setVisible(false);
-        showButton.setEnabled(false);
+        settearBotones(false);
         
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -238,6 +230,16 @@ public class MainWindow extends JFrame implements WindowListener{
         pack();
     }// </editor-fold>                        
 
+    private void settearBotones(boolean b){
+        buscarMenu.setVisible(b);
+        compararMenu.setVisible(b);
+        editarMenu.setVisible(b);        
+        saveButton.setVisible(b);
+        saveButton.setEnabled(b);
+        saveAsButton.setVisible(b);
+        showButton.setVisible(b);
+        showButton.setEnabled(!b);
+    }
     private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
         showMessage("Se ha creado un documento en blanco.","Nuevo documento",1);                
         String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","Récord"};
@@ -250,13 +252,14 @@ public class MainWindow extends JFrame implements WindowListener{
         tabla.getColumn("Edad").setPreferredWidth(10);
         tabla.getColumn("Nacionalidad").setPreferredWidth(33);
         
-        buscarMenu.setVisible(true);
-        compararMenu.setVisible(true);
-        editarMenu.setVisible(true);
-        saveButton.setVisible(true);
-        saveAsButton.setVisible(true);
-        showButton.setVisible(true);
-    }                                           
+        settearBotones(true);
+    }
+    
+    private void showButtonActionPerformed(java.awt.event.ActionEvent evt){
+        
+        updateTabla(swimming.getNadadores());
+        showButton.setEnabled(false);
+    }
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
@@ -267,6 +270,7 @@ public class MainWindow extends JFrame implements WindowListener{
         if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
 
         else{
+            showButton.setEnabled(true);
             final JFrame mainVentana = getVentana("Dar de baja nadador");
             mainVentana.setSize(new Dimension(400, 100));
             mainVentana.setLocationRelativeTo(this);
@@ -501,56 +505,57 @@ public class MainWindow extends JFrame implements WindowListener{
     }                                           
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-// TODO add your handling code here:
+/// TODO add your handling code here:
         if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
-            else{    
-                final JFrame mainVentana = getVentana("Buscar");
-                mainVentana.setSize(350, 100);
-                mainVentana.setLocationRelativeTo(this);
-                JPanel mainPanel = new JPanel(new BorderLayout());
+        else{
+            showButton.setEnabled(true);
+            final JFrame mainVentana = getVentana("Buscar");
+            mainVentana.setSize(350, 100);
+            mainVentana.setLocationRelativeTo(this);
+            JPanel mainPanel = new JPanel(new BorderLayout());
 
-                JButton botonAceptar = new JButton();
-                botonAceptar.setText("Aceptar");
-                JButton botonCancelar = new JButton();
-                botonCancelar.setText("Cancelar");
+            JButton botonAceptar = new JButton();
+            botonAceptar.setText("Aceptar");
+            JButton botonCancelar = new JButton();
+            botonCancelar.setText("Cancelar");
 
-                final JComboBox caja = getComboNadadores();
+            final JComboBox caja = getComboNadadores();
 
-                JPanel panelBoxLabel = new JPanel(new GridLayout(1, 1));
-                JPanel auxPanelLabel = new JPanel(new FlowLayout());
-                JPanel mainPanelBox = new JPanel(new BorderLayout());
-                JPanel auxPanelBox = new JPanel(new FlowLayout());
-                auxPanelLabel.add(new JLabel("Seleccione Nadador: "));                        
-                auxPanelBox.add(caja);
-                mainPanelBox.add(auxPanelBox, "Center");
-                panelBoxLabel.add(auxPanelLabel);
-                panelBoxLabel.add(mainPanelBox);
+            JPanel panelBoxLabel = new JPanel(new GridLayout(1, 1));
+            JPanel auxPanelLabel = new JPanel(new FlowLayout());
+            JPanel mainPanelBox = new JPanel(new BorderLayout());
+            JPanel auxPanelBox = new JPanel(new FlowLayout());
+            auxPanelLabel.add(new JLabel("Seleccione Nadador: "));                        
+            auxPanelBox.add(caja);
+            mainPanelBox.add(auxPanelBox, "Center");
+            panelBoxLabel.add(auxPanelLabel);
+            panelBoxLabel.add(mainPanelBox);
 
-                mainPanel.add(panelBoxLabel, "Center");
-                mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");
+            mainPanel.add(panelBoxLabel, "Center");
+            mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");
 
-                mainVentana.add(mainPanel);
+            mainVentana.add(mainPanel);
 
-                botonCancelar.addActionListener(new ActionListener(){
-                    public void actionPerformed(ActionEvent e) {
+            botonCancelar.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e) {
+                    mainVentana.dispose();
+                }
+            });
+
+            botonAceptar.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    try{
+                        ArrayList<Nadador> list = new ArrayList<Nadador>();
+                        list.add(swimming.buscarNadadorPorNombre((String)caja.getSelectedItem()));
+                        updateTabla(list);
                         mainVentana.dispose();
                     }
-                });
-
-                botonAceptar.addActionListener(new ActionListener(){
-                    public void actionPerformed(ActionEvent e){
-                        try{
-                            ArrayList<Nadador> list = new ArrayList<Nadador>();
-                            list.add(swimming.buscarNadadorPorNombre((String)caja.getSelectedItem()));
-                            updateTabla(list);
-                            mainVentana.dispose();
-                        }
-                        catch(DataException ex){
-                            showMessage(ex.getMessage(),"Error", 0);
-                        }
+                    catch(DataException ex){
+                        showMessage(ex.getMessage(),"Error", 0);
                     }
+                }
 
-                });
+            });
         }
     } 
 
@@ -623,6 +628,10 @@ public class MainWindow extends JFrame implements WindowListener{
         this.addWindowListener(this);        
         openButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                  if(swimming == null) {
+                      swimming = new SwimmingManager();
+                      settearBotones(true);
+                  }    
                   int i=selecFich.showOpenDialog(MainWindow .this);
                   try {
                        if (i == JFileChooser.APPROVE_OPTION) {
