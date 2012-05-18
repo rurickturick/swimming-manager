@@ -239,7 +239,7 @@ public class MainWindow extends JFrame implements WindowListener{
     }// </editor-fold>                        
 
     private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        showMessage("Se ha creado un documento en blanco.","Archivo Nuevo",1);                
+        showMessage("Se ha creado un documento en blanco.","Nuevo documento",1);                
         String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","Récord"};
         String [][] matriz = new String[0][columnNames.length];
         tableModel.setDataVector(matriz, columnNames);     
@@ -390,7 +390,7 @@ public class MainWindow extends JFrame implements WindowListener{
                     final String nombreNadador = (String)caja.getSelectedItem();
                     try{
                         if(swimming.buscarNadadorPorNombre(nombreNadador).getMarcas().isEmpty())
-                            throw new DataException("Este Nadador no tiene marcas añadidas, añada primero alguna.");
+                            throw new DataException("Este nadador no tiene marcas añadidas, añada primero alguna.");
                         mainVentana.setVisible(false);
                         final JFrame mainVentana = getVentana("Eliminar Marca");
                         mainVentana.setSize(new Dimension(400, 100));
@@ -602,7 +602,7 @@ private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
                         saveButton.setEnabled(true);
                     }					
                 } catch (IOException e1) {
-                        JOptionPane.showMessageDialog(null,"No se ha seleccionado archivo");
+                        showMessage(e1.getMessage(), "Error", 1);
                 }                    
             }
         });
@@ -713,7 +713,7 @@ private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
             public void actionPerformed(ActionEvent evt){
                 if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
                 else{
-                    final JFrame mainVentana = getVentana("Añadir Marca");
+                    final JFrame mainVentana = getVentana("Añadir marca");
                     JPanel mainPanel = new JPanel(new BorderLayout());
 
                     String[] labels = {"Marca: ", "Estilo: ", "Distancia: ", "Día: ", "Mes: ", "Año: " };
@@ -758,7 +758,7 @@ private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
                                 String fecha = camposTexto[3].getText()+"-"+camposTexto[4].getText()+"-"+camposTexto[5].getText();
                                 swimming.anadirMarcaNadador(nombre, marca, fecha, distancia, estilo);
                                 updateTabla(swimming.getNadadores());
-                                showMessage("Marca añadida", "Añadir Marca", 1);
+                                showMessage("Marca añadida", "Añadir marca", 1);
                                 mainVentana.dispose();
                             }
                             catch(Exception ex){
@@ -804,7 +804,7 @@ private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
                 matriz[i][4] = list.get(i).toStringEstilos();
                if(list.get(i).getRecord()!=null)
                  matriz[i][5] = list.get(i).getRecord().getTiempo().toString();
-                else matriz[i][5] = "No hay record";
+                else matriz[i][5] = "No hay récord";
             }
             
             tableModel.setDataVector(matriz, columnNames);
