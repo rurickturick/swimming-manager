@@ -10,11 +10,13 @@ public class SwimmingManager {
 	private ArrayList<Nadador> nadadores;
         public static final String LINE_SEPARATOR = System.getProperty("line.separator");
         private File ficheroActual;
+        public ArrayList<String> paises;
         
         /** Metodo que se usa para generar un array list de estilos a partir de un String **/
         
         public SwimmingManager(){
             nadadores = new ArrayList<Nadador>();
+            paises = new ArrayList<String>();
         }
         
         private ArrayList<Estilo> parseEstilos(String[] estilo){
@@ -62,7 +64,24 @@ public class SwimmingManager {
                     this.nadadores.add(nadador);
                 }                   
             //Aquí debe ir una estructura try-catch ya que si lo que se le pasa es un string y no un número lanza una excepción quue no está controlada.
-        }
+                 
+            //añadir la nacionalidad al arrayList de paises
+                   Iterator<String>  it=paises.iterator();
+                   boolean encontrado=false;
+            //ver si esta el pais ya añadido
+                   while(it.hasNext()&&!encontrado){
+                        if (it.next().contentEquals(pais)) encontrado=true;
+
+                      }
+            //si no esta añadido se añade
+                   if(!encontrado){
+                    
+                      paises.add(pais);
+                      
+                    }
+
+                 
+       }
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -187,11 +206,11 @@ public class SwimmingManager {
            try{
                Nadador nadador=buscarNadadorPorNombre(nombre);
            
-          //  if (nadador==null) return 1;
+            //  if (nadador==null) return 1;
             String[] auxMarca = marca.split(":");
-           // if (auxMarca.length!=5) return 2;
+          //  if (auxMarca.length!=3) return 2;
             String[] auxfecha = fecha.split("-");
-          //  if (auxfecha.length!=3) return 3;
+         //  if (auxfecha.length!=3) return 3;
             Marca m = new Marca(Integer.parseInt(auxfecha[0]),Integer.parseInt(auxfecha[1]),
                                 Integer.parseInt(auxfecha[2]),Integer.parseInt(auxMarca[0]),
                                 Integer.parseInt(auxMarca[1]),Integer.parseInt(auxMarca[2]),
@@ -220,7 +239,7 @@ public class SwimmingManager {
                System.out.println(e.getMessage());
            }
            
-            return 0;
+                return 0;
         }       // end-user-code
         
         
