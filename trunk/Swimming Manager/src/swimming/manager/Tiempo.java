@@ -96,8 +96,8 @@ public class Tiempo {
         }
         
         public String saveToString(){
-            String s= this.minutos+" "+
-                        this.segundos+" "+
+            String s= this.minutos+":"+
+                        this.segundos+":"+
                     this.milesimas;
             return s;
         }

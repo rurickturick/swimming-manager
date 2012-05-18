@@ -211,7 +211,7 @@ public class Nadador {
                     s+=this.nombre+"%";
                     s+=this.marcas.get(i).getTiempo().saveToString()+"%";
                     String fechaMarca=this.marcas.get(i).getFecha().toString();
-                    fechaMarca.replaceAll("/", " ");
+                   fechaMarca=fechaMarca.replaceAll("/", "-");
                     s+=fechaMarca+"%";
                     s+=this.marcas.get(i).getDistancia()+"%";
                     s+=this.marcas.get(i).getEstilo()+NEWLINE;
