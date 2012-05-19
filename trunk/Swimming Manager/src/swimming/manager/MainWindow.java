@@ -430,7 +430,7 @@ public class MainWindow extends JFrame implements WindowListener{
     }                                           
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        if(!swimming.getNadadores().isEmpty()) {
+        if(swimming != null) {
             int respuesta;
             respuesta = JOptionPane.showConfirmDialog(null,"Se perderán los cambios no guardados.","Salir",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
             if(respuesta==0) System.exit(0);
