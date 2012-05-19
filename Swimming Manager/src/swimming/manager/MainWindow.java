@@ -255,14 +255,59 @@ public class MainWindow extends JFrame implements WindowListener{
         settearBotones(true);
     }
     
-    private void showButtonActionPerformed(java.awt.event.ActionEvent evt){
-        
-        updateTabla(swimming.getNadadores());
-        showButton.setEnabled(false);
-    }
+
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
+        if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
+
+        else{
+            showButton.setEnabled(true);
+            final JFrame mainVentana = getVentana("Dar de baja nadador");
+            mainVentana.setSize(new Dimension(400, 100));
+            mainVentana.setLocationRelativeTo(this);
+            JPanel mainPanel = new JPanel(new BorderLayout());
+
+            JPanel auxPanel = new JPanel(new GridLayout(1, 1));
+            JPanel auxPanelIz = new JPanel(new FlowLayout());
+            JPanel mainPanelDr = new JPanel(new BorderLayout());
+            JPanel auxPanelDr = new JPanel(new FlowLayout());
+            final JComboBox caja = getComboPaises();
+
+            JLabel label = new JLabel("Seleccione un país: ");
+            auxPanelIz.add(label);
+            auxPanelDr.add(caja);
+            mainPanelDr.add(auxPanelDr);
+            auxPanel.add(auxPanelIz);
+            auxPanel.add(mainPanelDr);
+            mainPanel.add(auxPanel, "Center");
+
+            JButton botonAceptar = new JButton();
+            botonAceptar.setText("Aceptar");
+            JButton botonCancelar = new JButton();
+            botonCancelar.setText("Cancelar");                        
+
+            mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                             
+            mainVentana.add(mainPanel, "Center");
+            
+            botonCancelar.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e) {
+                    mainVentana.dispose();
+                }
+            });
+            botonAceptar.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e) {                  
+                    try{    
+                        ArrayList<Nadador> lista = swimming.buscarNadadoresPorPais((String)caja.getSelectedItem());
+                        updateTabla(lista);
+                        mainVentana.dispose();
+                    }
+                    catch(DataException ex){
+                        showMessage(ex.getMessage(),"Error", 0);
+                    }
+                }
+            });            
+        }
     }                                          
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -645,6 +690,13 @@ public class MainWindow extends JFrame implements WindowListener{
                     }
             }
         });
+        
+        showButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                updateTabla(swimming.getNadadores());
+            }
+        });
+        
         saveAsButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 int i=selecFich.showSaveDialog(MainWindow.this);
@@ -907,6 +959,10 @@ public class MainWindow extends JFrame implements WindowListener{
         finally{     
             return combo;
         }
+    }
+    
+    private JComboBox getComboPaises(){
+        return new JComboBox(swimming.paises.toArray());
     }
     
     private JTextField[] getTextFields(Component[] losComponentes, int[] pos){
