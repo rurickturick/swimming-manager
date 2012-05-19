@@ -17,9 +17,11 @@ public class MainWindow extends JFrame implements WindowListener{
     private Image img;
     JFileChooser selecFich;
     private boolean sexo;
+    private final JFrame venta;
     
     public MainWindow() {
         initComponents();
+        venta = this;
         this.setTitle("Swimming Manager");
         img=Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("SW.png"));
         this.setIconImage(img);        
@@ -263,7 +265,7 @@ public class MainWindow extends JFrame implements WindowListener{
 
         else{
             showButton.setEnabled(true);
-            final JFrame mainVentana = getVentana("Dar de baja nadador");
+            final JFrame mainVentana = getVentana("Buscar Nadador");
             mainVentana.setSize(new Dimension(400, 100));
             mainVentana.setLocationRelativeTo(this);
             JPanel mainPanel = new JPanel(new BorderLayout());
@@ -316,7 +318,7 @@ public class MainWindow extends JFrame implements WindowListener{
 
         else{
             showButton.setEnabled(true);
-            final JFrame mainVentana = getVentana("Dar de baja nadador");
+            final JFrame mainVentana = getVentana("Buscar Nadador");
             mainVentana.setSize(new Dimension(400, 100));
             mainVentana.setLocationRelativeTo(this);
             JPanel mainPanel = new JPanel(new BorderLayout());
@@ -816,6 +818,116 @@ public class MainWindow extends JFrame implements WindowListener{
                     });
                 }                
             }    
+        });
+        
+        jMenuItem9.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                if(swimming.getNadadores().isEmpty()) 
+                    showMessage("No hay nadadores añadidos.","Error",0);
+                else{
+                    showButton.setEnabled(true);
+                    final JFrame mainVentana = getVentana("Buscar Nadador");
+                    mainVentana.setSize(new Dimension(400, 100));
+                    mainVentana.setLocationRelativeTo(venta);
+                    JPanel mainPanel = new JPanel(new BorderLayout());
+
+                    JPanel auxPanel = new JPanel(new GridLayout(1, 1));
+                    JPanel auxPanelIz = new JPanel(new FlowLayout());
+                    JPanel mainPanelDr = new JPanel(new BorderLayout());
+                    JPanel auxPanelDr = new JPanel(new FlowLayout());
+                    String [] combo = {"Femenino", "Masculino"};
+                    final JComboBox caja = new JComboBox(combo);
+
+                    JLabel label = new JLabel("Seleccione sexo: ");
+                    auxPanelIz.add(label);
+                    auxPanelDr.add(caja);
+                    mainPanelDr.add(auxPanelDr);
+                    auxPanel.add(auxPanelIz);
+                    auxPanel.add(mainPanelDr);
+                    mainPanel.add(auxPanel, "Center");
+
+                    JButton botonAceptar = new JButton();
+                    botonAceptar.setText("Aceptar");
+                    JButton botonCancelar = new JButton();
+                    botonCancelar.setText("Cancelar");                        
+
+                    mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                             
+                    mainVentana.add(mainPanel, "Center");
+
+                    botonCancelar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            mainVentana.dispose();
+                        }
+                    });
+                    botonAceptar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {                  
+                            /*try{    
+                                ArrayList<Nadador> lista = swimming.buscarNadadoresPorSexo((String)caja.getSelectedItem());
+                                updateTabla(lista);
+                                mainVentana.dispose();
+                            }
+                            catch(DataException ex){
+                                showMessage(ex.getMessage(),"Error", 0);
+                            }*/
+                        }
+                    });            
+                }
+            }
+        });
+        
+        jMenuItem10.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                if(swimming.getNadadores().isEmpty()) 
+                    showMessage("No hay nadadores añadidos.","Error",0);
+                else{
+                    showButton.setEnabled(true);
+                    final JFrame mainVentana = getVentana("Buscar Nadador");
+                    mainVentana.setSize(new Dimension(400, 100));
+                    mainVentana.setLocationRelativeTo(venta);
+                    JPanel mainPanel = new JPanel(new BorderLayout());
+
+                    JPanel auxPanel = new JPanel(new GridLayout(1, 1));
+                    JPanel auxPanelIz = new JPanel(new FlowLayout());
+                    JPanel mainPanelDr = new JPanel(new BorderLayout());
+                    JPanel auxPanelDr = new JPanel(new FlowLayout());
+                    String [] combo = {"Libre", "Espalda", "Mariposa", "Braza"};
+                    final JComboBox caja = new JComboBox(combo);
+
+                    JLabel label = new JLabel("Seleccione un estilo: ");
+                    auxPanelIz.add(label);
+                    auxPanelDr.add(caja);
+                    mainPanelDr.add(auxPanelDr);
+                    auxPanel.add(auxPanelIz);
+                    auxPanel.add(mainPanelDr);
+                    mainPanel.add(auxPanel, "Center");
+
+                    JButton botonAceptar = new JButton();
+                    botonAceptar.setText("Aceptar");
+                    JButton botonCancelar = new JButton();
+                    botonCancelar.setText("Cancelar");                        
+
+                    mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                             
+                    mainVentana.add(mainPanel, "Center");
+
+                    botonCancelar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            mainVentana.dispose();
+                        }
+                    });
+                    botonAceptar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {                  
+                            try{    
+                                ArrayList<Nadador> lista = swimming.buscarNadadoresPorEstilo((String)caja.getSelectedItem());
+                                updateTabla(lista);
+                                mainVentana.dispose();
+                            }
+                            catch(DataException ex){
+                                showMessage(ex.getMessage(),"Error", 0);
+                            }
+                        }
+                    });            
+                }
+            }
         });
         
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
