@@ -208,7 +208,22 @@ public class SwimmingManager {
             return auxNadadores;
         }
         
-        public ArrayList<Nadador> buscarNadadoresPorRecord(Marca m)throws DataException{
+        //Metodo de la version r129
+        public ArrayList<Nadador> buscarNadadoresPorRecord(String m)throws DataException{
+            ArrayList<Nadador> record = new ArrayList<Nadador>();
+            Iterator<Nadador> it =  this.nadadores.iterator();
+            while(it.hasNext()){
+                Nadador n=it.next();
+                if (n.getRecord().getTiempo().toString().equalsIgnoreCase(m)){
+                    record.add(n);
+                }
+            }
+            if (record.isEmpty()) throw new DataException("No se han encontrado nadadores de ese sexo");
+            return record;
+        }
+        
+        //Metodo de la version r128
+        /*public ArrayList<Nadador> buscarNadadoresPorRecord(Marca m)throws DataException{
             ArrayList<Nadador> record = new ArrayList<Nadador>();
             Iterator<Nadador> it =  this.nadadores.iterator();
             while(it.hasNext()){
@@ -221,7 +236,7 @@ public class SwimmingManager {
             }
             if (record.isEmpty()) throw new DataException("No se han encontrado nadadores de ese sexo");
             return record;
-        }
+        }*/
         
         // devuelve 0 si se ha añadido bien
         //          1 si el nadador no existe
