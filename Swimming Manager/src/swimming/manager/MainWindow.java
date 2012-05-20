@@ -264,7 +264,7 @@ public class MainWindow extends JFrame implements WindowListener{
 
         else{
             showButton.setEnabled(true);
-            final JFrame mainVentana = getVentana("Buscar Nadador");
+            final JFrame mainVentana = getVentana("Buscar nadador");
             mainVentana.setSize(new Dimension(400, 100));
             mainVentana.setLocationRelativeTo(this);
             JPanel mainPanel = new JPanel(new BorderLayout());
@@ -317,7 +317,7 @@ public class MainWindow extends JFrame implements WindowListener{
 
         else{
             showButton.setEnabled(true);
-            final JFrame mainVentana = getVentana("Buscar Nadador");
+            final JFrame mainVentana = getVentana("Buscar nadador");
             mainVentana.setSize(new Dimension(400, 100));
             mainVentana.setLocationRelativeTo(this);
             JPanel mainPanel = new JPanel(new BorderLayout());
@@ -450,7 +450,7 @@ public class MainWindow extends JFrame implements WindowListener{
         if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
         else{
             final JFrame ventana = this;
-            final JFrame mainVentana = getVentana("Eliminar Marca");
+            final JFrame mainVentana = getVentana("Eliminar marca");
             mainVentana.setSize(new Dimension(400, 100));
             mainVentana.setLocationRelativeTo(ventana);
             JPanel mainPanel = new JPanel(new BorderLayout());
@@ -490,7 +490,7 @@ public class MainWindow extends JFrame implements WindowListener{
                         if(swimming.buscarNadadorPorNombre(nombreNadador).getMarcas().isEmpty())
                             throw new DataException("Este nadador no tiene marcas añadidas, añada primero alguna.");
                         mainVentana.setVisible(false);
-                        final JFrame mainVentana = getVentana("Eliminar Marca");
+                        final JFrame mainVentana = getVentana("Eliminar marca");
                         mainVentana.setSize(new Dimension(400, 100));
                         mainVentana.setLocationRelativeTo(ventana);
                         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -571,7 +571,7 @@ public class MainWindow extends JFrame implements WindowListener{
             JPanel auxPanelLabel = new JPanel(new FlowLayout());
             JPanel mainPanelBox = new JPanel(new BorderLayout());
             JPanel auxPanelBox = new JPanel(new FlowLayout());
-            auxPanelLabel.add(new JLabel("Seleccione Nadador: "));                        
+            auxPanelLabel.add(new JLabel("Seleccione nadador: "));                        
             auxPanelBox.add(caja);
             mainPanelBox.add(auxPanelBox, "Center");
             panelBoxLabel.add(auxPanelLabel);
@@ -830,7 +830,7 @@ public class MainWindow extends JFrame implements WindowListener{
                     showMessage("No hay nadadores añadidos.","Error",0);
                 else{
                     showButton.setEnabled(true);
-                    final JFrame mainVentana = getVentana("Buscar Nadador");
+                    final JFrame mainVentana = getVentana("Buscar nadador");
                     mainVentana.setSize(new Dimension(400, 100));
                     mainVentana.setLocationRelativeTo(venta);
                     JPanel mainPanel = new JPanel(new BorderLayout());
@@ -886,7 +886,7 @@ public class MainWindow extends JFrame implements WindowListener{
                     showMessage("No hay nadadores añadidos.","Error",0);
                 else{
                     showButton.setEnabled(true);
-                    final JFrame mainVentana = getVentana("Buscar Nadador");
+                    final JFrame mainVentana = getVentana("Buscar nadador");
                     mainVentana.setSize(new Dimension(400, 100));
                     mainVentana.setLocationRelativeTo(venta);
                     JPanel mainPanel = new JPanel(new BorderLayout());
@@ -956,7 +956,7 @@ public class MainWindow extends JFrame implements WindowListener{
                     JPanel auxPanelLabel = new JPanel(new FlowLayout());
                     JPanel mainPanelBox = new JPanel(new BorderLayout());
                     JPanel auxPanelBox = new JPanel(new FlowLayout());
-                    auxPanelLabel.add(new JLabel("Seleccione Nadador: "));                        
+                    auxPanelLabel.add(new JLabel("Seleccione nadador: "));                        
                     auxPanelBox.add(caja);
                     mainPanelBox.add(auxPanelBox, "Center");
                     panelBoxLabel.add(auxPanelLabel);
