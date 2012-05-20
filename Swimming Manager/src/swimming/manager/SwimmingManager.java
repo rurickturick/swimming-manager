@@ -352,13 +352,12 @@ public class SwimmingManager {
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
             if (!file.exists()) {
-
-            if (file.createNewFile()) {
-            System.out.println("El fichero se ha creado correctamente");
-            } else {
-
-            System.out.println("No ha podido ser creado el fichero");
-            }
+                if (file.createNewFile()) {
+                    System.out.println("El fichero se ha creado correctamente");
+                } 
+                else {
+                    System.out.println("No ha podido ser creado el fichero");
+                }
             }
 
 
@@ -370,8 +369,7 @@ public class SwimmingManager {
             while(it.hasNext()){
                 Nadador n=it.next();
                 out.write(n.saveToString());
-                
-             }
+            }
             out.write("/*endf*/");
             out.close();
 		// end-user-code
