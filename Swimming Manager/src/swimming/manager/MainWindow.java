@@ -15,7 +15,7 @@ public class MainWindow extends JFrame implements WindowListener{
     private final JTable tabla;
     private DefaultTableModel tableModel;
     private Image img;
-    JFileChooser selecFich;
+    private JFileChooser selecFich;
     private boolean sexo;
     private final JFrame venta;
     
@@ -35,7 +35,14 @@ public class MainWindow extends JFrame implements WindowListener{
         JScrollPane container = new JScrollPane(tabla);
         this.getContentPane().add(container);        
         
-        settearBotones(false);
+        buscarMenu.setVisible(false);
+        compararMenu.setVisible(false);
+        editarMenu.setVisible(false);        
+        saveButton.setVisible(false);
+        saveButton.setEnabled(false);
+        saveAsButton.setVisible(false);
+        showButton.setVisible(false);
+        showButton.setEnabled(false);
         
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -229,16 +236,6 @@ public class MainWindow extends JFrame implements WindowListener{
         pack();
     }// </editor-fold>                        
 
-    private void settearBotones(boolean b){
-        buscarMenu.setVisible(b);
-        compararMenu.setVisible(b);
-        editarMenu.setVisible(b);        
-        saveButton.setVisible(b);
-        saveButton.setEnabled(b);
-        saveAsButton.setVisible(b);
-        showButton.setVisible(b);
-        showButton.setEnabled(!b);
-    }
     private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
         showMessage("Se ha creado un documento en blanco.","Nuevo documento",1);                
         String[] columnNames = {"Nombre", "Edad","Sexo","Nacionalidad","Estilo","Récord"};
@@ -251,7 +248,12 @@ public class MainWindow extends JFrame implements WindowListener{
         tabla.getColumn("Edad").setPreferredWidth(10);
         tabla.getColumn("Nacionalidad").setPreferredWidth(33);
         
-        settearBotones(true);
+        buscarMenu.setVisible(true);
+        compararMenu.setVisible(true);
+        editarMenu.setVisible(true);        
+        saveButton.setVisible(true);
+        saveAsButton.setVisible(true);
+        showButton.setVisible(true);
     }
     
 
@@ -673,7 +675,7 @@ public class MainWindow extends JFrame implements WindowListener{
             public void actionPerformed(ActionEvent e){
                   if(swimming == null) {
                       swimming = new SwimmingManager();
-                      settearBotones(true);
+                      
                   }    
                   int i=selecFich.showOpenDialog(MainWindow .this);
                   try {
@@ -681,6 +683,12 @@ public class MainWindow extends JFrame implements WindowListener{
                             File fich = selecFich.getSelectedFile();                
                             swimming.loadFromFile(fich);
                             updateTabla(swimming.getNadadores());
+                            buscarMenu.setVisible(true);
+                            compararMenu.setVisible(true);
+                            editarMenu.setVisible(true);        
+                            saveButton.setVisible(true);
+                            saveAsButton.setVisible(true);
+                            showButton.setVisible(true);
                        }
                         
                     } catch (Exception e1) {
@@ -866,7 +874,8 @@ public class MainWindow extends JFrame implements WindowListener{
                                 showMessage(ex.getMessage(),"Error", 0);
                             }
                         }
-                    });            
+                    });  
+                    showButton.setEnabled(true);
                 }
             }
         });
@@ -921,7 +930,8 @@ public class MainWindow extends JFrame implements WindowListener{
                                 showMessage(ex.getMessage(),"Error", 0);
                             }
                         }
-                    });            
+                    }); 
+                    showButton.setEnabled(true);
                 }
             }
         });
