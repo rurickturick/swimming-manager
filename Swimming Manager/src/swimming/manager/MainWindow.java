@@ -875,7 +875,6 @@ public class MainWindow extends JFrame implements WindowListener{
                             }
                         }
                     });  
-                    showButton.setEnabled(true);
                 }
             }
         });
@@ -931,7 +930,6 @@ public class MainWindow extends JFrame implements WindowListener{
                             }
                         }
                     }); 
-                    showButton.setEnabled(true);
                 }
             }
         });
