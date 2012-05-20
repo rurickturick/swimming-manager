@@ -10,20 +10,17 @@ public class Nadador {
         private boolean masculino;
 	private ArrayList<Estilo> estilos = new ArrayList<Estilo>();
 	private Pais pais;
-	private ArrayList<Titulo> palmares = new ArrayList<Titulo>();
 	private ArrayList <Marca> marcas = new ArrayList<Marca>();
         private Marca record;
         
 	public Nadador(String nombre, Fecha fechaNacimiento, 
-                ArrayList<Estilo> estilos, Pais pais, 
-                ArrayList<Titulo> palmares, ArrayList<Marca> marcas, 
+                ArrayList<Estilo> estilos, Pais pais, ArrayList<Marca> marcas, 
                 boolean masculino) {
             this.nombre = nombre;
             this.fechaNacimiento = fechaNacimiento;
             this.masculino = masculino;
             this.estilos = estilos;
             this.pais = pais;
-            this.palmares = palmares;
             this.marcas = marcas;
             this.record = null;
 	}
@@ -48,8 +45,6 @@ public class Nadador {
             for (int i = 0; i < marcas.size(); i++)
                 s6 = s6 + "/n" + marcas.get(i).toString();            
             
-            for (int i = 0; i < palmares.size(); i++)
-                s7 = s7 + "/n" + palmares.get(i).toString();
          
             String resultado = s1 + "\n" + s2 + "\n" + s3 + "\n" +
                                s4 + "\n" + s5 + "\n" + s6 + "\n" + s7;
@@ -114,14 +109,6 @@ public class Nadador {
         
         public ArrayList<Estilo> getEstilos(){
             return estilos;
-        }
-        
-        public void setPalmares (ArrayList<Titulo> titulos){
-            this.palmares = titulos;
-        }
-        
-        public ArrayList<Titulo> getPalmares() {
-            return palmares;
         }
         
         public void setPais(Pais pais){

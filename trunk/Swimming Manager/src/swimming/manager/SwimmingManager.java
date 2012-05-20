@@ -58,9 +58,8 @@ public class SwimmingManager {
                     Fecha fecha= new Fecha(Integer.parseInt(s[0]),Integer.parseInt(s[1]),Integer.parseInt(s[2]));
                     ArrayList<Estilo> estilos=new ArrayList<Estilo>();
                     Pais p= new Pais(pais);
-                    ArrayList<Titulo> palmares=new ArrayList<Titulo>();
                     ArrayList<Marca> marca= new ArrayList<Marca>();
-                    Nadador nadador = new Nadador(nombre, fecha, estilos, p, palmares, marca, masculino);
+                    Nadador nadador = new Nadador(nombre, fecha, estilos, p, marca, masculino);
                     this.nadadores.add(nadador);
                 }                   
             //Aquí debe ir una estructura try-catch ya que si lo que se le pasa es un string y no un número lanza una excepción quue no está controlada.
@@ -318,9 +317,6 @@ public class SwimmingManager {
             for(int i = 0; i < n.getMarcas().size(); i++)
                 s6 = s6 + n.getMarcas().get(i).toString()+ LINE_SEPARATOR;            
             
-            for(int i = 0; i < n.getPalmares().size(); i++)
-                s7 = s7 + n.getPalmares().get(i).toString()+ LINE_SEPARATOR;
-          
             resultado = labelNombre + s1 + LINE_SEPARATOR + 
                     labelFN + s2 + LINE_SEPARATOR + labelPais + s3 + LINE_SEPARATOR +
                     labelEstilos + s4 + LINE_SEPARATOR + labelMarcas + s6 + LINE_SEPARATOR + 
