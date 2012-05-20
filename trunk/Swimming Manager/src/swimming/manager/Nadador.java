@@ -68,7 +68,7 @@ public class Nadador {
             if (this.masculino)  return "Masculino";
             else return "Femenino";
         }
-                
+        
         public void setNombre(String nombre){
             this.nombre = nombre;
         }

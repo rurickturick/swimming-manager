@@ -22,7 +22,6 @@ public class Fecha {
 	public void setDia(int x){
 		dia = x;
 	}
-    @Override
 	public String toString(){
 		return dia + "-" + mes + "-" + anyo;
 	}
