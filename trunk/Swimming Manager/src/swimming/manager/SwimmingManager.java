@@ -195,6 +195,19 @@ public class SwimmingManager {
             if(auxNadadores.isEmpty()) throw new DataException("No se han encontrado nadadores asociados a la edad introducida.");
             return auxNadadores;
         }
+        
+        public ArrayList<Nadador> buscarNadadoresPorSexo(String sexo)throws DataException{
+        
+            ArrayList<Nadador> auxNadadores = new ArrayList<Nadador>();
+            Iterator<Nadador> it=this.nadadores.iterator();
+            while(it.hasNext()){
+                Nadador n=it.next();
+                if (n.toStringSexo().equalsIgnoreCase(sexo))
+                    auxNadadores.add(n);
+            }
+            if (auxNadadores.isEmpty()) throw new DataException("No se han encontrado nadadores de ese sexo");
+            return auxNadadores;
+        }
         // devuelve 0 si se ha añadido bien
         //          1 si el nadador no existe
         //          2 si el formato de la marca no es correcto

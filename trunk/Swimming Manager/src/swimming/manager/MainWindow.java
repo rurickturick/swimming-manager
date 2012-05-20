@@ -861,14 +861,14 @@ public class MainWindow extends JFrame implements WindowListener{
                     });
                     botonAceptar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {                  
-                            /*try{    
+                            try{    
                                 ArrayList<Nadador> lista = swimming.buscarNadadoresPorSexo((String)caja.getSelectedItem());
                                 updateTabla(lista);
                                 mainVentana.dispose();
                             }
                             catch(DataException ex){
                                 showMessage(ex.getMessage(),"Error", 0);
-                            }*/
+                            }
                         }
                     });            
                 }
