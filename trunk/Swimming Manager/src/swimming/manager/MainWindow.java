@@ -42,7 +42,9 @@ public class MainWindow extends JFrame implements WindowListener{
         saveButton.setEnabled(false);
         saveAsButton.setVisible(false);
         showButton.setVisible(false);
-        showButton.setEnabled(false);
+        showButton.setEnabled(false);        
+        jMenuItem11.setVisible(false);
+        jMenuItem14.setVisible(false);
         
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -235,6 +237,19 @@ public class MainWindow extends JFrame implements WindowListener{
 
         pack();
     }// </editor-fold>                        
+
+    private void settearBotones(boolean b){
+        buscarMenu.setVisible(b);
+        compararMenu.setVisible(b);
+        editarMenu.setVisible(b);        
+        saveButton.setVisible(b);
+        saveButton.setEnabled(b);
+        saveAsButton.setVisible(b);
+        showButton.setVisible(b);
+        showButton.setEnabled(!b);
+        jMenuItem11.setVisible(false);
+        jMenuItem14.setVisible(false);
+    }
 
     private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
         showMessage("Se ha creado un documento en blanco.","Nuevo documento",1);                
@@ -555,7 +570,7 @@ public class MainWindow extends JFrame implements WindowListener{
         if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
         else{
             showButton.setEnabled(true);
-            final JFrame mainVentana = getVentana("Buscar");
+            final JFrame mainVentana = getVentana("Buscar Nadador");
             mainVentana.setSize(350, 100);
             mainVentana.setLocationRelativeTo(this);
             JPanel mainPanel = new JPanel(new BorderLayout());
@@ -670,7 +685,63 @@ public class MainWindow extends JFrame implements WindowListener{
     
     
     private void initListener(){
-        this.addWindowListener(this);        
+        this.addWindowListener(this);    
+        
+        jMenuItem15.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(swimming.getNadadores().isEmpty()) showMessage("No hay nadadores añadidos.","Error",0);
+
+                else{
+                    showButton.setEnabled(true);
+                    final JFrame mainVentana = getVentana("Buscar nadador");
+                    mainVentana.setSize(new Dimension(400, 100));
+                    mainVentana.setLocationRelativeTo(venta);
+                    JPanel mainPanel = new JPanel(new BorderLayout());
+
+                    JPanel auxPanel = new JPanel(new GridLayout(1, 1));
+                    JPanel auxPanelIz = new JPanel(new FlowLayout());
+                    JPanel mainPanelDr = new JPanel(new BorderLayout());
+                    JPanel auxPanelDr = new JPanel(new FlowLayout());
+                    final JComboBox caja = getComboRecords();
+
+                    JLabel label = new JLabel("Seleccione un récord: ");
+                    auxPanelIz.add(label);
+                    auxPanelDr.add(caja);
+                    mainPanelDr.add(auxPanelDr);
+                    auxPanel.add(auxPanelIz);
+                    auxPanel.add(mainPanelDr);
+                    mainPanel.add(auxPanel, "Center");
+
+                    JButton botonAceptar = new JButton();
+                    botonAceptar.setText("Aceptar");
+                    JButton botonCancelar = new JButton();
+                    botonCancelar.setText("Cancelar");                        
+
+                    mainPanel.add(getPanelBotones(botonAceptar, botonCancelar), "South");                             
+                    mainVentana.add(mainPanel, "Center");
+
+                    botonCancelar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            mainVentana.dispose();
+                        }
+                    });
+                    botonAceptar.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {                  
+                            /*try{    
+                                ArrayList<Nadador> lista = swimming.buscarNadadoresPorEdad(Integer.parseInt((String)caja.getSelectedItem()));
+                                updateTabla(lista);
+                                mainVentana.dispose();
+                            }
+                            catch(DataException ex){
+                                showMessage(ex.getMessage(),"Error", 0);
+                            }*/
+                        }
+                    });            
+                }
+            }        
+        });
+        
+        
         openButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                   if(swimming == null) {
@@ -1079,6 +1150,21 @@ public class MainWindow extends JFrame implements WindowListener{
     
     private JComboBox getComboPaises(){
         return new JComboBox(swimming.paises.toArray());
+    }
+    
+    private JComboBox getComboRecords(){
+        int i = 0;
+        ArrayList<String> nadadores = new ArrayList<String>();
+        for(Nadador nad : swimming.getNadadores()){
+            try{
+                if(!nadadores.contains(nad.getRecord().getTiempo().toString()))
+                    nadadores.add(nad.getRecord().getTiempo().toString());
+            }
+            catch(Exception e){
+                
+            }
+        }        
+        return new JComboBox(nadadores.toArray());
     }
     
     private JTextField[] getTextFields(Component[] losComponentes, int[] pos){
