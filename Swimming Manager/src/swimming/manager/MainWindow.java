@@ -63,7 +63,6 @@ public class MainWindow extends JFrame implements WindowListener{
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
@@ -139,8 +138,6 @@ public class MainWindow extends JFrame implements WindowListener{
         jMenuItem11.setText("Distancia");
         buscarMenu.add(jMenuItem11);
 
-        jMenuItem12.setText("Núm. Federativo");
-        buscarMenu.add(jMenuItem12);
 
         jMenuItem13.setText("Edad");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
@@ -617,7 +614,6 @@ public class MainWindow extends JFrame implements WindowListener{
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
