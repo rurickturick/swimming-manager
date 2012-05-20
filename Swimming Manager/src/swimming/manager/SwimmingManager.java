@@ -207,6 +207,22 @@ public class SwimmingManager {
             if (auxNadadores.isEmpty()) throw new DataException("No se han encontrado nadadores de ese sexo");
             return auxNadadores;
         }
+        
+        public ArrayList<Nadador> buscarNadadoresPorRecord(Marca m)throws DataException{
+            ArrayList<Nadador> record = new ArrayList<Nadador>();
+            Iterator<Nadador> it =  this.nadadores.iterator();
+            while(it.hasNext()){
+                Nadador n=it.next();
+                if ((n.getRecord().getTiempo().getMinutos() == m.getTiempo().getMinutos())
+                    && (n.getRecord().getTiempo().getSegundos() == m.getTiempo().getSegundos())
+                    &&(n.getRecord().getTiempo().getMilesimas() == m.getTiempo().getMilesimas())){
+                    record.add(n);
+                }
+            }
+            if (record.isEmpty()) throw new DataException("No se han encontrado nadadores de ese sexo");
+            return record;
+        }
+        
         // devuelve 0 si se ha añadido bien
         //          1 si el nadador no existe
         //          2 si el formato de la marca no es correcto
@@ -310,7 +326,7 @@ public class SwimmingManager {
             String s4 = "";
             String s6 = "";
             String s7 = "";
-            String resultado = "";
+            String resultado ;
             for(int i = 0; i < n.getEstilos().size(); i++) 
                 s4 = s4 + n.getEstilos().get(i).name() + LINE_SEPARATOR;
             
@@ -381,7 +397,7 @@ public class SwimmingManager {
 		// TODO Ap?ndice de m?todo generado autom?ticamente
             this.nadadores.clear();
             BufferedReader reader = new BufferedReader(new FileReader(f));
-            String s = "";
+            String s;
             String tmp[];
             s=reader.readLine();
             if (!s.equalsIgnoreCase("/*inif*/"))throw new DataException("Error en el formato del archivo");
@@ -435,7 +451,7 @@ public class SwimmingManager {
             //Marcas que no sean el record
             ArrayList<Marca> auxMarcas = n.getMarcas();
             Iterator<Marca> it=auxMarcas.iterator();
-            String s="";;
+            String s="";
             while(it.hasNext()){
                 Marca m=it.next();
                 if (n.getRecord()==m){
