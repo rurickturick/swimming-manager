@@ -416,7 +416,37 @@ public class SwimmingManager {
             }    
             // end-user-code
 	}
-
+        
+        //Metodo que reune los datos de un nadador
+        public ArrayList<String> datosNadador(Nadador n){
+            ArrayList<String> datos = new ArrayList<String>();
+            //Nombre
+            datos.add("Nombre: " + n.getNombre());
+            //Sexo
+            datos.add("Sexo: "+n.toStringSexo());
+            //Fecha de Nacimiento
+            datos.add("Fecha de nacimiento: " + n.getFecha().toString());
+            //Edad
+            datos.add("Edad :" + n.getEdad() + "años.");
+            //Pais
+            datos.add("País" + n.getPais());
+            //Estilos
+            datos.add("Estilos" + n.toStringEstilos());
+            //Record
+            datos.add("Mejor marca: " + n.getRecord().toString());
+            //Marcas que no sean el record
+            ArrayList<Marca> auxMarcas = n.getMarcas();
+            Iterator<Marca> it=auxMarcas.iterator();
+            String s="";;
+            while(it.hasNext()){
+                Marca m=it.next();
+                if (n.getRecord()==m){
+                    s+=m.toString();
+                }
+            }
+            datos.add(s);
+            return datos;
+        }
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
