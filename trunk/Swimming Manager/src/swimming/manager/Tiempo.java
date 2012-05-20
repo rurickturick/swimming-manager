@@ -54,7 +54,13 @@ public class Tiempo {
 	}
         
        
-      
+        public int getMilesimas(){
+            return this.milesimas;
+        }
+        
+        public void setMilesimas(int milesimas){
+            this.milesimas = milesimas;
+        }
         
         public int getMinutos(){
             return this.minutos;
