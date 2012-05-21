@@ -66,5 +66,13 @@ public class Fecha {
             return anyo;
         }
         
+        public void setMes(int m){
+            this.mes = m;
+        }
+        
+        public void setAnyo(int m){
+            this.anyo = m;
+        }
+        
         
 }

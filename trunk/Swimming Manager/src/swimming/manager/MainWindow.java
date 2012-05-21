@@ -902,19 +902,127 @@ public class MainWindow extends JFrame implements WindowListener{
                     showMessage("No hay nadadores añadidos.","Error",0);
                 else{
                     final JFrame mainVentana = getVentana("Información");
-                    String[] labels = {"Nombre: ", "País de Origen: ","Día de Nacimiento: ", "Mes de Nacimiento: ",
-                                        "Año de Nacimiento: "};
-                    JButton botonAceptar = new JButton();
-                    botonAceptar.setText("Aceptar");
+                    mainVentana.setSize(new Dimension(400, 100));
+                    mainVentana.setLocationRelativeTo(venta);
+                    JPanel mainPanel = new JPanel(new BorderLayout());
+
+                    JPanel auxPanel = new JPanel(new GridLayout(1, 1));
+                    JPanel auxPanelIz = new JPanel(new FlowLayout());
+                    JPanel mainPanelDr = new JPanel(new BorderLayout());
+                    JPanel auxPanelDr = new JPanel(new FlowLayout());
+                    final JComboBox caja = getComboNadadores();
+
+                    JLabel label = new JLabel("Seleccione un nadador: ");
+                    auxPanelIz.add(label);
+                    auxPanelDr.add(caja);
+                    mainPanelDr.add(auxPanelDr);
+                    auxPanel.add(auxPanelIz);
+                    auxPanel.add(mainPanelDr);
+                    mainPanel.add(auxPanel, "Center");
+
+                    JButton botonSiguiente = new JButton();
+                    botonSiguiente.setText("Siguiente");
                     JButton botonCancelar = new JButton();
-                    botonCancelar.setText("Cancelar");
-                    
-                    botonCancelar.addActionListener(new ActionListener(){                        
+                    botonCancelar.setText("Cancelar");                        
+
+                    mainPanel.add(getPanelBotones(botonSiguiente, botonCancelar), "South");                             
+                    mainVentana.add(mainPanel, "Center");
+
+                    botonCancelar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {
                             mainVentana.dispose();
-                        }                
-                    }); 
+                        }
+                    });
                     
+                    botonSiguiente.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent evt){
+                            mainVentana.dispose();
+                            final JFrame mainVentana = getVentana("Información");                            
+                            mainVentana.setLayout(new BorderLayout());
+                            try{
+                            final Nadador nadador = swimming.buscarNadadorPorNombre((String)caja.getSelectedItem());                            
+                            
+                            String[] labels = {"Nombre: ", "País de Origen: ","Día de Nacimiento: ", "Mes de Nacimiento: ",
+                                                "Año de Nacimiento: "};
+                            JButton botonAceptar = new JButton();
+                            botonAceptar.setText("Aceptar");
+                            JButton botonCancelar = new JButton();
+                            botonCancelar.setText("Cancelar");
+
+                            JRadioButton boton1 = new JRadioButton("Hombre");
+                            boton1.setActionCommand("Hombre");
+                            boton1.setMnemonic(KeyEvent.VK_H);
+
+                            JRadioButton boton2 = new JRadioButton("Mujer");
+                            boton2.setActionCommand("Mujer");
+                            boton2.setMnemonic(KeyEvent.VK_M);
+
+                            ButtonGroup grupo = new ButtonGroup();
+                            grupo.add(boton1);
+                            grupo.add(boton2);
+                            
+                            if(nadador.getSexo()) {
+                                boton1.setSelected(true);
+                                boton2.setSelected(false);
+                            }
+                            else {
+                                boton2.setSelected(true);
+                                boton1.setSelected(false);
+                            }
+
+                            boton1.addActionListener(new ActionListener(){
+                                public void actionPerformed(ActionEvent e){
+                                    sexo = true;
+                                }
+                            });
+
+                            boton2.addActionListener(new ActionListener(){
+                                public void actionPerformed(ActionEvent e){
+                                    sexo = false;
+                                }
+                            });
+
+                            JPanel panelRadio = new JPanel(new FlowLayout());
+                            JLabel l1 = new JLabel("Sexo: ");
+                            panelRadio.add(l1);
+                            panelRadio.add(boton1);
+                            panelRadio.add(boton2);
+
+                            mainVentana.add(panelRadio, "North");
+                            mainVentana.add(getLabelsPanel(labels, botonAceptar, botonCancelar), "Center");
+                            
+                            int[] posiciones = {1, 0};
+                            final JTextField[] campos = getTextFields(mainVentana.getContentPane().getComponents(), posiciones);
+                            
+                            campos[0].setText(nadador.getNombre());
+                            campos[1].setText(nadador.getPais().toString());
+                            campos[2].setText(Integer.toString(nadador.getFecha().getDia()));
+                            campos[3].setText(Integer.toString(nadador.getFecha().getMes()));
+                            campos[4].setText(Integer.toString(nadador.getFecha().getAnyo()));
+
+                            botonCancelar.addActionListener(new ActionListener(){                        
+                                public void actionPerformed(ActionEvent e) {
+                                    mainVentana.dispose();
+                                }                
+                            });
+                            
+                            botonAceptar.addActionListener(new ActionListener(){
+                                public void actionPerformed(ActionEvent e){
+                                    nadador.setNombre(campos[0].getText());
+                                    Pais p = nadador.getPais();
+                                    p.setPais(campos[1].getText());
+                                    Fecha f = nadador.getFecha();
+                                    f.setDia(Integer.parseInt(campos[2].getText()));
+                                    f.setMes(Integer.parseInt(campos[3].getText()));
+                                    f.setAnyo(Integer.parseInt(campos[4].getText()));
+                                    nadador.setSexo(sexo);
+                                    mainVentana.dispose();
+                                    updateTabla(swimming.getNadadores());
+                                }
+                            });
+                            }catch(Exception e){}
+                        }
+                    });
                 }
             }
         });

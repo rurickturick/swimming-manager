@@ -24,7 +24,13 @@ public class Nadador {
             this.marcas = marcas;
             this.record = null;
 	}
-	
+        
+	public boolean getSexo(){
+            return masculino;
+        }
+        public void setSexo(boolean b){
+            this.masculino = b; 
+        }
 	public String toString() {
             String s1 = this.nombre;
             String s2 = "";
