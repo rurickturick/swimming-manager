@@ -727,14 +727,14 @@ public class MainWindow extends JFrame implements WindowListener{
                     });
                     botonAceptar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {                  
-                            /*try{    
-                                ArrayList<Nadador> lista = swimming.buscarNadadoresPorEdad(Integer.parseInt((String)caja.getSelectedItem()));
+                            try{    
+                                ArrayList<Nadador> lista = swimming.buscarNadadoresPorRecord((String)caja.getSelectedItem());
                                 updateTabla(lista);
                                 mainVentana.dispose();
                             }
                             catch(DataException ex){
                                 showMessage(ex.getMessage(),"Error", 0);
-                            }*/
+                            }
                         }
                     });            
                 }
@@ -751,7 +751,8 @@ public class MainWindow extends JFrame implements WindowListener{
                   int i=selecFich.showOpenDialog(MainWindow .this);
                   try {
                        if (i == JFileChooser.APPROVE_OPTION) {
-                            File fich = selecFich.getSelectedFile();                
+                            File fich = selecFich.getSelectedFile();
+                            saveButton.setEnabled(true);
                             swimming.loadFromFile(fich);
                             updateTabla(swimming.getNadadores());
                             buscarMenu.setVisible(true);

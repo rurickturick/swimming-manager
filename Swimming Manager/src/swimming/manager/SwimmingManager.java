@@ -3,7 +3,6 @@ package swimming.manager;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import javax.swing.JOptionPane;
 
 public class SwimmingManager {
 	
@@ -380,7 +379,6 @@ public class SwimmingManager {
         //-- Le entra al método un string con el nombre del archivo
 	public void saveToFile(File file) throws IOException {
             ficheroActual=file;
-            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
             if (!file.exists()) {
                 if (file.createNewFile()) {
@@ -481,13 +479,6 @@ public class SwimmingManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void verLista() {
-		String s="";
-                for (int i=0;i<this.nadadores.size();i++){
-                    s+=this.nadadores.get(i).toString();
-                }
-               JOptionPane.showMessageDialog(null, s,"Lista" , 1, null);
-	}
         
         public boolean hayNadador(Nadador nadador) throws DataException{
             boolean encontrado = false;
