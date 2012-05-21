@@ -20,7 +20,7 @@ public class MainWindow extends JFrame implements WindowListener{
     private final JFrame venta;
     
     public MainWindow() {
-        initComponents();
+        initComponents();  
         venta = this;
         this.setTitle("Swimming Manager");
         img=Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("SW.png"));
