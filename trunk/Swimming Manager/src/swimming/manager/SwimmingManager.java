@@ -213,11 +213,13 @@ public class SwimmingManager {
             Iterator<Nadador> it =  this.nadadores.iterator();
             while(it.hasNext()){
                 Nadador n=it.next();
+                if(n.getRecord()!=null){
                 if (n.getRecord().getTiempo().toString().equalsIgnoreCase(m)){
                     record.add(n);
                 }
-            }
-            if (record.isEmpty()) throw new DataException("No se han encontrado nadadores de ese sexo");
+             }
+            }    
+            if (record.isEmpty()) throw new DataException("No se han encontrado nadadores de ese record");
             return record;
         }
         
