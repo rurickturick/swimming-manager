@@ -896,6 +896,29 @@ public class MainWindow extends JFrame implements WindowListener{
             }    
         });
         
+        jMenuItem20.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                if(swimming.getNadadores().isEmpty()) 
+                    showMessage("No hay nadadores añadidos.","Error",0);
+                else{
+                    final JFrame mainVentana = getVentana("Información");
+                    String[] labels = {"Nombre: ", "País de Origen: ","Día de Nacimiento: ", "Mes de Nacimiento: ",
+                                        "Año de Nacimiento: "};
+                    JButton botonAceptar = new JButton();
+                    botonAceptar.setText("Aceptar");
+                    JButton botonCancelar = new JButton();
+                    botonCancelar.setText("Cancelar");
+                    
+                    botonCancelar.addActionListener(new ActionListener(){                        
+                        public void actionPerformed(ActionEvent e) {
+                            mainVentana.dispose();
+                        }                
+                    }); 
+                    
+                }
+            }
+        });
+        
         jMenuItem9.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent evt){
                 if(swimming.getNadadores().isEmpty()) 

@@ -400,7 +400,6 @@ public class SwimmingManager {
             }
             out.write("/*endf*/");
             out.close();
-		// end-user-code
 	}
 
 
@@ -409,6 +408,7 @@ public class SwimmingManager {
 		// TODO Ap?ndice de m?todo generado autom?ticamente
             this.nadadores.clear();
             BufferedReader reader = new BufferedReader(new FileReader(f));
+            this.ficheroActual = f;
             String s;
             String tmp[];
             s=reader.readLine();
