@@ -378,8 +378,7 @@ public class SwimmingManager {
         
         //-- Le entra al método un string con el nombre del archivo
 	public void saveToFile(File file) throws IOException {
-            ficheroActual=file;
-
+          
             if (!file.exists()) {
                 if (file.createNewFile()) {
                     System.out.println("El fichero se ha creado correctamente");
@@ -392,7 +391,7 @@ public class SwimmingManager {
 
             /*la clave de activar o no la sobreescritura esta en FileOutputStream(file, true) si le ponemos en true entonces agregas al final de la linea */
             
-            BufferedWriter out = new BufferedWriter(new FileWriter(ficheroActual));
+            BufferedWriter out = new BufferedWriter(new FileWriter(file));
             Iterator<Nadador> it=this.nadadores.iterator(); 
             out.write("/*inif*/"+LINE_SEPARATOR);
             while(it.hasNext()){
