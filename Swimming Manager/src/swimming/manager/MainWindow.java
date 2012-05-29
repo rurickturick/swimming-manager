@@ -755,7 +755,7 @@ public class MainWindow extends JFrame implements WindowListener{
                                 try{
                                     mainVentana.dispose();
                                     final JFrame mainVentana = getVentana("Comparativa de nadadores");
-                                    mainVentana.setSize(mainVentana.getWidth()+100, mainVentana.getHeight()+80);
+                                    mainVentana.setSize(mainVentana.getWidth()*2, mainVentana.getHeight()+100);
                                     mainVentana.setLocationRelativeTo(venta);
                                     Nadador nadador1 = swimming.buscarNadadorPorNombre(nombre);
                                     Nadador nadador2 = swimming.buscarNadadorPorNombre(nombre2);

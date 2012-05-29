@@ -80,7 +80,7 @@ public class Main {
         splashInit(); 
         appInit();
         if (mySplash != null) 
-            mySplash.close(); 
+            mySplash.close();
         MainWindow window = new MainWindow();
     }
     
