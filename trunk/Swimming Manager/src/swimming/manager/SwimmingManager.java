@@ -455,25 +455,26 @@ public class SwimmingManager {
             //Fecha de Nacimiento
             datos.add("Fecha de nacimiento: " + n.getFecha().toString());
             //Edad
-            datos.add("Edad :" + n.getEdad() + "años.");
+            datos.add("Edad: " + n.getEdad());
             //Pais
-            datos.add("País" + n.getPais());
+            datos.add("País: " + n.getPais());
             //Estilos
-            datos.add("Estilos" + n.toStringEstilos());
+            datos.add("Estilos: " + n.toStringEstilos());
             //Record
             if(n.getRecord()!=null){
-                datos.add("Mejor marca: " + n.getRecord().toString());
+                datos.add("Mejor marca: " + n.getRecord().toString()+"\n");
                 //Marcas que no sean el record
                 ArrayList<Marca> auxMarcas = n.getMarcas();
                 Iterator<Marca> it=auxMarcas.iterator();
-                String s="";
+                String s="Otras Marcas: \n";
                 while(it.hasNext()){
                     Marca m=it.next();
-                    if (n.getRecord()==m){
-                        s+=m.toString();
+                    if (!n.getRecord().equals(m)){
+                        s+=m.toString()+"\n";
+                        datos.add(s);
+                        s = "";
                     }
                 }
-                datos.add(s);
             }
             else{
                 datos.add("Mejor marca: No tiene marcas.");
