@@ -945,8 +945,8 @@ public class MainWindow extends JFrame implements WindowListener{
                 else {
                     final JFrame mainVentana = getVentana("Dar de alta nadador");   
                     mainVentana.setLayout(new BorderLayout());
-                    String[] labels = {"Nombre: ", "País de origen: ","Día de Nacimiento: ", "Mes de Nacimiento: ",
-                                        "Año de Nacimiento: "};
+                    String[] labels = {"Nombre: ", "País de origen: ","Día de nacimiento: ", "Mes de nacimiento: ",
+                                        "Año de nacimiento: "};
                     JButton botonAceptar = new JButton();
                     botonAceptar.setText("Aceptar");
                     JButton botonCancelar = new JButton();
@@ -1075,8 +1075,8 @@ public class MainWindow extends JFrame implements WindowListener{
                             try{
                             final Nadador nadador = swimming.buscarNadadorPorNombre((String)caja.getSelectedItem());                            
                             
-                            String[] labels = {"Nombre: ", "País de origen: ","Día de Nacimiento: ", "Mes de Nacimiento: ",
-                                                "Año de Nacimiento: "};
+                            String[] labels = {"Nombre: ", "País de origen: ","Día de nacimiento: ", "Mes de nacimiento: ",
+                                                "Año de nacimiento: "};
                             JButton botonAceptar = new JButton();
                             botonAceptar.setText("Aceptar");
                             JButton botonCancelar = new JButton();
