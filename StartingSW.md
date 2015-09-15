@@ -1,0 +1,1 @@
+Hoy, 20 de febrero, comienzan las pruebas sobre Google Code para comenzar la elaboración del proyecto Swimming Manager.
